@@ -12,18 +12,16 @@ import os.log
 class Alarm: NSObject, NSCoding {
     
     //MARK: - Properties
-    
     var sunnyAlarmTime: Date
     var rainyAlarmTime: Date
 
-    //MARK: - Archiving Paths
     
+    //MARK: - Archiving Paths
     static let DocumentsDirectory = FileManager().urls(for: .documentDirectory, in: .userDomainMask).first!
     static let ArchiveURL = DocumentsDirectory.appendingPathComponent("alarm")
     
     
     //MARK: - Types
-    
     struct PropertyKey {
         static let sunnyAlarmTime = "sunnyAlarmTime"
         static let rainyAlarmTime = "rainyAlarmTime"
@@ -31,13 +29,11 @@ class Alarm: NSObject, NSCoding {
     
     
     //MARK: Initialization
-    
     init?(sunnyAlarmTime: Date, rainyAlarmTime: Date) {
-        
-        // Initialize stored properties.
         self.sunnyAlarmTime = sunnyAlarmTime
         self.rainyAlarmTime = rainyAlarmTime
     }
+    
     
     //MARK: - Public methods
     public func getSunnyAlarmTimeAsString() -> String {
@@ -84,5 +80,4 @@ class Alarm: NSObject, NSCoding {
         // Must call designated initializer.
         self.init(sunnyAlarmTime: sunnyAlarmTime, rainyAlarmTime: rainyAlarmTime)
     }
-    
 }

@@ -10,25 +10,27 @@ import UIKit
 
 class AlarmStandbyViewController: UIViewController {
     
-    //TODO: Stringじゃなく、Alarm型で受け渡す(後でdate型が必要になるので、、)
-    var sunnyAlarmTimeString: String?
-    var rainyAlarmTimeString: String?
+    // MARK: - Properties
+    var alarm: Alarm?
+    
+    
+    //MARK: - Outlets
     @IBOutlet weak var sunnyAlarmTime: UILabel!
     @IBOutlet weak var rainyAlarmTime: UILabel!
     
+    
+    //MARK: - Actions
     @IBAction func backToPrevious(_ sender: UIBarButtonItem) {
         dismiss(animated: true, completion: nil)
     }
     
 
+    //MARK: - Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        //前の画面(AlarmViewController)のprepare()で渡してもらったdate情報をラベルにセット
-        sunnyAlarmTime.text = sunnyAlarmTimeString
-        rainyAlarmTime.text = rainyAlarmTimeString
-
-        // Do any additional setup after loading the view.
+        //前の画面(AlarmViewController)のprepare()で渡してもらったalarmから時刻を抽出
+        sunnyAlarmTime.text = self.alarm?.getSunnyAlarmTimeAsString()
+        rainyAlarmTime.text = self.alarm?.getRainyAlarmTimeAsString()
     }
     
 
