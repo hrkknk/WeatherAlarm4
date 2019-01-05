@@ -40,13 +40,15 @@ class AlarmViewController: UIViewController {
         super.viewDidLoad()
         
         //保存データがある場合、それを読み込む
-        alarm = loadAlarm()
-        
-        //時刻引き継ぎ
-        if let alarm = alarm {
-            self.sunnyAlarmDatePicker.date = alarm.sunnyAlarmTime
-            self.rainyAlarmDatePicker.date = alarm.rainyAlarmTime
+        if let savedAlarm = loadAlarm() {
+            alarm = savedAlarm
+        } else {
+            alarm = Alarm(sunnyAlarmTime: Date(), rainyAlarmTime: Date())
         }
+        //時刻を表示
+        self.sunnyAlarmDatePicker.date = alarm!.sunnyAlarmTime
+        self.rainyAlarmDatePicker.date = alarm!.rainyAlarmTime
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
