@@ -8,13 +8,16 @@
 
 import UIKit
 import os.log
+import AVFoundation
 
 class Alarm: NSObject, NSCoding {
     
     //MARK: - Properties
     var sunnyAlarmTime: Date
     var rainyAlarmTime: Date
-
+    var sound: String
+    
+    var audioPlayer: AVAudioPlayer!
     
     //MARK: - Archiving Paths
     static let DocumentsDirectory = FileManager().urls(for: .documentDirectory, in: .userDomainMask).first!
@@ -29,9 +32,10 @@ class Alarm: NSObject, NSCoding {
     
     
     //MARK: Initialization
-    init?(sunnyAlarmTime: Date, rainyAlarmTime: Date) {
+    init?(sunnyAlarmTime: Date, rainyAlarmTime: Date, sound: String) {
         self.sunnyAlarmTime = sunnyAlarmTime
         self.rainyAlarmTime = rainyAlarmTime
+        self.sound = sound
     }
     
     
@@ -44,7 +48,7 @@ class Alarm: NSObject, NSCoding {
         dateFormatter.dateStyle = .none
         // TODO: localeはあとで変更
         dateFormatter.locale = Locale(identifier: "ja_JP")
-
+        
         return dateFormatter.string(from: sunnyAlarmTime)
     }
     
@@ -60,6 +64,19 @@ class Alarm: NSObject, NSCoding {
         return dateFormatter.string(from: rainyAlarmTime)
     }
     
+    func playSound(){
+        //パスのURL
+        let sound:URL = URL(fileURLWithPath: self.sound)
+        
+        do {
+            //AVAudioPlayerを作成
+            audioPlayer = try AVAudioPlayer(contentsOf: sound, fileTypeHint:nil)
+        } catch {
+            print("Could not load file")
+        }
+        //再生
+        audioPlayer.play()
+    }
     
     //MARK: - NSCoding
     func encode(with aCoder: NSCoder) {
@@ -78,6 +95,7 @@ class Alarm: NSObject, NSCoding {
         }
         
         // Must call designated initializer.
-        self.init(sunnyAlarmTime: sunnyAlarmTime, rainyAlarmTime: rainyAlarmTime)
+        // TODO: サウンドファイル名を変数化する。ひとまず動かすために直指定。
+        self.init(sunnyAlarmTime: sunnyAlarmTime, rainyAlarmTime: rainyAlarmTime, sound: Bundle.main.path(forResource: "学校のチャイム01", ofType: "mp3")!)
     }
 }
