@@ -8,6 +8,8 @@
 
 import UIKit
 import CoreLocation
+import Alamofire
+import SwiftyJSON
 
 class AlarmStandbyViewController: UIViewController {
     
@@ -20,6 +22,12 @@ class AlarmStandbyViewController: UIViewController {
     var remainForSunnyAlarm: Int = 0
     var remainForRainyAlarm: Int = 0
     var isRungAlarm: Bool = false
+    var latitude: String?
+    var longitude: String?
+    var currentLocationWeather: String?
+    
+    // Dictionary型を定義して、緯度・経度・APIKeyをセット
+    var geoCoordinatesInfo: [String : String]?
     
     // 位置情報取得用オブジェクト
     let locationManager = CLLocationManager()
@@ -69,18 +77,28 @@ class AlarmStandbyViewController: UIViewController {
     @objc private func updateCurrentTime() {
         if(!isRungAlarm && self.remainForSunnyAlarm <= 0) {
             //TODO: Sunnyアラーム鳴らす判定
-            print("Sunny: \(remainForSunnyAlarm)")
-            self.alarm?.playSound()
-            isRungAlarm = true
+            geoCoordinatesInfo = ["lat" : latitude!, "lon" : longitude!, "appid" : APP_ID]
+            getWeatherData(url: WEATHER_URL, geoCoordinatesInfo: geoCoordinatesInfo!)
+            
+            if(currentLocationWeather == "Sunny") {
+                print("Sunny: \(remainForSunnyAlarm)")
+                self.alarm?.playSound()
+                isRungAlarm = true
+            }
         } else {
             self.remainForSunnyAlarm -= 1
         }
         
         if(!isRungAlarm && self.remainForRainyAlarm <= 0) {
             //TODO: Rainyアラーム鳴らす判定
-            print("Rainy: \(remainForRainyAlarm)")
-            self.alarm?.playSound()
-            isRungAlarm = true
+            geoCoordinatesInfo = ["lat" : latitude!, "lon" : longitude!, "appid" : APP_ID]
+            getWeatherData(url: WEATHER_URL, geoCoordinatesInfo: geoCoordinatesInfo!)
+            
+            if(currentLocationWeather == "Rainy") {
+                print("Rainy: \(remainForRainyAlarm)")
+                self.alarm?.playSound()
+                isRungAlarm = true
+            }
         } else {
             self.remainForRainyAlarm -= 1
         }
@@ -100,6 +118,33 @@ class AlarmStandbyViewController: UIViewController {
         let calendar =  Calendar.current
         let seconds = calendar.component(.second, from: userAwakeTime)
         return interval - seconds
+    }
+    
+    // Networking
+    func getWeatherData(url: String, geoCoordinatesInfo: [String : String]) {
+        Alamofire.request(url, method: .get, parameters: geoCoordinatesInfo).responseJSON {
+            response in
+            if response.result.isSuccess {
+                print("Success! Got the weather data")
+                
+                // response.result.valueはオプショナル型だが、if文で結果を確認しているのでforce unwrappedしてよい
+                let weatherJSON: JSON = JSON(response.result.value!)
+                print(weatherJSON)
+                
+                // クロージャの中でメソッドを呼び出すにはself句を呼び出すメソッドの前につける必要あり
+                self.parsingJSON(json: weatherJSON)
+                
+            } else {
+                print("Error \(String(describing: response.result.error))")
+            }
+        }
+    }
+    
+    func parsingJSON(json: JSON) {
+        currentLocationWeather = json["weather"][0]["main"].stringValue
+        
+        print(json["weather"][0]["main"].stringValue)
+        print(json["name"].stringValue)
     }
     
     /*
