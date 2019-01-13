@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 class AlarmStandbyViewController: UIViewController {
     
@@ -19,6 +20,13 @@ class AlarmStandbyViewController: UIViewController {
     var remainForSunnyAlarm: Int = 0
     var remainForRainyAlarm: Int = 0
     var isRungAlarm: Bool = false
+    
+    // 位置情報取得用オブジェクト
+    let locationManager = CLLocationManager()
+    
+    // 天気予報API
+    let WEATHER_URL = "http://api.openweathermap.org/data/2.5/weather"
+    let APP_ID = "3486f122e589efd3e860f3a10775ce47"
 
     //MARK: - Outlets
     @IBOutlet weak var sunnyAlarmTime: UILabel!
@@ -34,6 +42,12 @@ class AlarmStandbyViewController: UIViewController {
     //MARK: - Methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        // 位置情報取得のためのデリゲート
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
+        locationManager.requestAlwaysAuthorization()
+        locationManager.startUpdatingLocation()
+        
         //前の画面(AlarmViewController)のprepare()で渡してもらったalarmから時刻を抽出
         sunnyAlarmTime.text = self.alarm?.getSunnyAlarmTimeAsString()
         rainyAlarmTime.text = self.alarm?.getRainyAlarmTimeAsString()

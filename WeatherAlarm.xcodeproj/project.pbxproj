@@ -16,6 +16,7 @@
 		CCD8F966217B69BC00C4B00F /* AlarmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD8F964217B69BB00C4B00F /* AlarmViewController.swift */; };
 		CCD980FC2168B5A100C9B8D8 /* Alarm.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD980FB2168B5A100C9B8D8 /* Alarm.swift */; };
 		CCE7DBCA21EB241100D1415F /* 学校のチャイム01.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = CCE7DBC921EB241100D1415F /* 学校のチャイム01.mp3 */; };
+		CCE7DBCC21EB555D00D1415F /* CLLocationManagerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7DBCB21EB555D00D1415F /* CLLocationManagerDelegate.swift */; };
 		F6E449F2596129E8A7A4F5EA /* Pods_WeatherAlarmTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F97F425757ED4C0F2E4CE1E8 /* Pods_WeatherAlarmTests.framework */; };
 		FFCD61870CDB555B7B9C3A3E /* Pods_WeatherAlarm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42FA32884084C6145561B182 /* Pods_WeatherAlarm.framework */; };
 /* End PBXBuildFile section */
@@ -48,6 +49,7 @@
 		CCD8F964217B69BB00C4B00F /* AlarmViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlarmViewController.swift; sourceTree = "<group>"; };
 		CCD980FB2168B5A100C9B8D8 /* Alarm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alarm.swift; sourceTree = "<group>"; };
 		CCE7DBC921EB241100D1415F /* 学校のチャイム01.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "学校のチャイム01.mp3"; sourceTree = "<group>"; };
+		CCE7DBCB21EB555D00D1415F /* CLLocationManagerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLLocationManagerDelegate.swift; sourceTree = "<group>"; };
 		F941604C39F785D2FF7CC7D3 /* Pods-WeatherAlarmTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeatherAlarmTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-WeatherAlarmTests/Pods-WeatherAlarmTests.release.xcconfig"; sourceTree = "<group>"; };
 		F97F425757ED4C0F2E4CE1E8 /* Pods_WeatherAlarmTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WeatherAlarmTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -98,6 +100,7 @@
 				CCBC344E211F495600BF6E6D /* AppDelegate.swift */,
 				CCD8F964217B69BB00C4B00F /* AlarmViewController.swift */,
 				CC3C007321DF62CF0081B8CD /* AlarmStandbyViewController.swift */,
+				CCE7DBCB21EB555D00D1415F /* CLLocationManagerDelegate.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -354,6 +357,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CCE7DBCC21EB555D00D1415F /* CLLocationManagerDelegate.swift in Sources */,
 				CCD8F966217B69BC00C4B00F /* AlarmViewController.swift in Sources */,
 				CC3C007421DF62CF0081B8CD /* AlarmStandbyViewController.swift in Sources */,
 				CCD980FC2168B5A100C9B8D8 /* Alarm.swift in Sources */,
