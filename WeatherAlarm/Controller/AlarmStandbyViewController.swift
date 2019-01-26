@@ -72,35 +72,75 @@ class AlarmStandbyViewController: UIViewController {
     }
     
     @objc private func updateCurrentTime() {
-        if(!isRungAlarm && self.remainForSunnyAlarm <= 0) {
-            //TODO: Sunnyアラーム鳴らす判定
-            geoCoordinatesInfo = ["lat" : latitude!, "lon" : longitude!, "appid" : APP_ID]
-            getWeatherData(url: WEATHER_URL, geoCoordinatesInfo: geoCoordinatesInfo!)
-            
-            //TODO: あとでもっとスマートにする
-            if(currentLocationWeather == "clear sky" || currentLocationWeather == "few clouds" || currentLocationWeather == "scattered clouds") {
-                print("Good Weather: \(remainForSunnyAlarm)")
-                self.alarm?.playSound()
-                isRungAlarm = true
+        if(!isRungAlarm) {
+            // どちらかを鳴らす時間になったら、天気情報を取得する
+            if(self.remainForSunnyAlarm <= 0 || self.remainForRainyAlarm <= 0) {
+                geoCoordinatesInfo = ["lat" : latitude!, "lon" : longitude!, "appid" : APP_ID]
+                getWeatherData(url: WEATHER_URL, geoCoordinatesInfo: geoCoordinatesInfo!)
+                
+                if(self.remainForSunnyAlarm <= 0) {
+                    switch(currentLocationWeather) {
+                    case "clear sky", "few clouds", "scattered clouds":
+                        print("Good Weather: \(remainForSunnyAlarm)")
+                        self.alarm?.playSound()
+                        isRungAlarm = true
+                    default:
+                        // 訳のわからない天気情報だったので、とりあえず鳴らしておく
+                        self.alarm?.playSound()
+                        isRungAlarm = true
+                        print("I need your current weather condition!")
+                    }
+                }
+                
+                if(self.remainForRainyAlarm <= 0) {
+                    switch(currentLocationWeather) {
+                    case "broken clouds", "shower rain", "rain", "thunderstorm", "snow", "mist":
+                        print("Bad Weather: \(remainForRainyAlarm)")
+                        self.alarm?.playSound()
+                        isRungAlarm = true
+                    default:
+                        // 訳のわからない天気情報だったので、とりあえず鳴らしておく
+                        self.alarm?.playSound()
+                        isRungAlarm = true
+                        print("I need your current weather condition!¡")
+                    }
+                }
+            } else {
+                // 時間になるまで1秒ずつ減らす
+                self.remainForSunnyAlarm -= 1
+                self.remainForRainyAlarm -= 1
             }
-        } else {
-            self.remainForSunnyAlarm -= 1
         }
         
-        if(!isRungAlarm && self.remainForRainyAlarm <= 0) {
-            //TODO: Rainyアラーム鳴らす判定
-            geoCoordinatesInfo = ["lat" : latitude!, "lon" : longitude!, "appid" : APP_ID]
-            getWeatherData(url: WEATHER_URL, geoCoordinatesInfo: geoCoordinatesInfo!)
-            
-            //TODO: broken cloudsどうする？？
-            if(currentLocationWeather == "broken clouds" || currentLocationWeather == "shower rain" || currentLocationWeather == "rain" || currentLocationWeather == "thunderstorm" || currentLocationWeather == "snow") {
-                print("Bad Weather: \(remainForRainyAlarm)")
-                self.alarm?.playSound()
-                isRungAlarm = true
-            }
-        } else {
-            self.remainForRainyAlarm -= 1
-        }
+//        if(!isRungAlarm && self.remainForSunnyAlarm <= 0) {
+//            //TODO: Sunnyアラーム鳴らす判定
+//            geoCoordinatesInfo = ["lat" : latitude!, "lon" : longitude!, "appid" : APP_ID]
+//            getWeatherData(url: WEATHER_URL, geoCoordinatesInfo: geoCoordinatesInfo!)
+//
+//            //TODO: あとでもっとスマートにする
+//            if(currentLocationWeather == "clear sky" || currentLocationWeather == "few clouds" || currentLocationWeather == "scattered clouds") {
+//                print("Good Weather: \(remainForSunnyAlarm)")
+//                self.alarm?.playSound()
+//                isRungAlarm = true
+//            }
+//        } else {
+//            self.remainForSunnyAlarm -= 1
+//        }
+//
+//        if(!isRungAlarm && self.remainForRainyAlarm <= 0) {
+//            //TODO: Rainyアラーム鳴らす判定
+//            geoCoordinatesInfo = ["lat" : latitude!, "lon" : longitude!, "appid" : APP_ID]
+//            getWeatherData(url: WEATHER_URL, geoCoordinatesInfo: geoCoordinatesInfo!)
+//
+//            //TODO: broken cloudsどうする？？
+//            if(currentLocationWeather == "broken clouds" || currentLocationWeather == "shower rain" || currentLocationWeather == "rain" || currentLocationWeather == "thunderstorm" || currentLocationWeather == "snow") {
+//                print("Bad Weather: \(remainForRainyAlarm)")
+//                self.alarm?.playSound()
+//                isRungAlarm = true
+//            }
+//        } else {
+//            self.remainForRainyAlarm -= 1
+//        }
     }
 
     private func calculateInterval(userAwakeTime:Date) -> Int {
