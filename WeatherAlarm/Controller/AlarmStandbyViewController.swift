@@ -68,10 +68,7 @@ class AlarmStandbyViewController: UIViewController {
         self.remainForSunnyAlarm = self.secondsForSunnyAlarm
         self.remainForRainyAlarm = self.secondsForRainyAlarm
         
-        if timer == nil{
-            //タイマーをセット、一秒ごとにupdateCurrentTimeを呼ぶ
-            timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateCurrentTime), userInfo: nil, repeats: true)
-        }
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateCurrentTime), userInfo: nil, repeats: true)
     }
     
     @objc private func updateCurrentTime() {
@@ -80,8 +77,9 @@ class AlarmStandbyViewController: UIViewController {
             geoCoordinatesInfo = ["lat" : latitude!, "lon" : longitude!, "appid" : APP_ID]
             getWeatherData(url: WEATHER_URL, geoCoordinatesInfo: geoCoordinatesInfo!)
             
-            if(currentLocationWeather == "Sunny") {
-                print("Sunny: \(remainForSunnyAlarm)")
+            //TODO: あとでもっとスマートにする
+            if(currentLocationWeather == "clear sky" || currentLocationWeather == "few clouds" || currentLocationWeather == "scattered clouds") {
+                print("Good Weather: \(remainForSunnyAlarm)")
                 self.alarm?.playSound()
                 isRungAlarm = true
             }
@@ -94,8 +92,9 @@ class AlarmStandbyViewController: UIViewController {
             geoCoordinatesInfo = ["lat" : latitude!, "lon" : longitude!, "appid" : APP_ID]
             getWeatherData(url: WEATHER_URL, geoCoordinatesInfo: geoCoordinatesInfo!)
             
-            if(currentLocationWeather == "Rainy") {
-                print("Rainy: \(remainForRainyAlarm)")
+            //TODO: broken cloudsどうする？？
+            if(currentLocationWeather == "broken clouds" || currentLocationWeather == "shower rain" || currentLocationWeather == "rain" || currentLocationWeather == "thunderstorm" || currentLocationWeather == "snow") {
+                print("Bad Weather: \(remainForRainyAlarm)")
                 self.alarm?.playSound()
                 isRungAlarm = true
             }
@@ -141,9 +140,9 @@ class AlarmStandbyViewController: UIViewController {
     }
     
     func parsingJSON(json: JSON) {
-        currentLocationWeather = json["weather"][0]["main"].stringValue
+        currentLocationWeather = json["weather"][0]["description"].stringValue
         
-        print(json["weather"][0]["main"].stringValue)
+        print(json["weather"][0]["description"].stringValue)
         print(json["name"].stringValue)
     }
     
