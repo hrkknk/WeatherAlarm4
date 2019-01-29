@@ -50,6 +50,10 @@ class AlarmStandbyViewController: UIViewController {
     //MARK: - Methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //ブラックUI化
+        view.backgroundColor = UIColor(red: 20/255, green: 20/255, blue: 20/255, alpha: 1)
+
         // 位置情報取得のためのデリゲート
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
@@ -110,37 +114,7 @@ class AlarmStandbyViewController: UIViewController {
                 self.remainForSunnyAlarm -= 1
                 self.remainForRainyAlarm -= 1
             }
-        }
-        
-//        if(!isRungAlarm && self.remainForSunnyAlarm <= 0) {
-//            //TODO: Sunnyアラーム鳴らす判定
-//            geoCoordinatesInfo = ["lat" : latitude!, "lon" : longitude!, "appid" : APP_ID]
-//            getWeatherData(url: WEATHER_URL, geoCoordinatesInfo: geoCoordinatesInfo!)
-//
-//            //TODO: あとでもっとスマートにする
-//            if(currentLocationWeather == "clear sky" || currentLocationWeather == "few clouds" || currentLocationWeather == "scattered clouds") {
-//                print("Good Weather: \(remainForSunnyAlarm)")
-//                self.alarm?.playSound()
-//                isRungAlarm = true
-//            }
-//        } else {
-//            self.remainForSunnyAlarm -= 1
-//        }
-//
-//        if(!isRungAlarm && self.remainForRainyAlarm <= 0) {
-//            //TODO: Rainyアラーム鳴らす判定
-//            geoCoordinatesInfo = ["lat" : latitude!, "lon" : longitude!, "appid" : APP_ID]
-//            getWeatherData(url: WEATHER_URL, geoCoordinatesInfo: geoCoordinatesInfo!)
-//
-//            //TODO: broken cloudsどうする？？
-//            if(currentLocationWeather == "broken clouds" || currentLocationWeather == "shower rain" || currentLocationWeather == "rain" || currentLocationWeather == "thunderstorm" || currentLocationWeather == "snow") {
-//                print("Bad Weather: \(remainForRainyAlarm)")
-//                self.alarm?.playSound()
-//                isRungAlarm = true
-//            }
-//        } else {
-//            self.remainForRainyAlarm -= 1
-//        }
+        }        
     }
 
     private func calculateInterval(userAwakeTime:Date) -> Int {

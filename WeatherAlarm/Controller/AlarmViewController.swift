@@ -33,11 +33,14 @@ class AlarmViewController: UIViewController {
         alarm!.rainyAlarmTime = sender.date
     }
     
-    
     //MARK: - Methods
     override func viewDidLoad() {
-        
         super.viewDidLoad()
+        
+        //ブラックUI化
+        view.backgroundColor = UIColor(red: 20/255, green: 20/255, blue: 20/255, alpha: 1)
+        self.sunnyAlarmDatePicker.setValue(UIColor.white, forKey: "textColor")
+        self.rainyAlarmDatePicker.setValue(UIColor.white, forKey: "textColor")
         
         //保存データがある場合、それを読み込む
         if let savedAlarm = loadAlarm() {
