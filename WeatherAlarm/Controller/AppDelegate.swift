@@ -16,6 +16,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
+        //アプリのスリープを無効化
+        UIApplication.shared.isIdleTimerDisabled = true
+
         // ナビゲーションバーの色変更
         UINavigationBar.appearance().barTintColor = UIColor.black
         
