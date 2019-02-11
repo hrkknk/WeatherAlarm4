@@ -81,6 +81,7 @@ class AlarmStandbyViewController: UIViewController {
         geoCoordinatesInfo = ["lat" : latitude!, "lon" : longitude!, "appid" : APP_ID]
         getWeatherData(url: WEATHER_URL, geoCoordinatesInfo: geoCoordinatesInfo!)
         
+        // TODO: rainyAlarmTime, sunnyAlarmTime は日付が前日や翌々日だったり、秒数を持っていたりするので、時間と分数だけ比較して判断する
         if(now >= alarm!.rainyAlarmTime) {
             switch(currentLocationWeather) {
             case "clear sky", "few clouds", "scattered clouds":
