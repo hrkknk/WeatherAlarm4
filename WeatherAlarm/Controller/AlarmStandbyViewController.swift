@@ -64,75 +64,62 @@ class AlarmStandbyViewController: UIViewController {
         sunnyAlarmTime.text = self.alarm?.getSunnyAlarmTimeAsString()
         rainyAlarmTime.text = self.alarm?.getRainyAlarmTimeAsString()
         
-        //アラームを鳴らす時刻までの秒数を取得
-        self.secondsForSunnyAlarm = calculateInterval(userAwakeTime: (self.alarm?.sunnyAlarmTime)!)
-        self.secondsForRainyAlarm = calculateInterval(userAwakeTime: (self.alarm?.rainyAlarmTime)!)
-        
         //更新用の変数を用意
         self.remainForSunnyAlarm = self.secondsForSunnyAlarm
         self.remainForRainyAlarm = self.secondsForRainyAlarm
         
-        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateCurrentTime), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(observeAlarmTimer), userInfo: nil, repeats: true)
     }
     
-    @objc private func updateCurrentTime() {
-        if(!isRungAlarm) {
-            // どちらかを鳴らす時間になったら、天気情報を取得する
-            if(self.remainForSunnyAlarm <= 0 || self.remainForRainyAlarm <= 0) {
-                geoCoordinatesInfo = ["lat" : latitude!, "lon" : longitude!, "appid" : APP_ID]
-                getWeatherData(url: WEATHER_URL, geoCoordinatesInfo: geoCoordinatesInfo!)
-                
-                if(self.remainForSunnyAlarm <= 0) {
-                    switch(currentLocationWeather) {
-                    case "clear sky", "few clouds", "scattered clouds":
-                        print("Good Weather: \(remainForSunnyAlarm)")
-                        self.alarm?.playSound()
-                        isRungAlarm = true
-                    default:
-                        // 訳のわからない天気情報だったので、とりあえず鳴らしておく
-                        self.alarm?.playSound()
-                        isRungAlarm = true
-                        print("I need your current weather condition!")
-                    }
-                }
-                
-                if(self.remainForRainyAlarm <= 0) {
-                    switch(currentLocationWeather) {
-                    case "broken clouds", "shower rain", "rain", "thunderstorm", "snow", "mist":
-                        print("Bad Weather: \(remainForRainyAlarm)")
-                        self.alarm?.playSound()
-                        isRungAlarm = true
-                    default:
-                        // 訳のわからない天気情報だったので、とりあえず鳴らしておく
-                        self.alarm?.playSound()
-                        isRungAlarm = true
-                        print("I need your current weather condition!¡")
-                    }
-                }
-            } else {
-                // 時間になるまで1秒ずつ減らす
-                self.remainForSunnyAlarm -= 1
-                self.remainForRainyAlarm -= 1
-            }
-        }        
-    }
-
-    private func calculateInterval(userAwakeTime:Date) -> Int {
-        //タイマーの時間を計算する
-        var interval = Int(userAwakeTime.timeIntervalSinceNow)
-        print("interval: \(interval)")
+    @objc private func observeAlarmTimer() {
+        let now = Date();
         
-        if interval < 0 {
-            //日をまたぐと過去の時刻と比較してしまうので、24時間(86400秒)足す
-            interval = 86400 + interval
+        let isTimeRainyAlarm = areEqualHourMinute(date1: now, date2: alarm!.rainyAlarmTime)
+        let isTimeSunnyAlarm = areEqualHourMinute(date1: now, date2: alarm!.sunnyAlarmTime)
+        
+        if(isRungAlarm || (!isTimeRainyAlarm && !isTimeSunnyAlarm)) {
+            return
         }
         
-        //DatePickerで設定した時刻は秒単位まで指定できていないので、最大59秒ずれる。回避策として、その分引いてやる。
-        let calendar =  Calendar.current
-        let seconds = calendar.component(.second, from: userAwakeTime)
-        return interval - seconds
+        geoCoordinatesInfo = ["lat" : latitude!, "lon" : longitude!, "appid" : APP_ID]
+        getWeatherData(url: WEATHER_URL, geoCoordinatesInfo: geoCoordinatesInfo!)
+        
+        if(isTimeRainyAlarm) {
+            switch(currentLocationWeather) {
+            case "clear sky", "few clouds", "scattered clouds":
+                print("Good Weather: \(remainForSunnyAlarm)")
+                self.alarm?.playSound()
+            default:
+                // 訳のわからない天気情報だったので、とりあえず鳴らしておく
+                self.alarm?.playSound()
+                print("I need your current weather condition!")
+            }
+            isRungAlarm = true;
+        } else if(isTimeSunnyAlarm) {
+            switch(currentLocationWeather) {
+            case "clear sky", "few clouds", "scattered clouds":
+                print("Good Weather: \(remainForSunnyAlarm)")
+                self.alarm?.playSound()
+            default:
+                // 訳のわからない天気情報だったので、とりあえず鳴らしておく
+                self.alarm?.playSound()
+                print("I need your current weather condition!")
+            }
+            isRungAlarm = true;
+        }
     }
     
+    func areEqualHourMinute(date1: Date, date2: Date) -> Bool {
+        let hour1 = Calendar.current.component(.hour, from: date1)
+        let minute1 = Calendar.current.component(.minute, from: date1)
+        let hour2 = Calendar.current.component(.hour, from: date2)
+        let minute2 = Calendar.current.component(.minute, from: date2)
+        if(hour1 == hour2 && minute1 == minute2) {
+            return true
+        }
+        return false
+    }
+
     // Networking
     func getWeatherData(url: String, geoCoordinatesInfo: [String : String]) {
         Alamofire.request(url, method: .get, parameters: geoCoordinatesInfo).responseJSON {
