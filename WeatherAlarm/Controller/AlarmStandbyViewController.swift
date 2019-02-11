@@ -68,15 +68,11 @@ class AlarmStandbyViewController: UIViewController {
         self.remainForSunnyAlarm = self.secondsForSunnyAlarm
         self.remainForRainyAlarm = self.secondsForRainyAlarm
         
-        print("Target - rainyAlarmTime: \(alarm!.rainyAlarmTime)")
-        print("Target - sunnyAlarmTime: \(alarm!.sunnyAlarmTime)")
-        
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(observeAlarmTimer), userInfo: nil, repeats: true)
     }
     
     @objc private func observeAlarmTimer() {
         let now = Date();
-        print("now: \(now)");
         
         let isTimeRainyAlarm = areEqualHourMinute(date1: now, date2: alarm!.rainyAlarmTime)
         let isTimeSunnyAlarm = areEqualHourMinute(date1: now, date2: alarm!.sunnyAlarmTime)
