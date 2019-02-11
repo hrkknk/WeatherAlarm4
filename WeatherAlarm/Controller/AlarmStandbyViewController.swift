@@ -68,21 +68,27 @@ class AlarmStandbyViewController: UIViewController {
         self.remainForSunnyAlarm = self.secondsForSunnyAlarm
         self.remainForRainyAlarm = self.secondsForRainyAlarm
         
+        print("Target - rainyAlarmTime: \(alarm!.rainyAlarmTime)")
+        print("Target - sunnyAlarmTime: \(alarm!.sunnyAlarmTime)")
+        
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(observeAlarmTimer), userInfo: nil, repeats: true)
     }
     
     @objc private func observeAlarmTimer() {
         let now = Date();
+        print("now: \(now)");
         
-        if(isRungAlarm || (now < alarm!.rainyAlarmTime && now < alarm!.sunnyAlarmTime)) {
+        let isTimeRainyAlarm = areEqualHourMinute(date1: now, date2: alarm!.rainyAlarmTime)
+        let isTimeSunnyAlarm = areEqualHourMinute(date1: now, date2: alarm!.sunnyAlarmTime)
+        
+        if(isRungAlarm || (!isTimeRainyAlarm && !isTimeSunnyAlarm)) {
             return
         }
         
         geoCoordinatesInfo = ["lat" : latitude!, "lon" : longitude!, "appid" : APP_ID]
         getWeatherData(url: WEATHER_URL, geoCoordinatesInfo: geoCoordinatesInfo!)
         
-        // TODO: rainyAlarmTime, sunnyAlarmTime は日付が前日や翌々日だったり、秒数を持っていたりするので、時間と分数だけ比較して判断する
-        if(now >= alarm!.rainyAlarmTime) {
+        if(isTimeRainyAlarm) {
             switch(currentLocationWeather) {
             case "clear sky", "few clouds", "scattered clouds":
                 print("Good Weather: \(remainForSunnyAlarm)")
@@ -93,7 +99,7 @@ class AlarmStandbyViewController: UIViewController {
                 print("I need your current weather condition!")
             }
             isRungAlarm = true;
-        } else if(now >= alarm!.sunnyAlarmTime) {
+        } else if(isTimeSunnyAlarm) {
             switch(currentLocationWeather) {
             case "clear sky", "few clouds", "scattered clouds":
                 print("Good Weather: \(remainForSunnyAlarm)")
@@ -105,6 +111,17 @@ class AlarmStandbyViewController: UIViewController {
             }
             isRungAlarm = true;
         }
+    }
+    
+    func areEqualHourMinute(date1: Date, date2: Date) -> Bool {
+        let hour1 = Calendar.current.component(.hour, from: date1)
+        let minute1 = Calendar.current.component(.minute, from: date1)
+        let hour2 = Calendar.current.component(.hour, from: date2)
+        let minute2 = Calendar.current.component(.minute, from: date2)
+        if(hour1 == hour2 && minute1 == minute2) {
+            return true
+        }
+        return false
     }
 
     // Networking
