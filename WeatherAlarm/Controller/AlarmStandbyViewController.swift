@@ -82,31 +82,34 @@ class AlarmStandbyViewController: UIViewController {
         }
         
         geoCoordinatesInfo = ["lat" : latitude!, "lon" : longitude!, "appid" : APP_ID]
-        getWeatherData(url: WEATHER_URL, geoCoordinatesInfo: geoCoordinatesInfo!)
-        
-        if(isTimeRainyAlarm) {
-            switch(currentLocationWeather) {
-            case "clear sky", "few clouds", "scattered clouds":
-                print("Good Weather: \(remainForSunnyAlarm)")
-                self.alarm?.playSound()
-            default:
-                // 訳のわからない天気情報だったので、とりあえず鳴らしておく
-                self.alarm?.playSound()
-                print("I need your current weather condition!")
+        getWeatherData(url: WEATHER_URL, geoCoordinatesInfo: geoCoordinatesInfo!) { response in
+            self.currentLocationWeather = response
+            
+            if(isTimeRainyAlarm) {
+                switch(self.currentLocationWeather) {
+                case "clear sky", "few clouds", "scattered clouds":
+                    print("Good Weather: \(String(describing: self.currentLocationWeather))")
+                    self.alarm?.playSound()
+                default:
+                    // 訳のわからない天気情報だったので、とりあえず鳴らしておく
+                    self.alarm?.playSound()
+                    print("I need your current weather condition!")
+                }
+                self.isRungAlarm = true;
+            } else if(isTimeSunnyAlarm) {
+                switch(self.currentLocationWeather) {
+                case "clear sky", "few clouds", "scattered clouds":
+                    print("Good Weather: \(String(describing: self.currentLocationWeather))")
+                    self.alarm?.playSound()
+                default:
+                    // 訳のわからない天気情報だったので、とりあえず鳴らしておく
+                    self.alarm?.playSound()
+                    print("I need your current weather condition!")
+                }
+                self.isRungAlarm = true;
             }
-            isRungAlarm = true;
-        } else if(isTimeSunnyAlarm) {
-            switch(currentLocationWeather) {
-            case "clear sky", "few clouds", "scattered clouds":
-                print("Good Weather: \(remainForSunnyAlarm)")
-                self.alarm?.playSound()
-            default:
-                // 訳のわからない天気情報だったので、とりあえず鳴らしておく
-                self.alarm?.playSound()
-                print("I need your current weather condition!")
-            }
-            isRungAlarm = true;
         }
+        
     }
     
     func areEqualHourMinute(date1: Date, date2: Date) -> Bool {
@@ -121,7 +124,7 @@ class AlarmStandbyViewController: UIViewController {
     }
 
     // Networking
-    func getWeatherData(url: String, geoCoordinatesInfo: [String : String]) {
+    func getWeatherData(url: String, geoCoordinatesInfo: [String : String], completion: @escaping (String) -> Void) {
         Alamofire.request(url, method: .get, parameters: geoCoordinatesInfo).responseJSON {
             response in
             if response.result.isSuccess {
@@ -132,7 +135,7 @@ class AlarmStandbyViewController: UIViewController {
                 print(weatherJSON)
                 
                 // クロージャの中でメソッドを呼び出すにはself句を呼び出すメソッドの前につける必要あり
-                self.parsingJSON(json: weatherJSON)
+                completion(self.parsingJSON(json: weatherJSON))
                 
             } else {
                 print("Error \(String(describing: response.result.error))")
@@ -140,11 +143,11 @@ class AlarmStandbyViewController: UIViewController {
         }
     }
     
-    func parsingJSON(json: JSON) {
-        currentLocationWeather = json["weather"][0]["description"].stringValue
-        
+    func parsingJSON(json: JSON) -> String {
         print(json["weather"][0]["description"].stringValue)
         print(json["name"].stringValue)
+        
+        return json["weather"][0]["description"].stringValue
     }
     
     /*
