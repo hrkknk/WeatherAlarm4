@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5C71ED7F222AB190002CD717 /* AlarmSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C71ED7E222AB190002CD717 /* AlarmSetting.swift */; };
+		5C71ED81222AB609002CD717 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C71ED80222AB609002CD717 /* Weather.swift */; };
+		5C71ED84222ACC97002CD717 /* AlarmUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C71ED83222ACC97002CD717 /* AlarmUseCase.swift */; };
+		5CAE5C8B222BDD65009EE0FB /* AlarmRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CAE5C8A222BDD65009EE0FB /* AlarmRepository.swift */; };
 		CC25685A2174F1C200156CD9 /* WeatherAlarmTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC2568592174F1C200156CD9 /* WeatherAlarmTests.swift */; };
 		CC3C007421DF62CF0081B8CD /* AlarmStandbyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3C007321DF62CF0081B8CD /* AlarmStandbyViewController.swift */; };
 		CCBC344F211F495600BF6E6D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBC344E211F495600BF6E6D /* AppDelegate.swift */; };
@@ -36,6 +40,10 @@
 		0CD4F052C81BDE8DAAD9A48A /* Pods-WeatherAlarmTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeatherAlarmTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WeatherAlarmTests/Pods-WeatherAlarmTests.debug.xcconfig"; sourceTree = "<group>"; };
 		2C3F386C5A2A109D86CE52C0 /* Pods-WeatherAlarm.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeatherAlarm.release.xcconfig"; path = "Pods/Target Support Files/Pods-WeatherAlarm/Pods-WeatherAlarm.release.xcconfig"; sourceTree = "<group>"; };
 		42FA32884084C6145561B182 /* Pods_WeatherAlarm.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WeatherAlarm.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5C71ED7E222AB190002CD717 /* AlarmSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmSetting.swift; sourceTree = "<group>"; };
+		5C71ED80222AB609002CD717 /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
+		5C71ED83222ACC97002CD717 /* AlarmUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmUseCase.swift; sourceTree = "<group>"; };
+		5CAE5C8A222BDD65009EE0FB /* AlarmRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmRepository.swift; sourceTree = "<group>"; };
 		CC2568572174F1C200156CD9 /* WeatherAlarmTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WeatherAlarmTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC2568592174F1C200156CD9 /* WeatherAlarmTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherAlarmTests.swift; sourceTree = "<group>"; };
 		CC25685B2174F1C200156CD9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -113,6 +121,31 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		5C71ED7D222AB03E002CD717 /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				5C71ED7E222AB190002CD717 /* AlarmSetting.swift */,
+				5C71ED80222AB609002CD717 /* Weather.swift */,
+			);
+			path = Entity;
+			sourceTree = "<group>";
+		};
+		5C71ED82222AB6D9002CD717 /* UseCase */ = {
+			isa = PBXGroup;
+			children = (
+				5C71ED83222ACC97002CD717 /* AlarmUseCase.swift */,
+			);
+			path = UseCase;
+			sourceTree = "<group>";
+		};
+		5CAE5C89222BDD4B009EE0FB /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				5CAE5C8A222BDD65009EE0FB /* AlarmRepository.swift */,
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
 		CC2568582174F1C200156CD9 /* WeatherAlarmTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -145,6 +178,9 @@
 		CCBC344D211F495600BF6E6D /* WeatherAlarm */ = {
 			isa = PBXGroup;
 			children = (
+				5CAE5C89222BDD4B009EE0FB /* Repository */,
+				5C71ED82222AB6D9002CD717 /* UseCase */,
+				5C71ED7D222AB03E002CD717 /* Entity */,
 				2A4C1E9721A84A9900A1CF08 /* View */,
 				2A4C1E9821A84BD400A1CF08 /* Controller */,
 				2A4C1E9921A84BF900A1CF08 /* Model */,
@@ -359,9 +395,13 @@
 			files = (
 				CCE7DBCC21EB555D00D1415F /* CLLocationManagerDelegate.swift in Sources */,
 				CCD8F966217B69BC00C4B00F /* AlarmViewController.swift in Sources */,
+				5C71ED84222ACC97002CD717 /* AlarmUseCase.swift in Sources */,
 				CC3C007421DF62CF0081B8CD /* AlarmStandbyViewController.swift in Sources */,
+				5CAE5C8B222BDD65009EE0FB /* AlarmRepository.swift in Sources */,
 				CCD980FC2168B5A100C9B8D8 /* Alarm.swift in Sources */,
 				CCBC344F211F495600BF6E6D /* AppDelegate.swift in Sources */,
+				5C71ED7F222AB190002CD717 /* AlarmSetting.swift in Sources */,
+				5C71ED81222AB609002CD717 /* Weather.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -14,7 +14,6 @@ class AlarmViewController: UIViewController {
     // MARK: - Properties
     var alarm: Alarm?
     
-    
     //MARK: - Outlets
     @IBOutlet weak var sunnyAlarmDatePicker: UIDatePicker!
     @IBOutlet weak var rainyAlarmDatePicker: UIDatePicker!
@@ -26,11 +25,23 @@ class AlarmViewController: UIViewController {
     }
     
     @IBAction func setSunnyAlarm(_ sender: UIDatePicker) {
-        alarm!.sunnyAlarmTime = sender.date
+        do {
+            let alarm = try AlarmUseCase.createAlarm(date: sender.date,
+                                                 soundFilePath: Bundle.main.path(forResource: "学校のチャイム01", ofType: "mp3")!)
+            AlarmRepository.sharedInstance.setAlarm(weather: "sunny", alarm: alarm)
+        } catch {
+            print("Failed to set sunny alarm.")
+        }
     }
     
     @IBAction func setRainyAlarm(_ sender: UIDatePicker) {
-        alarm!.rainyAlarmTime = sender.date
+        do {
+            let alarm = try AlarmUseCase.createAlarm(date: sender.date,
+                                                     soundFilePath: Bundle.main.path(forResource: "学校のチャイム01", ofType: "mp3")!)
+            AlarmRepository.sharedInstance.setAlarm(weather: "rainy", alarm: alarm)
+        } catch {
+            print("Failed to set rainy alarm.")
+        }
     }
     
     //MARK: - Methods
