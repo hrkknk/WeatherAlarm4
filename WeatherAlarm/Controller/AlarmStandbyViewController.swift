@@ -15,8 +15,8 @@ class AlarmStandbyViewController: UIViewController {
     
     // MARK: - Properties
     //var alarm: Alarm?
-    var sunnyAlarm: AlarmSetting?
-    var rainyAlarm: AlarmSetting?
+    var sunnyAlarm: Alarm?
+    var rainyAlarm: Alarm?
     var timer: Timer?
     var isRungAlarm: Bool = false
     var latitude: String?

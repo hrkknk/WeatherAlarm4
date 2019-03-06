@@ -18,11 +18,11 @@ class AlarmRepository: NSObject {
     private override init() {
     }
     
-    func setAlarm(weatherType: WeatherType, alarm: AlarmSetting) {
+    func setAlarm(weatherType: WeatherType, alarm: Alarm) {
         alarms[weatherType.rawValue] = alarm
     }
     
-    func getAlarm(weatherType: WeatherType) -> AlarmSetting? {
+    func getAlarm(weatherType: WeatherType) -> Alarm? {
         return alarms[weatherType.rawValue]
     }
 }

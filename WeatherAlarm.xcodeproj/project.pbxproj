@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5C71ED7F222AB190002CD717 /* AlarmSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C71ED7E222AB190002CD717 /* AlarmSetting.swift */; };
+		5C71ED7F222AB190002CD717 /* Alarm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C71ED7E222AB190002CD717 /* Alarm.swift */; };
 		5C71ED81222AB609002CD717 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C71ED80222AB609002CD717 /* Weather.swift */; };
 		5C71ED84222ACC97002CD717 /* AlarmUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C71ED83222ACC97002CD717 /* AlarmUseCase.swift */; };
 		5CAE5C8B222BDD65009EE0FB /* AlarmRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CAE5C8A222BDD65009EE0FB /* AlarmRepository.swift */; };
@@ -39,7 +39,7 @@
 		0CD4F052C81BDE8DAAD9A48A /* Pods-WeatherAlarmTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeatherAlarmTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WeatherAlarmTests/Pods-WeatherAlarmTests.debug.xcconfig"; sourceTree = "<group>"; };
 		2C3F386C5A2A109D86CE52C0 /* Pods-WeatherAlarm.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeatherAlarm.release.xcconfig"; path = "Pods/Target Support Files/Pods-WeatherAlarm/Pods-WeatherAlarm.release.xcconfig"; sourceTree = "<group>"; };
 		42FA32884084C6145561B182 /* Pods_WeatherAlarm.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WeatherAlarm.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		5C71ED7E222AB190002CD717 /* AlarmSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmSetting.swift; sourceTree = "<group>"; };
+		5C71ED7E222AB190002CD717 /* Alarm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alarm.swift; sourceTree = "<group>"; };
 		5C71ED80222AB609002CD717 /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
 		5C71ED83222ACC97002CD717 /* AlarmUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmUseCase.swift; sourceTree = "<group>"; };
 		5CAE5C8A222BDD65009EE0FB /* AlarmRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmRepository.swift; sourceTree = "<group>"; };
@@ -114,7 +114,7 @@
 		5C71ED7D222AB03E002CD717 /* Entity */ = {
 			isa = PBXGroup;
 			children = (
-				5C71ED7E222AB190002CD717 /* AlarmSetting.swift */,
+				5C71ED7E222AB190002CD717 /* Alarm.swift */,
 				5C71ED80222AB609002CD717 /* Weather.swift */,
 			);
 			path = Entity;
@@ -388,7 +388,7 @@
 				CC3C007421DF62CF0081B8CD /* AlarmStandbyViewController.swift in Sources */,
 				5CAE5C8B222BDD65009EE0FB /* AlarmRepository.swift in Sources */,
 				CCBC344F211F495600BF6E6D /* AppDelegate.swift in Sources */,
-				5C71ED7F222AB190002CD717 /* AlarmSetting.swift in Sources */,
+				5C71ED7F222AB190002CD717 /* Alarm.swift in Sources */,
 				5C71ED81222AB609002CD717 /* Weather.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
