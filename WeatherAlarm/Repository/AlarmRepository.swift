@@ -6,23 +6,23 @@
 //  Copyright © 2019 金子宏樹. All rights reserved.
 //
 
-class AlarmRepository {
+import Foundation
+
+class AlarmRepository: NSObject {
     static let sharedInstance: AlarmRepository = AlarmRepository()
-    private var alarms: Dictionary = ["sunny": AlarmSetting(),
-                              "rainy": AlarmSetting()]
+    private let defaultSoundFilePath = Bundle.main.path(forResource: "学校のチャイム01", ofType: "mp3")!
     
-    private init() {
+    var alarms: Dictionary = [WeatherType.sunny.rawValue: AlarmUseCase.createAlarm(),
+                              WeatherType.rainy.rawValue: AlarmUseCase.createAlarm()]
+    
+    private override init() {
     }
     
-    func setAlarm(weather: String, alarm: AlarmSetting) {
-        if(alarms[weather] == nil){
-            print("Weather '\(weather)' is not found in alarms.")
-            return
-        }
-        alarms[weather] = alarm
+    func setAlarm(weatherType: WeatherType, alarm: AlarmSetting) {
+        alarms[weatherType.rawValue] = alarm
     }
     
-    func getAlarm(weather: String) -> AlarmSetting? {
-        return alarms[weather]
+    func getAlarm(weatherType: WeatherType) -> AlarmSetting? {
+        return alarms[weatherType.rawValue]
     }
 }

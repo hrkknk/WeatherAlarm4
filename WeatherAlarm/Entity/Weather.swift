@@ -7,9 +7,10 @@
 //
 
 class Weather {
-    var description: String
-    
-    init(description: String) {
-        self.description = description
-    }
+    var description: String?
+}
+
+enum WeatherType: String, CaseIterable {
+    case sunny
+    case rainy
 }

@@ -14,13 +14,10 @@ import SwiftyJSON
 class AlarmStandbyViewController: UIViewController {
     
     // MARK: - Properties
-    var alarm: Alarm?
+    //var alarm: Alarm?
+    var sunnyAlarm: AlarmSetting?
+    var rainyAlarm: AlarmSetting?
     var timer: Timer?
-    var currentTime: String?
-    var secondsForSunnyAlarm: Int = 0
-    var secondsForRainyAlarm: Int = 0
-    var remainForSunnyAlarm: Int = 0
-    var remainForRainyAlarm: Int = 0
     var isRungAlarm: Bool = false
     var latitude: String?
     var longitude: String?
@@ -60,52 +57,43 @@ class AlarmStandbyViewController: UIViewController {
         locationManager.requestAlwaysAuthorization()
         locationManager.startUpdatingLocation()
         
-        //前の画面(AlarmViewController)のprepare()で渡してもらったalarmから時刻を抽出
-        sunnyAlarmTime.text = self.alarm?.getSunnyAlarmTimeAsString()
-        rainyAlarmTime.text = self.alarm?.getRainyAlarmTimeAsString()
-        
-        //更新用の変数を用意
-        self.remainForSunnyAlarm = self.secondsForSunnyAlarm
-        self.remainForRainyAlarm = self.secondsForRainyAlarm
+        sunnyAlarm = AlarmRepository.sharedInstance.getAlarm(weatherType: WeatherType.sunny)
+        rainyAlarm = AlarmRepository.sharedInstance.getAlarm(weatherType: WeatherType.rainy)
+        sunnyAlarmTime.text = AlarmUseCase.getAlarmTimeAsString(alarm: sunnyAlarm!)
+        rainyAlarmTime.text = AlarmUseCase.getAlarmTimeAsString(alarm: rainyAlarm!)
         
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(observeAlarmTimer), userInfo: nil, repeats: true)
     }
     
     @objc private func observeAlarmTimer() {
-        let now = Date();
+        let isRainyAlarmRingTime = AlarmUseCase.isAlarmRingTime(alarm: rainyAlarm!)
+        let isSunnyAlarmRingTime = AlarmUseCase.isAlarmRingTime(alarm: sunnyAlarm!)
         
-        let isTimeRainyAlarm = areEqualHourMinute(date1: now, date2: alarm!.rainyAlarmTime)
-        let isTimeSunnyAlarm = areEqualHourMinute(date1: now, date2: alarm!.sunnyAlarmTime)
-        
-        if(isRungAlarm || (!isTimeRainyAlarm && !isTimeSunnyAlarm)) {
+        if(isRungAlarm || (!isRainyAlarmRingTime && !isSunnyAlarmRingTime)) {
             return
         }
         
         geoCoordinatesInfo = ["lat" : latitude!, "lon" : longitude!, "appid" : APP_ID]
         getWeatherData(url: WEATHER_URL, geoCoordinatesInfo: geoCoordinatesInfo!)
         
-        if(isTimeRainyAlarm) {
+        if isRainyAlarmRingTime {
             switch(currentLocationWeather) {
             case "clear sky", "few clouds", "scattered clouds":
-                print("Good Weather: \(remainForSunnyAlarm)")
-                self.alarm?.playSound()
+                isRungAlarm = AlarmUseCase.ringAlarm(alarm: rainyAlarm!)
             default:
                 // 訳のわからない天気情報だったので、とりあえず鳴らしておく
-                self.alarm?.playSound()
+                isRungAlarm = AlarmUseCase.ringAlarm(alarm: rainyAlarm!)
                 print("I need your current weather condition!")
             }
-            isRungAlarm = true;
-        } else if(isTimeSunnyAlarm) {
+        } else if isSunnyAlarmRingTime {
             switch(currentLocationWeather) {
             case "clear sky", "few clouds", "scattered clouds":
-                print("Good Weather: \(remainForSunnyAlarm)")
-                self.alarm?.playSound()
+                isRungAlarm = AlarmUseCase.ringAlarm(alarm: sunnyAlarm!)
             default:
                 // 訳のわからない天気情報だったので、とりあえず鳴らしておく
-                self.alarm?.playSound()
+                isRungAlarm = AlarmUseCase.ringAlarm(alarm: sunnyAlarm!)
                 print("I need your current weather condition!")
             }
-            isRungAlarm = true;
         }
     }
     

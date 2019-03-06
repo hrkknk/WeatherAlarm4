@@ -8,7 +8,7 @@
 
 import AVFoundation
 
-class AlarmSetting: NSObject {
+class AlarmSetting {
     var hour: Int?
     var minute: Int?
     var sound: AVAudioPlayer?
