@@ -15,6 +15,8 @@ class AlarmViewController: UIViewController {
     @IBOutlet weak var sunnyAlarmDatePicker: UIDatePicker!
     @IBOutlet weak var rainyAlarmDatePicker: UIDatePicker!
     
+    let alarmRepo: AlarmRepository = AlarmRepository.sharedInstance
+    
     //MARK: - Actions
     @IBAction func setAlarm(_ sender: UIButton) {
         //TODO: saving alarms
@@ -22,12 +24,12 @@ class AlarmViewController: UIViewController {
     
     @IBAction func setSunnyAlarm(_ sender: UIDatePicker) {
         let alarm = AlarmUseCase.createAlarm(date: sender.date)
-        AlarmRepository.sharedInstance.setAlarm(weatherType: WeatherType.sunny, alarm: alarm)
+        alarmRepo.setAlarm(weatherType: WeatherType.sunny, alarm: alarm)
     }
     
     @IBAction func setRainyAlarm(_ sender: UIDatePicker) {
         let alarm = AlarmUseCase.createAlarm(date: sender.date)
-        AlarmRepository.sharedInstance.setAlarm(weatherType: WeatherType.rainy, alarm: alarm)
+        alarmRepo.setAlarm(weatherType: WeatherType.rainy, alarm: alarm)
     }
     
     //MARK: - Methods
@@ -45,13 +47,13 @@ class AlarmViewController: UIViewController {
     }
     
     private func initAlarmDatePickers() {
-        if let sunnyAlarm = AlarmRepository.sharedInstance.getAlarm(weatherType: WeatherType.sunny) {
+        if let sunnyAlarm = alarmRepo.getAlarm(weatherType: WeatherType.sunny) {
             self.sunnyAlarmDatePicker.date = AlarmUseCase.getAlarmDate(alarm: sunnyAlarm)
         } else {
             self.sunnyAlarmDatePicker.date = Date()
         }
         
-        if let rainyAlarm = AlarmRepository.sharedInstance.getAlarm(weatherType: WeatherType.rainy) {
+        if let rainyAlarm = alarmRepo.getAlarm(weatherType: WeatherType.rainy) {
             self.rainyAlarmDatePicker.date = AlarmUseCase.getAlarmDate(alarm: rainyAlarm)
         } else {
             self.rainyAlarmDatePicker.date = Date()

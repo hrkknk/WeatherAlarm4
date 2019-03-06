@@ -14,10 +14,9 @@ import SwiftyJSON
 class AlarmStandbyViewController: UIViewController {
     
     // MARK: - Properties
-    //var alarm: Alarm?
+    let alarmRepo: AlarmRepository = AlarmRepository.sharedInstance
     var sunnyAlarm: Alarm?
     var rainyAlarm: Alarm?
-    var timer: Timer?
     var isRungAlarm: Bool = false
     var latitude: String?
     var longitude: String?
@@ -56,12 +55,12 @@ class AlarmStandbyViewController: UIViewController {
         locationManager.requestAlwaysAuthorization()
         locationManager.startUpdatingLocation()
         
-        sunnyAlarm = AlarmRepository.sharedInstance.getAlarm(weatherType: WeatherType.sunny)
-        rainyAlarm = AlarmRepository.sharedInstance.getAlarm(weatherType: WeatherType.rainy)
+        sunnyAlarm = alarmRepo.getAlarm(weatherType: WeatherType.sunny)
+        rainyAlarm = alarmRepo.getAlarm(weatherType: WeatherType.rainy)
         sunnyAlarmTime.text = AlarmUseCase.getAlarmTimeAsString(alarm: sunnyAlarm!)
         rainyAlarmTime.text = AlarmUseCase.getAlarmTimeAsString(alarm: rainyAlarm!)
         
-        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(observeAlarmTimer), userInfo: nil, repeats: true)
+        Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(observeAlarmTimer), userInfo: nil, repeats: true)
     }
     
     @objc private func observeAlarmTimer() {
