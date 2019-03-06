@@ -43,7 +43,6 @@ class AlarmStandbyViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
-
     //MARK: - Methods
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -95,17 +94,6 @@ class AlarmStandbyViewController: UIViewController {
                 print("I need your current weather condition!")
             }
         }
-    }
-    
-    func areEqualHourMinute(date1: Date, date2: Date) -> Bool {
-        let hour1 = Calendar.current.component(.hour, from: date1)
-        let minute1 = Calendar.current.component(.minute, from: date1)
-        let hour2 = Calendar.current.component(.hour, from: date2)
-        let minute2 = Calendar.current.component(.minute, from: date2)
-        if(hour1 == hour2 && minute1 == minute2) {
-            return true
-        }
-        return false
     }
 
     // Networking
