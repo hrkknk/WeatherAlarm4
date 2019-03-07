@@ -15,6 +15,7 @@ class AlarmStandbyViewController: UIViewController {
     
     // MARK: - Properties
     let alarmRepo: AlarmRepository = AlarmRepository.sharedInstance
+    let weatherApiClient: WeatherApiClient = WeatherApiClient.sharedInstance
     var sunnyAlarm: Alarm?
     var rainyAlarm: Alarm?
     var isRungAlarm: Bool = false
@@ -27,10 +28,6 @@ class AlarmStandbyViewController: UIViewController {
     
     // 位置情報取得用オブジェクト
     let locationManager = CLLocationManager()
-    
-    // 天気予報API
-    let WEATHER_URL = "http://api.openweathermap.org/data/2.5/weather"
-    let APP_ID = "3486f122e589efd3e860f3a10775ce47"
 
     //MARK: - Outlets
     @IBOutlet weak var sunnyAlarmTime: UILabel!
@@ -71,55 +68,28 @@ class AlarmStandbyViewController: UIViewController {
             return
         }
         
-        geoCoordinatesInfo = ["lat" : latitude!, "lon" : longitude!, "appid" : APP_ID]
-        getWeatherData(url: WEATHER_URL, geoCoordinatesInfo: geoCoordinatesInfo!)
+        let geoLocation = GeoLocation()
+        geoLocation.latitude = latitude
+        geoLocation.longitude = longitude
+
+        let weatherData = weatherApiClient.getWeatherData(geoLocation: geoLocation)
+        if weatherData.id == nil {
+            return
+        }
+        
+        let weather = WeatherUseCase.getCondition(weatherId: weatherData.id!)
         
         if isRainyAlarmRingTime {
-            switch(currentLocationWeather) {
-            case "clear sky", "few clouds", "scattered clouds":
+            if weather == Weather.rainy {
                 isRungAlarm = AlarmUseCase.ringAlarm(alarm: rainyAlarm!)
-            default:
-                // 訳のわからない天気情報だったので、とりあえず鳴らしておく
-                isRungAlarm = AlarmUseCase.ringAlarm(alarm: rainyAlarm!)
-                print("I need your current weather condition!")
+                print("'Rainy' alarmed.")
             }
         } else if isSunnyAlarmRingTime {
-            switch(currentLocationWeather) {
-            case "clear sky", "few clouds", "scattered clouds":
+            if weather == Weather.sunny {
                 isRungAlarm = AlarmUseCase.ringAlarm(alarm: sunnyAlarm!)
-            default:
-                // 訳のわからない天気情報だったので、とりあえず鳴らしておく
-                isRungAlarm = AlarmUseCase.ringAlarm(alarm: sunnyAlarm!)
-                print("I need your current weather condition!")
+                print("'Sunny' alarmed.")
             }
         }
-    }
-
-    // Networking
-    func getWeatherData(url: String, geoCoordinatesInfo: [String : String]) {
-        Alamofire.request(url, method: .get, parameters: geoCoordinatesInfo).responseJSON {
-            response in
-            if response.result.isSuccess {
-                print("Success! Got the weather data")
-                
-                // response.result.valueはオプショナル型だが、if文で結果を確認しているのでforce unwrappedしてよい
-                let weatherJSON: JSON = JSON(response.result.value!)
-                print(weatherJSON)
-                
-                // クロージャの中でメソッドを呼び出すにはself句を呼び出すメソッドの前につける必要あり
-                self.parsingJSON(json: weatherJSON)
-                
-            } else {
-                print("Error \(String(describing: response.result.error))")
-            }
-        }
-    }
-    
-    func parsingJSON(json: JSON) {
-        currentLocationWeather = json["weather"][0]["description"].stringValue
-        
-        print(json["weather"][0]["description"].stringValue)
-        print(json["name"].stringValue)
     }
     
     /*
