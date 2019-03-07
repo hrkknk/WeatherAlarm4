@@ -55,8 +55,8 @@ class AlarmStandbyViewController: UIViewController {
         locationManager.requestAlwaysAuthorization()
         locationManager.startUpdatingLocation()
         
-        sunnyAlarm = alarmRepo.getAlarm(weatherType: WeatherType.sunny)
-        rainyAlarm = alarmRepo.getAlarm(weatherType: WeatherType.rainy)
+        sunnyAlarm = alarmRepo.getAlarm(weather: Weather.sunny)
+        rainyAlarm = alarmRepo.getAlarm(weather: Weather.rainy)
         sunnyAlarmTime.text = AlarmUseCase.getAlarmTimeAsString(alarm: sunnyAlarm!)
         rainyAlarmTime.text = AlarmUseCase.getAlarmTimeAsString(alarm: rainyAlarm!)
         

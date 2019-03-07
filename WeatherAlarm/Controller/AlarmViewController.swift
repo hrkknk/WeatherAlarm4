@@ -24,12 +24,12 @@ class AlarmViewController: UIViewController {
     
     @IBAction func setSunnyAlarm(_ sender: UIDatePicker) {
         let alarm = AlarmUseCase.createAlarm(date: sender.date)
-        alarmRepo.setAlarm(weatherType: WeatherType.sunny, alarm: alarm)
+        alarmRepo.setAlarm(weather: Weather.sunny, alarm: alarm)
     }
     
     @IBAction func setRainyAlarm(_ sender: UIDatePicker) {
         let alarm = AlarmUseCase.createAlarm(date: sender.date)
-        alarmRepo.setAlarm(weatherType: WeatherType.rainy, alarm: alarm)
+        alarmRepo.setAlarm(weather: Weather.rainy, alarm: alarm)
     }
     
     //MARK: - Methods
@@ -47,13 +47,13 @@ class AlarmViewController: UIViewController {
     }
     
     private func initAlarmDatePickers() {
-        if let sunnyAlarm = alarmRepo.getAlarm(weatherType: WeatherType.sunny) {
+        if let sunnyAlarm = alarmRepo.getAlarm(weather: Weather.sunny) {
             self.sunnyAlarmDatePicker.date = AlarmUseCase.getAlarmDate(alarm: sunnyAlarm)
         } else {
             self.sunnyAlarmDatePicker.date = Date()
         }
         
-        if let rainyAlarm = alarmRepo.getAlarm(weatherType: WeatherType.rainy) {
+        if let rainyAlarm = alarmRepo.getAlarm(weather: Weather.rainy) {
             self.rainyAlarmDatePicker.date = AlarmUseCase.getAlarmDate(alarm: rainyAlarm)
         } else {
             self.rainyAlarmDatePicker.date = Date()

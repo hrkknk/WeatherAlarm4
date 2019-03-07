@@ -6,11 +6,7 @@
 //  Copyright © 2019 金子宏樹. All rights reserved.
 //
 
-class Weather {
-    var description: String?
-}
-
-enum WeatherType: String, CaseIterable {
+enum Weather: String, CaseIterable {
     case sunny
     case rainy
 }
