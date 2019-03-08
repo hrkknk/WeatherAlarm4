@@ -15,24 +15,19 @@ class AlarmStandbyViewController: UIViewController {
     
     // MARK: - Properties
     private let alarmRepository: AlarmRepository = AlarmRepository.sharedInstance
-    let weatherApiClient: WeatherApiClient = WeatherApiClient.sharedInstance
-    var sunnyAlarm: Alarm?
-    var rainyAlarm: Alarm?
-    var isRungAlarm: Bool = false
+    private let weatherApiClient: WeatherApiClient = WeatherApiClient.sharedInstance
+    private var sunnyAlarm: Alarm?
+    private var rainyAlarm: Alarm?
+    private var isRungAlarm: Bool = false
     var latitude: String?
     var longitude: String?
-    var currentLocationWeather: String?
-    
-    // Dictionary型を定義して、緯度・経度・APIKeyをセット
-    var geoCoordinatesInfo: [String : String]?
-    
+
     // 位置情報取得用オブジェクト
     let locationManager = CLLocationManager()
 
     //MARK: - Outlets
     @IBOutlet weak var sunnyAlarmTime: UILabel!
     @IBOutlet weak var rainyAlarmTime: UILabel!
-    
     
     //MARK: - Actions
     @IBAction func backToPrevious(_ sender: UIBarButtonItem) {

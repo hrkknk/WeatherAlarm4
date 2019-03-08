@@ -12,7 +12,7 @@ class AlarmRepository: NSObject {
     static let sharedInstance: AlarmRepository = AlarmRepository()
     private let defaultSoundFilePath = Bundle.main.path(forResource: "学校のチャイム01", ofType: "mp3")!
     
-    var alarms: Dictionary = [Weather.sunny.rawValue: AlarmUseCase.createAlarm(),
+    private var alarms: Dictionary = [Weather.sunny.rawValue: AlarmUseCase.createAlarm(),
                               Weather.rainy.rawValue: AlarmUseCase.createAlarm()]
     
     private override init() {
