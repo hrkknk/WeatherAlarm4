@@ -14,7 +14,7 @@ import SwiftyJSON
 class AlarmStandbyViewController: UIViewController {
     
     // MARK: - Properties
-    let alarmRepo: AlarmRepository = AlarmRepository.sharedInstance
+    private let alarmRepository: AlarmRepository = AlarmRepository.sharedInstance
     let weatherApiClient: WeatherApiClient = WeatherApiClient.sharedInstance
     var sunnyAlarm: Alarm?
     var rainyAlarm: Alarm?
@@ -52,8 +52,8 @@ class AlarmStandbyViewController: UIViewController {
         locationManager.requestAlwaysAuthorization()
         locationManager.startUpdatingLocation()
         
-        sunnyAlarm = alarmRepo.getAlarm(weather: Weather.sunny)
-        rainyAlarm = alarmRepo.getAlarm(weather: Weather.rainy)
+        sunnyAlarm = alarmRepository.getAlarm(weather: Weather.sunny)
+        rainyAlarm = alarmRepository.getAlarm(weather: Weather.rainy)
         sunnyAlarmTime.text = AlarmUseCase.getAlarmTimeAsString(alarm: sunnyAlarm!)
         rainyAlarmTime.text = AlarmUseCase.getAlarmTimeAsString(alarm: rainyAlarm!)
         
