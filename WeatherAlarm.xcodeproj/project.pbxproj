@@ -8,10 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		5C71ED7F222AB190002CD717 /* Alarm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C71ED7E222AB190002CD717 /* Alarm.swift */; };
-		5C71ED81222AB609002CD717 /* WeatherCondition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C71ED80222AB609002CD717 /* WeatherCondition.swift */; };
 		5C71ED84222ACC97002CD717 /* AlarmUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C71ED83222ACC97002CD717 /* AlarmUseCase.swift */; };
 		5CAE5C8B222BDD65009EE0FB /* AlarmRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CAE5C8A222BDD65009EE0FB /* AlarmRepository.swift */; };
-		5CE966452231633700263A2D /* WeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE966442231633700263A2D /* WeatherData.swift */; };
+		5CE966452231633700263A2D /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE966442231633700263A2D /* Weather.swift */; };
 		5CE966482231643000263A2D /* WeatherApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE966472231643000263A2D /* WeatherApiClient.swift */; };
 		5CE9664A2231644900263A2D /* WeatherUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE966492231644900263A2D /* WeatherUseCase.swift */; };
 		5CE9664C2231663B00263A2D /* GeoLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE9664B2231663B00263A2D /* GeoLocation.swift */; };
@@ -44,10 +43,9 @@
 		2C3F386C5A2A109D86CE52C0 /* Pods-WeatherAlarm.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeatherAlarm.release.xcconfig"; path = "Pods/Target Support Files/Pods-WeatherAlarm/Pods-WeatherAlarm.release.xcconfig"; sourceTree = "<group>"; };
 		42FA32884084C6145561B182 /* Pods_WeatherAlarm.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WeatherAlarm.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C71ED7E222AB190002CD717 /* Alarm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alarm.swift; sourceTree = "<group>"; };
-		5C71ED80222AB609002CD717 /* WeatherCondition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherCondition.swift; sourceTree = "<group>"; };
 		5C71ED83222ACC97002CD717 /* AlarmUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmUseCase.swift; sourceTree = "<group>"; };
 		5CAE5C8A222BDD65009EE0FB /* AlarmRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmRepository.swift; sourceTree = "<group>"; };
-		5CE966442231633700263A2D /* WeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherData.swift; sourceTree = "<group>"; };
+		5CE966442231633700263A2D /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
 		5CE966472231643000263A2D /* WeatherApiClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherApiClient.swift; sourceTree = "<group>"; };
 		5CE966492231644900263A2D /* WeatherUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherUseCase.swift; sourceTree = "<group>"; };
 		5CE9664B2231663B00263A2D /* GeoLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoLocation.swift; sourceTree = "<group>"; };
@@ -123,8 +121,7 @@
 			isa = PBXGroup;
 			children = (
 				5C71ED7E222AB190002CD717 /* Alarm.swift */,
-				5C71ED80222AB609002CD717 /* WeatherCondition.swift */,
-				5CE966442231633700263A2D /* WeatherData.swift */,
+				5CE966442231633700263A2D /* Weather.swift */,
 				5CE9664B2231663B00263A2D /* GeoLocation.swift */,
 			);
 			path = Entity;
@@ -412,8 +409,7 @@
 				5CAE5C8B222BDD65009EE0FB /* AlarmRepository.swift in Sources */,
 				CCBC344F211F495600BF6E6D /* AppDelegate.swift in Sources */,
 				5C71ED7F222AB190002CD717 /* Alarm.swift in Sources */,
-				5CE966452231633700263A2D /* WeatherData.swift in Sources */,
-				5C71ED81222AB609002CD717 /* WeatherCondition.swift in Sources */,
+				5CE966452231633700263A2D /* Weather.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -6,7 +6,11 @@
 //  Copyright © 2019 金子宏樹. All rights reserved.
 //
 
-class WeatherData {
+class Weather {
     var id: String?
     var description: String?
+    enum Condition: String, CaseIterable {
+        case sunny
+        case rainy
+    }
 }

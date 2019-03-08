@@ -18,8 +18,8 @@ class WeatherApiClient: NSObject {
     private override init() {
     }
     
-    func getWeatherData(geoLocation: GeoLocation) -> WeatherData {
-        let weatherData: WeatherData = WeatherData()
+    func getWeather(geoLocation: GeoLocation) -> Weather {
+        let weather: Weather = Weather()
         let semaphore = DispatchSemaphore(value: 0)
         let queue     = DispatchQueue.global(qos: .utility)
         
@@ -34,8 +34,8 @@ class WeatherApiClient: NSObject {
                 let responseJson: JSON = JSON(response.result.value!)
                 print(responseJson)
                 
-                weatherData.id = responseJson["weather"][0]["id"].stringValue
-                weatherData.description = responseJson["weather"][0]["description"].stringValue
+                weather.id = responseJson["weather"][0]["id"].stringValue
+                weather.description = responseJson["weather"][0]["description"].stringValue
             } else {
                 print("Error \(String(describing: response.result.error))")
             }
@@ -43,6 +43,6 @@ class WeatherApiClient: NSObject {
         }
         semaphore.wait()
         
-        return weatherData
+        return weather
     }
 }

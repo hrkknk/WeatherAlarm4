@@ -45,8 +45,8 @@ class AlarmStandbyViewController: UIViewController {
         locationManager.requestAlwaysAuthorization()
         locationManager.startUpdatingLocation()
         
-        sunnyAlarm = alarmRepository.getAlarm(weatherCondition: WeatherCondition.sunny)
-        rainyAlarm = alarmRepository.getAlarm(weatherCondition: WeatherCondition.rainy)
+        sunnyAlarm = alarmRepository.getAlarm(weatherCondition: Weather.Condition.sunny)
+        rainyAlarm = alarmRepository.getAlarm(weatherCondition: Weather.Condition.rainy)
         sunnyAlarmTime.text = AlarmUseCase.getAlarmTimeAsString(alarm: sunnyAlarm!)
         rainyAlarmTime.text = AlarmUseCase.getAlarmTimeAsString(alarm: rainyAlarm!)
         
@@ -65,20 +65,20 @@ class AlarmStandbyViewController: UIViewController {
         geoLocation.latitude = latitude
         geoLocation.longitude = longitude
 
-        let weatherData = weatherApiClient.getWeatherData(geoLocation: geoLocation)
-        if weatherData.id == nil {
+        let weather = weatherApiClient.getWeather(geoLocation: geoLocation)
+        if weather.id == nil {
             return
         }
         
-        let weather = WeatherUseCase.getWeatherCondition(weatherId: weatherData.id!)
+        let weatherCondition = WeatherUseCase.getWeatherCondition(weatherId: weather.id!)
         
         if isRainyAlarmRingTime {
-            if weather == WeatherCondition.rainy {
+            if weatherCondition == Weather.Condition.rainy {
                 isRungAlarm = AlarmUseCase.ringAlarm(alarm: rainyAlarm!)
                 print("'Rainy' alarmed.")
             }
         } else if isSunnyAlarmRingTime {
-            if weather == WeatherCondition.sunny {
+            if weatherCondition == Weather.Condition.sunny {
                 isRungAlarm = AlarmUseCase.ringAlarm(alarm: sunnyAlarm!)
                 print("'Sunny' alarmed.")
             }
