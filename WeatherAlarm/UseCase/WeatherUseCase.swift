@@ -7,7 +7,7 @@
 //
 
 class WeatherUseCase {
-    static func getCondition(weatherId: String) -> Weather {
+    static func getWeatherCondition(weatherId: String) -> WeatherCondition {
         // id 2xx, 3xx, 4xx, 5xx and 6xx are 'Rainy'
         // https://openweathermap.org/weather-conditions
         if weatherId.hasPrefix("2") ||
@@ -15,9 +15,9 @@ class WeatherUseCase {
             weatherId.hasPrefix("4") ||
             weatherId.hasPrefix("5") ||
             weatherId.hasPrefix("6") {
-            return Weather.rainy
+            return WeatherCondition.rainy
         }
         // otherwise 'Sunny'
-        return Weather.sunny
+        return WeatherCondition.sunny
     }
 }

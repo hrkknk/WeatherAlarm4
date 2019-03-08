@@ -45,8 +45,8 @@ class AlarmStandbyViewController: UIViewController {
         locationManager.requestAlwaysAuthorization()
         locationManager.startUpdatingLocation()
         
-        sunnyAlarm = alarmRepository.getAlarm(weather: Weather.sunny)
-        rainyAlarm = alarmRepository.getAlarm(weather: Weather.rainy)
+        sunnyAlarm = alarmRepository.getAlarm(weatherCondition: WeatherCondition.sunny)
+        rainyAlarm = alarmRepository.getAlarm(weatherCondition: WeatherCondition.rainy)
         sunnyAlarmTime.text = AlarmUseCase.getAlarmTimeAsString(alarm: sunnyAlarm!)
         rainyAlarmTime.text = AlarmUseCase.getAlarmTimeAsString(alarm: rainyAlarm!)
         
@@ -70,15 +70,15 @@ class AlarmStandbyViewController: UIViewController {
             return
         }
         
-        let weather = WeatherUseCase.getCondition(weatherId: weatherData.id!)
+        let weather = WeatherUseCase.getWeatherCondition(weatherId: weatherData.id!)
         
         if isRainyAlarmRingTime {
-            if weather == Weather.rainy {
+            if weather == WeatherCondition.rainy {
                 isRungAlarm = AlarmUseCase.ringAlarm(alarm: rainyAlarm!)
                 print("'Rainy' alarmed.")
             }
         } else if isSunnyAlarmRingTime {
-            if weather == Weather.sunny {
+            if weather == WeatherCondition.sunny {
                 isRungAlarm = AlarmUseCase.ringAlarm(alarm: sunnyAlarm!)
                 print("'Sunny' alarmed.")
             }
