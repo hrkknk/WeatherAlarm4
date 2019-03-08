@@ -8,8 +8,6 @@
 
 import UIKit
 import CoreLocation
-import Alamofire
-import SwiftyJSON
 
 class AlarmStandbyViewController: UIViewController {
     

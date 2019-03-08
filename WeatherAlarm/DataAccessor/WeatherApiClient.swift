@@ -6,7 +6,6 @@
 //  Copyright © 2019 金子宏樹. All rights reserved.
 //
 
-import Foundation
 import Alamofire
 import SwiftyJSON
 
