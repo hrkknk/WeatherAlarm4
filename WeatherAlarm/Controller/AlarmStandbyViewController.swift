@@ -14,6 +14,7 @@ class AlarmStandbyViewController: UIViewController {
     // MARK: - Properties
     private let alarmRepository: AlarmRepository = AlarmRepository.sharedInstance
     private let weatherApiClient: WeatherApiClient = WeatherApiClient.sharedInstance
+    private var timer: Timer?
     private var sunnyAlarm: Alarm?
     private var rainyAlarm: Alarm?
     private var isRungAlarm: Bool = false
@@ -29,6 +30,7 @@ class AlarmStandbyViewController: UIViewController {
     
     //MARK: - Actions
     @IBAction func backToPrevious(_ sender: UIBarButtonItem) {
+        timer?.invalidate()
         dismiss(animated: true, completion: nil)
     }
     
@@ -50,10 +52,12 @@ class AlarmStandbyViewController: UIViewController {
         sunnyAlarmTime.text = AlarmUseCase.getAlarmTimeAsString(alarm: sunnyAlarm!)
         rainyAlarmTime.text = AlarmUseCase.getAlarmTimeAsString(alarm: rainyAlarm!)
         
-        Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(observeAlarmTimer), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(observeAlarmTimer), userInfo: nil, repeats: true)
     }
     
     @objc private func observeAlarmTimer() {
+        print("timer ticked: \(Date())")
+        
         let isRainyAlarmRingTime = AlarmUseCase.isAlarmRingTime(alarm: rainyAlarm!)
         let isSunnyAlarmRingTime = AlarmUseCase.isAlarmRingTime(alarm: sunnyAlarm!)
         
