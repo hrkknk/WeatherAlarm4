@@ -15,7 +15,7 @@ class Alarm {
     var status: Status = Status.waiting
     enum Status {
         case waiting
-        case checkingCondition
+        case timeHasCome
         case rang
         case misfired
     }

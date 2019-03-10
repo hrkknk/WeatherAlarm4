@@ -41,14 +41,14 @@ class AlarmUseCase {
         let nowHour = Calendar.current.component(.hour, from: Date())
         let nowMinute = Calendar.current.component(.minute, from: Date())
         if(nowHour == alarm.hour && nowMinute == alarm.minute) {
-            alarm.status = Alarm.Status.checkingCondition
+            alarm.status = Alarm.Status.timeHasCome
             return true
         }
         return false
     }
     
     static func ringAlarm(alarm: Alarm, currentWeather: Weather.Condition, targetWeather: Weather.Condition) -> Bool {
-        if alarm.status != Alarm.Status.checkingCondition {
+        if alarm.status != Alarm.Status.timeHasCome {
             return false
         }
         

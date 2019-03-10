@@ -60,11 +60,13 @@ class AlarmStandbyViewController: UIViewController {
         let isRainyAlarmRingTime = AlarmUseCase.changeStatusIfTimeHasCome(alarm: rainyAlarm!)
         let isSunnyAlarmRingTime = AlarmUseCase.changeStatusIfTimeHasCome(alarm: sunnyAlarm!)
         
-        if (rainyAlarm!.status != Alarm.Status.checkingCondition
-            && sunnyAlarm!.status != Alarm.Status.checkingCondition) {
+        // rainy も sunny も鳴る時間になっていないなら処理しない
+        if (rainyAlarm!.status != Alarm.Status.timeHasCome
+            && sunnyAlarm!.status != Alarm.Status.timeHasCome) {
             return
         }
         
+        // rainy か sunny が鳴らし終わっているなら処理しない
         if (rainyAlarm!.status == Alarm.Status.rang
             || sunnyAlarm!.status == Alarm.Status.rang) {
             return
