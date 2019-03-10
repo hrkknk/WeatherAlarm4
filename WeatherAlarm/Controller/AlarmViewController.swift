@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  AlarmViewController.swift
 //  WeatherAlarm
 //
 //  Created by 金子宏樹 on 2018/08/12.

@@ -1,5 +1,5 @@
 //
-//  WeatherDataAccessor.swift
+//  WeatherApiClient.swift
 //  WeatherAlarm
 //
 //  Created by Kunihisa Fujiwara on 2019/03/07.
