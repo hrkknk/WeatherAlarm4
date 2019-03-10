@@ -12,4 +12,11 @@ class Alarm {
     var hour: Int?
     var minute: Int?
     var sound: AVAudioPlayer?
+    var status: Status = Status.waiting
+    enum Status {
+        case waiting
+        case timeHasCome
+        case rang
+        case misfired
+    }
 }

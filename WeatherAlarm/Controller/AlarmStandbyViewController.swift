@@ -17,7 +17,6 @@ class AlarmStandbyViewController: UIViewController {
     private var timer: Timer?
     private var sunnyAlarm: Alarm?
     private var rainyAlarm: Alarm?
-    private var isRungAlarm: Bool = false
     var latitude: String?
     var longitude: String?
 
@@ -58,10 +57,18 @@ class AlarmStandbyViewController: UIViewController {
     @objc private func observeAlarmTimer() {
         print("timer ticked: \(Date())")
         
-        let isRainyAlarmRingTime = AlarmUseCase.isAlarmRingTime(alarm: rainyAlarm!)
-        let isSunnyAlarmRingTime = AlarmUseCase.isAlarmRingTime(alarm: sunnyAlarm!)
+        let isRainyAlarmRingTime = AlarmUseCase.changeStatusIfTimeHasCome(alarm: rainyAlarm!)
+        let isSunnyAlarmRingTime = AlarmUseCase.changeStatusIfTimeHasCome(alarm: sunnyAlarm!)
         
-        if(isRungAlarm || (!isRainyAlarmRingTime && !isSunnyAlarmRingTime)) {
+        // rainy も sunny も鳴る時間になっていないなら処理しない
+        if (rainyAlarm!.status != Alarm.Status.timeHasCome
+            && sunnyAlarm!.status != Alarm.Status.timeHasCome) {
+            return
+        }
+        
+        // rainy か sunny が鳴らし終わっているなら処理しない
+        if (rainyAlarm!.status == Alarm.Status.rang
+            || sunnyAlarm!.status == Alarm.Status.rang) {
             return
         }
         
@@ -77,15 +84,11 @@ class AlarmStandbyViewController: UIViewController {
         let weatherCondition = WeatherUseCase.getWeatherCondition(weatherId: weather.id!)
         
         if isRainyAlarmRingTime {
-            if weatherCondition == Weather.Condition.rainy {
-                isRungAlarm = AlarmUseCase.ringAlarm(alarm: rainyAlarm!)
-                print("'Rainy' alarmed.")
-            }
+            AlarmUseCase.ringAlarm(alarm: rainyAlarm!, currentWeather: weatherCondition, targetWeather: Weather.Condition.rainy) ?
+                print("'Rainy' alarmed.") : print("'Rainy' misfired.")
         } else if isSunnyAlarmRingTime {
-            if weatherCondition == Weather.Condition.sunny {
-                isRungAlarm = AlarmUseCase.ringAlarm(alarm: sunnyAlarm!)
-                print("'Sunny' alarmed.")
-            }
+            AlarmUseCase.ringAlarm(alarm: sunnyAlarm!, currentWeather: weatherCondition, targetWeather: Weather.Condition.sunny) ?
+                print("'Sunny' alarmed.") : print("'Sunny' misfired.")
         }
     }
     
