@@ -30,7 +30,7 @@ class AlarmUseCase {
     }
     
     static func getAlarmTimeAsString(alarm: Alarm) -> String {
-        return "\(alarm.hour!):\(alarm.minute!)"
+        return "\(alarm.hour!):\(String(format: "%02d", alarm.minute!))"
     }
     
     static func isAlarmRingTime(alarm: Alarm) -> Bool {
