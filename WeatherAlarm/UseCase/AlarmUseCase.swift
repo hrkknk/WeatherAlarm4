@@ -25,7 +25,7 @@ class AlarmUseCase {
         return alarm
     }
     
-    static func getAlarmDate(alarm: Alarm) -> Date {
+    static func getAlarmTimeAsDate(alarm: Alarm) -> Date {
         return Calendar.current.date(from: DateComponents(hour: alarm.hour, minute: alarm.minute))!
     }
     
