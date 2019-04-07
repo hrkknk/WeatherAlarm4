@@ -10,7 +10,6 @@ import Foundation
 
 class AlarmRepository: NSObject {
     static let sharedInstance: AlarmRepository = AlarmRepository()
-    private let defaultSoundFilePath = Bundle.main.path(forResource: "学校のチャイム01", ofType: "mp3")!
     private var alarms: Dictionary = [Weather.Condition.sunny.rawValue: AlarmUseCase.createAlarm(),
                                       Weather.Condition.rainy.rawValue: AlarmUseCase.createAlarm()]
 
