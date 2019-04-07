@@ -17,10 +17,6 @@ class AlarmViewController: UIViewController {
     private let alarmRepository: AlarmRepository = AlarmRepository.sharedInstance
     
     //MARK: - Actions
-//    @IBAction func setAlarm(_ sender: UIButton) {
-//        //TODO: saving alarms
-//    }
-    
     @IBAction func setSunnyAlarm(_ sender: UIDatePicker) {
         let alarm = AlarmUseCase.createAlarm(date: sender.date)
         alarmRepository.setAlarm(weatherCondition: Weather.Condition.sunny, alarm: alarm)
