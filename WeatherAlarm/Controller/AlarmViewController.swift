@@ -17,9 +17,9 @@ class AlarmViewController: UIViewController {
     private let alarmRepository: AlarmRepository = AlarmRepository.sharedInstance
     
     //MARK: - Actions
-    @IBAction func setAlarm(_ sender: UIButton) {
-        //TODO: saving alarms
-    }
+//    @IBAction func setAlarm(_ sender: UIButton) {
+//        //TODO: saving alarms
+//    }
     
     @IBAction func setSunnyAlarm(_ sender: UIDatePicker) {
         let alarm = AlarmUseCase.createAlarm(date: sender.date)
@@ -40,8 +40,10 @@ class AlarmViewController: UIViewController {
         self.sunnyAlarmDatePicker.setValue(UIColor.white, forKey: "textColor")
         self.rainyAlarmDatePicker.setValue(UIColor.white, forKey: "textColor")
         
-        //TODO: load alarms
-        
+        //前回保存したデータのロード
+        alarmRepository.loadAlarm(weatherCondition: Weather.Condition.sunny)
+        alarmRepository.loadAlarm(weatherCondition: Weather.Condition.rainy)
+
         initAlarmDatePickers()
     }
     
