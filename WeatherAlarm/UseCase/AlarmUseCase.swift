@@ -69,7 +69,7 @@ class AlarmUseCase {
         return true
     }
     
-    static func ringAlarmAnyway(alarm: Alarm){
+    static func ringAlarmForcibly(alarm: Alarm){
         alarm.sound?.play()
         alarm.status = Alarm.Status.rang
     }

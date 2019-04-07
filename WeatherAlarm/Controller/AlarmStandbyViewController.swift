@@ -91,14 +91,16 @@ class AlarmStandbyViewController: UIViewController {
         
         if isRainyAlarmRingTime {
             if sunnyAlarm?.status == Alarm.Status.misfired {
-                AlarmUseCase.ringAlarmAnyway(alarm: rainyAlarm!)
+                AlarmUseCase.ringAlarmForcibly(alarm: rainyAlarm!)
+                print("'Rainy' alarmed forcibly.")
             } else {
                 AlarmUseCase.ringAlarm(alarm: rainyAlarm!, currentWeather: weatherCondition, targetWeather: Weather.Condition.rainy) ?
                     print("'Rainy' alarmed.") : print("'Rainy' misfired.")
             }
         } else if isSunnyAlarmRingTime {
             if rainyAlarm?.status == Alarm.Status.misfired {
-                AlarmUseCase.ringAlarmAnyway(alarm: sunnyAlarm!)
+                AlarmUseCase.ringAlarmForcibly(alarm: sunnyAlarm!)
+                print("'Sunny' alarmed forcibly.")
             } else {
                 AlarmUseCase.ringAlarm(alarm: sunnyAlarm!, currentWeather: weatherCondition, targetWeather: Weather.Condition.sunny) ?
                     print("'Sunny' alarmed.") : print("'Sunny' misfired.")
