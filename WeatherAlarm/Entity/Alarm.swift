@@ -25,15 +25,15 @@ class Alarm: NSObject, NSSecureCoding {
     func encode(with aCoder: NSCoder) {
         aCoder.encode(hour, forKey: "hour")
         aCoder.encode(minute, forKey: "minute")
-        aCoder.encode(sound, forKey: "sound")
-        aCoder.encode(status, forKey: "status")
+        //TODO: soundを保存できるようにする
     }
     
     required init?(coder aDecoder: NSCoder) {
         self.hour = (aDecoder.decodeObject(forKey: "hour") as! Int)
         self.minute = (aDecoder.decodeObject(forKey: "minute") as! Int)
-        self.sound = (aDecoder.decodeObject(forKey: "sound") as! AVAudioPlayer)
-        self.status = (aDecoder.decodeObject(forKey: "status") as! Status)
+        //TODO: soundのデコード
+        self.sound = nil
+        self.status = Status.waiting
     }
     
     override init() {
