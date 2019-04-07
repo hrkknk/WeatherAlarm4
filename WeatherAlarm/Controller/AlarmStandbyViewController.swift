@@ -54,6 +54,12 @@ class AlarmStandbyViewController: UIViewController {
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(observeAlarmTimer), userInfo: nil, repeats: true)
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        // 別画面に遷移する時にはtimerを破棄しておく
+        timer?.invalidate()
+    }
+    
     @objc private func observeAlarmTimer() {
         print("timer ticked: \(Date())")
         
@@ -84,11 +90,19 @@ class AlarmStandbyViewController: UIViewController {
         let weatherCondition = WeatherUseCase.getWeatherCondition(weatherId: weather.id!)
         
         if isRainyAlarmRingTime {
-            AlarmUseCase.ringAlarm(alarm: rainyAlarm!, currentWeather: weatherCondition, targetWeather: Weather.Condition.rainy) ?
-                print("'Rainy' alarmed.") : print("'Rainy' misfired.")
+            if sunnyAlarm?.status == Alarm.Status.misfired {
+                AlarmUseCase.ringAlarmAnyway(alarm: rainyAlarm!)
+            } else {
+                AlarmUseCase.ringAlarm(alarm: rainyAlarm!, currentWeather: weatherCondition, targetWeather: Weather.Condition.rainy) ?
+                    print("'Rainy' alarmed.") : print("'Rainy' misfired.")
+            }
         } else if isSunnyAlarmRingTime {
-            AlarmUseCase.ringAlarm(alarm: sunnyAlarm!, currentWeather: weatherCondition, targetWeather: Weather.Condition.sunny) ?
-                print("'Sunny' alarmed.") : print("'Sunny' misfired.")
+            if rainyAlarm?.status == Alarm.Status.misfired {
+                AlarmUseCase.ringAlarmAnyway(alarm: sunnyAlarm!)
+            } else {
+                AlarmUseCase.ringAlarm(alarm: sunnyAlarm!, currentWeather: weatherCondition, targetWeather: Weather.Condition.sunny) ?
+                    print("'Sunny' alarmed.") : print("'Sunny' misfired.")
+            }
         }
     }
     
