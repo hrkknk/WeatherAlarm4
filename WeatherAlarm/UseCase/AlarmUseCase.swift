@@ -68,4 +68,9 @@ class AlarmUseCase {
         alarm.status = Alarm.Status.rang
         return true
     }
+    
+    static func ringAlarmForcibly(alarm: Alarm){
+        alarm.sound?.play()
+        alarm.status = Alarm.Status.rang
+    }
 }
