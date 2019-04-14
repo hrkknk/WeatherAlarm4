@@ -83,7 +83,7 @@ class AlarmStandbyViewController: UIViewController {
         geoLocation.longitude = longitude
 
         let weather = weatherApiClient.getWeather(geoLocation: geoLocation)
-        let weatherCondition = WeatherUseCase.getWeatherCondition(weatherId: weather.id!)
+        let weatherCondition = WeatherUseCase.getWeatherCondition(weatherId: weather.id)
         
         if isRainyAlarmRingTime {
             if weatherCondition == Weather.Condition.unsure || sunnyAlarm?.status == Alarm.Status.misfired {
