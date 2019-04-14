@@ -15,6 +15,7 @@ class AlarmViewController: UIViewController {
     @IBOutlet weak var rainyAlarmDatePicker: UIDatePicker!
     
     private let alarmRepository: AlarmRepository = AlarmRepository.sharedInstance
+    private let configRepository: ConfigRepository = ConfigRepository.sharedInstance
 
     @IBAction func setSunnyAlarm(_ sender: UIDatePicker) {
         let alarm = AlarmUseCase.createAlarm(date: sender.date)
@@ -26,10 +27,14 @@ class AlarmViewController: UIViewController {
         alarmRepository.setAlarm(weatherCondition: Weather.Condition.rainy, alarm: alarm)
     }
     
+    @IBAction func changeSnoozeOnOff(_ sender: UISwitch) {
+        configRepository.setSnoozeOn(isSnoozeOn: sender.isOn)
+    }
+    
     //MARK: - Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+                        
         //ブラックUI化
         view.backgroundColor = UIColor(red: 20/255, green: 20/255, blue: 20/255, alpha: 1)
         self.sunnyAlarmDatePicker.setValue(UIColor.white, forKey: "textColor")
