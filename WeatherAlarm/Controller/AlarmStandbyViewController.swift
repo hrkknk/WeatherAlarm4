@@ -109,6 +109,7 @@ class AlarmStandbyViewController: UIViewController {
             }
         }
         
+        //どちらかのアラームを鳴らした場合、alarmStopButtonのhiddenを解除
         if (sunnyAlarm!.status == Alarm.Status.rang || rainyAlarm!.status == Alarm.Status.rang) {
             self.stopAlarmButton.isHidden = false
         }
