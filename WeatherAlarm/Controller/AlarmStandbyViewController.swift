@@ -26,15 +26,11 @@ class AlarmStandbyViewController: UIViewController {
     //MARK: - Outlets
     @IBOutlet weak var sunnyAlarmTime: UILabel!
     @IBOutlet weak var rainyAlarmTime: UILabel!
-    @IBOutlet weak var stopAlarmButton: UIButton!
-    
+
     //MARK: - Actions
     @IBAction func backToPrevious(_ sender: UIBarButtonItem) {
         timer?.invalidate()
         dismiss(animated: true, completion: nil)
-    }
-    
-    @IBAction func stopAlarm(_ sender: UIButton) {
     }
     
     //MARK: - Methods
