@@ -157,6 +157,17 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z1c-LL-j1U">
+                                <rect key="frame" x="0.0" y="493" width="414" height="52"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="17E-TU-Hwb"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <state key="normal" title="STOP"/>
+                                <connections>
+                                    <action selector="stopAlarm:" destination="ney-m3-DYB" eventType="touchUpInside" id="yi6-kb-hsm"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -164,12 +175,15 @@
                             <constraint firstItem="2B2-DY-yC6" firstAttribute="leading" secondItem="6JL-J8-DPs" secondAttribute="leading" id="9lk-iC-fGV"/>
                             <constraint firstItem="6JL-J8-DPs" firstAttribute="centerX" secondItem="V5H-Qr-f91" secondAttribute="centerX" id="9uE-Fh-ym5"/>
                             <constraint firstItem="iqm-5I-I8a" firstAttribute="top" secondItem="2B2-DY-yC6" secondAttribute="bottom" constant="8" symbolic="YES" id="Fje-3u-EG2"/>
+                            <constraint firstItem="STm-NV-jD3" firstAttribute="bottom" secondItem="z1c-LL-j1U" secondAttribute="bottom" constant="324" id="OHW-qW-hJN"/>
                             <constraint firstItem="iqm-5I-I8a" firstAttribute="leading" secondItem="V5H-Qr-f91" secondAttribute="leading" id="UJt-re-WjW"/>
                             <constraint firstAttribute="trailing" secondItem="2B2-DY-yC6" secondAttribute="trailing" id="Vh5-tz-WPt"/>
                             <constraint firstItem="V5H-Qr-f91" firstAttribute="top" secondItem="6JL-J8-DPs" secondAttribute="bottom" constant="8" symbolic="YES" id="dDF-gg-qZv"/>
                             <constraint firstItem="2B2-DY-yC6" firstAttribute="trailing" secondItem="6JL-J8-DPs" secondAttribute="trailing" id="jW6-FJ-dZv"/>
+                            <constraint firstItem="z1c-LL-j1U" firstAttribute="leading" secondItem="6JL-J8-DPs" secondAttribute="leading" id="m6X-Du-AVy"/>
                             <constraint firstItem="2B2-DY-yC6" firstAttribute="leading" secondItem="Ry0-ZR-fUc" secondAttribute="leading" id="nef-Xh-hwX"/>
                             <constraint firstItem="6JL-J8-DPs" firstAttribute="top" secondItem="iqm-5I-I8a" secondAttribute="bottom" constant="79" id="sH5-gK-fbt"/>
+                            <constraint firstItem="z1c-LL-j1U" firstAttribute="trailing" secondItem="6JL-J8-DPs" secondAttribute="trailing" id="vdj-gp-yQe"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="STm-NV-jD3"/>
                     </view>
@@ -182,6 +196,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="rainyAlarmTime" destination="V5H-Qr-f91" id="16W-dW-h7T"/>
+                        <outlet property="stopAlarmButton" destination="z1c-LL-j1U" id="V1b-tT-L0W"/>
                         <outlet property="sunnyAlarmTime" destination="iqm-5I-I8a" id="HJT-pQ-h6H"/>
                     </connections>
                 </viewController>
