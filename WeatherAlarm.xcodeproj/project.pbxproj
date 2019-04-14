@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		5C71ED7F222AB190002CD717 /* Alarm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C71ED7E222AB190002CD717 /* Alarm.swift */; };
 		5C71ED84222ACC97002CD717 /* AlarmUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C71ED83222ACC97002CD717 /* AlarmUseCase.swift */; };
+		5C85DDB5226337AB00A90CAF /* NetworkChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C85DDB4226337AB00A90CAF /* NetworkChecker.swift */; };
 		5CAE5C8B222BDD65009EE0FB /* AlarmRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CAE5C8A222BDD65009EE0FB /* AlarmRepository.swift */; };
 		5CE966452231633700263A2D /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE966442231633700263A2D /* Weather.swift */; };
 		5CE966482231643000263A2D /* WeatherApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE966472231643000263A2D /* WeatherApiClient.swift */; };
@@ -44,6 +45,7 @@
 		42FA32884084C6145561B182 /* Pods_WeatherAlarm.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WeatherAlarm.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C71ED7E222AB190002CD717 /* Alarm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alarm.swift; sourceTree = "<group>"; };
 		5C71ED83222ACC97002CD717 /* AlarmUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmUseCase.swift; sourceTree = "<group>"; };
+		5C85DDB4226337AB00A90CAF /* NetworkChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkChecker.swift; sourceTree = "<group>"; };
 		5CAE5C8A222BDD65009EE0FB /* AlarmRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmRepository.swift; sourceTree = "<group>"; };
 		5CE966442231633700263A2D /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
 		5CE966472231643000263A2D /* WeatherApiClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherApiClient.swift; sourceTree = "<group>"; };
@@ -148,6 +150,7 @@
 			isa = PBXGroup;
 			children = (
 				5CE966472231643000263A2D /* WeatherApiClient.swift */,
+				5C85DDB4226337AB00A90CAF /* NetworkChecker.swift */,
 			);
 			path = DataAccessor;
 			sourceTree = "<group>";
@@ -403,6 +406,7 @@
 			files = (
 				5CE9664C2231663B00263A2D /* GeoLocation.swift in Sources */,
 				CCE7DBCC21EB555D00D1415F /* CLLocationManagerDelegate.swift in Sources */,
+				5C85DDB5226337AB00A90CAF /* NetworkChecker.swift in Sources */,
 				CCD8F966217B69BC00C4B00F /* AlarmViewController.swift in Sources */,
 				5C71ED84222ACC97002CD717 /* AlarmUseCase.swift in Sources */,
 				5CE966482231643000263A2D /* WeatherApiClient.swift in Sources */,

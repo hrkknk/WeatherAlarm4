@@ -82,9 +82,13 @@ class AlarmStandbyViewController: UIViewController {
         geoLocation.latitude = latitude
         geoLocation.longitude = longitude
 
-        let weather = weatherApiClient.getWeather(geoLocation: geoLocation)
-        let weatherCondition = WeatherUseCase.getWeatherCondition(weatherId: weather.id)
-        
+        var weatherCondition = Weather.Condition.unsure
+        // 通信可能な場合のみ天気情報を取得する。ネット未接続なら時間が来たアラームを鳴らす。
+        if NetworkChecker.reachable() {
+            let weather = self.weatherApiClient.getWeather(geoLocation: geoLocation)
+            weatherCondition = WeatherUseCase.getWeatherCondition(weatherId: weather.id)
+        }
+
         if isRainyAlarmRingTime {
             if weatherCondition == Weather.Condition.unsure || sunnyAlarm?.status == Alarm.Status.misfired {
                 AlarmUseCase.ringAlarmForcibly(alarm: rainyAlarm!)
