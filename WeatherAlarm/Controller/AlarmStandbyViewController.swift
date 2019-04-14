@@ -83,14 +83,10 @@ class AlarmStandbyViewController: UIViewController {
         geoLocation.longitude = longitude
 
         let weather = weatherApiClient.getWeather(geoLocation: geoLocation)
-        if weather.id == nil {
-            return
-        }
-        
         let weatherCondition = WeatherUseCase.getWeatherCondition(weatherId: weather.id!)
         
         if isRainyAlarmRingTime {
-            if sunnyAlarm?.status == Alarm.Status.misfired {
+            if weatherCondition == Weather.Condition.unsure || sunnyAlarm?.status == Alarm.Status.misfired {
                 AlarmUseCase.ringAlarmForcibly(alarm: rainyAlarm!)
                 print("'Rainy' alarmed forcibly.")
             } else {
@@ -100,7 +96,7 @@ class AlarmStandbyViewController: UIViewController {
         }
         
         if isSunnyAlarmRingTime {
-            if rainyAlarm?.status == Alarm.Status.misfired {
+            if weatherCondition == Weather.Condition.unsure || rainyAlarm?.status == Alarm.Status.misfired {
                 AlarmUseCase.ringAlarmForcibly(alarm: sunnyAlarm!)
                 print("'Sunny' alarmed forcibly.")
             } else {

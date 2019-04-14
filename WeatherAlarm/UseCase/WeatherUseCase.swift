@@ -7,14 +7,18 @@
 //
 
 class WeatherUseCase {
-    static func getWeatherCondition(weatherId: String) -> Weather.Condition {
+    static func getWeatherCondition(weatherId: String?) -> Weather.Condition {
+        if weatherId == nil {
+            return Weather.Condition.unsure
+        }
+        
         // id 2xx, 3xx, 4xx, 5xx and 6xx are 'Rainy'
         // https://openweathermap.org/weather-conditions
-        if weatherId.hasPrefix("2") ||
-            weatherId.hasPrefix("3") ||
-            weatherId.hasPrefix("4") ||
-            weatherId.hasPrefix("5") ||
-            weatherId.hasPrefix("6") {
+        if weatherId!.hasPrefix("2") ||
+            weatherId!.hasPrefix("3") ||
+            weatherId!.hasPrefix("4") ||
+            weatherId!.hasPrefix("5") ||
+            weatherId!.hasPrefix("6") {
             return Weather.Condition.rainy
         }
         // otherwise 'Sunny'
