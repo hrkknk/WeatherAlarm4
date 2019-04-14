@@ -83,7 +83,7 @@ class AlarmUseCase {
         alarm.status = Alarm.Status.rang
     }
     
-    static func stopAlarm(alarm: Alarm){
-        alarm.sound?.stop()
+    static func stopAlarm(){
+        self.player?.stop()
     }
 }

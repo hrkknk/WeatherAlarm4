@@ -14,6 +14,7 @@ class AlarmStandbyViewController: UIViewController {
     // MARK: - Properties
     private let alarmRepository: AlarmRepository = AlarmRepository.sharedInstance
     private let weatherApiClient: WeatherApiClient = WeatherApiClient.sharedInstance
+    private let configRepository: ConfigRepository = ConfigRepository.sharedInstance
     private var timer: Timer?
     private var sunnyAlarm: Alarm?
     private var rainyAlarm: Alarm?
@@ -26,19 +27,31 @@ class AlarmStandbyViewController: UIViewController {
     //MARK: - Outlets
     @IBOutlet weak var sunnyAlarmTime: UILabel!
     @IBOutlet weak var rainyAlarmTime: UILabel!
-
+    @IBOutlet weak var stopAlarmButton: UIButton!
+    
     //MARK: - Actions
     @IBAction func backToPrevious(_ sender: UIBarButtonItem) {
         timer?.invalidate()
         dismiss(animated: true, completion: nil)
     }
     
+    //viewDidLoad()でhiddenにしているので最初は押せない
+    //observeAlarmTimer()でアラームが鳴った時にhidden解除
+    @IBAction func stopAlarm(_ sender: UIButton) {
+        //アラームを止めて前画面に戻る
+        AlarmUseCase.stopAlarm()
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     //MARK: - Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        //TEST
+        print(configRepository.getSnoozeOn())
         //ブラックUI化
         view.backgroundColor = UIColor(red: 20/255, green: 20/255, blue: 20/255, alpha: 1)
+        
+        self.stopAlarmButton.isHidden = true
 
         // 位置情報取得のためのデリゲート
         locationManager.delegate = self
