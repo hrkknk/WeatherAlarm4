@@ -26,11 +26,15 @@ class AlarmStandbyViewController: UIViewController {
     //MARK: - Outlets
     @IBOutlet weak var sunnyAlarmTime: UILabel!
     @IBOutlet weak var rainyAlarmTime: UILabel!
+    @IBOutlet weak var stopAlarmButton: UIButton!
     
     //MARK: - Actions
     @IBAction func backToPrevious(_ sender: UIBarButtonItem) {
         timer?.invalidate()
         dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func stopAlarm(_ sender: UIButton) {
     }
     
     //MARK: - Methods
@@ -97,7 +101,9 @@ class AlarmStandbyViewController: UIViewController {
                 AlarmUseCase.ringAlarm(alarm: rainyAlarm!, currentWeather: weatherCondition, targetWeather: Weather.Condition.rainy) ?
                     print("'Rainy' alarmed.") : print("'Rainy' misfired.")
             }
-        } else if isSunnyAlarmRingTime {
+        }
+        
+        if isSunnyAlarmRingTime {
             if rainyAlarm?.status == Alarm.Status.misfired {
                 AlarmUseCase.ringAlarmForcibly(alarm: sunnyAlarm!)
                 print("'Sunny' alarmed forcibly.")
