@@ -108,6 +108,10 @@ class AlarmStandbyViewController: UIViewController {
                     print("'Sunny' alarmed.") : print("'Sunny' misfired.")
             }
         }
+        
+        if (sunnyAlarm!.status == Alarm.Status.rang || rainyAlarm!.status == Alarm.Status.rang) {
+            self.stopAlarmButton.isHidden = false
+        }
     }
     
     /*
