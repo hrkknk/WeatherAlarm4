@@ -9,19 +9,17 @@
 import AVFoundation
 
 class AlarmUseCase {
+    // AVAudioPlayerはプロパティとして保持しておかないと動かないらしい
+    static var player: AVAudioPlayer?
+    
     static func createAlarm(date: Date = Date(),
-                            soundFilePath: String = Bundle.main.path(forResource: "学校のチャイム01", ofType: "mp3")!) -> Alarm {
+                            soundFileName: String = "学校のチャイム01") -> Alarm {
         let alarm = Alarm()
         alarm.hour = Calendar.current.component(.hour, from: date)
         alarm.minute = Calendar.current.component(.minute, from: date)
-        
-        let sound: URL = URL(fileURLWithPath: soundFilePath)
-        do {
-            alarm.sound = try AVAudioPlayer(contentsOf: sound, fileTypeHint:nil)
-        } catch {
-            print("Failed to create alarm; soundFilePath not found; \(soundFilePath).")
-        }
-        
+        alarm.soundFileName = soundFileName
+        alarm.status = Alarm.Status.waiting
+
         return alarm
     }
     
@@ -57,20 +55,31 @@ class AlarmUseCase {
             return false
         }
         
-        let sound = alarm.sound
-        if sound == nil {
+        let soundFilePath = Bundle.main.path(forResource: alarm.soundFileName!, ofType: "mp3")!
+        do {
+            player = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: soundFilePath), fileTypeHint:nil)
+        } catch {
             alarm.status = Alarm.Status.misfired
-            print("Failed to ring alarm.")
+            print("Failed to ring sound; \(error)")
             return false
         }
-        
-        sound?.play()
+
+        player?.play()
         alarm.status = Alarm.Status.rang
         return true
     }
     
     static func ringAlarmForcibly(alarm: Alarm){
-        alarm.sound?.play()
+        let soundFilePath = Bundle.main.path(forResource: alarm.soundFileName!, ofType: "mp3")!
+        do {
+            player = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: soundFilePath), fileTypeHint:nil)
+        } catch {
+            alarm.status = Alarm.Status.misfired
+            print("Failed to create alarm; \(error)")
+            return
+        }
+
+        player?.play()
         alarm.status = Alarm.Status.rang
     }
 }
