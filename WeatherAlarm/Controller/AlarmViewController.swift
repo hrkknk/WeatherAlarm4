@@ -16,11 +16,6 @@ class AlarmViewController: UIViewController {
     
     private let alarmRepository: AlarmRepository = AlarmRepository.sharedInstance
 
-    //MARK: - Actions
-    @IBAction func setAlarm(_ sender: UIButton) {
-        //消すとAlarmStandbyViewControllerに遷移するとき怒られる。どこかで参照している？
-    }
-
     @IBAction func setSunnyAlarm(_ sender: UIDatePicker) {
         let alarm = AlarmUseCase.createAlarm(date: sender.date)
         alarmRepository.setAlarm(weatherCondition: Weather.Condition.sunny, alarm: alarm)
