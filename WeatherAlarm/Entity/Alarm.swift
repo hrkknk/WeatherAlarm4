@@ -13,7 +13,7 @@ class Alarm: NSObject, NSSecureCoding {
     
     var hour: Int?
     var minute: Int?
-    var soundFilePath: String?
+    var soundFileName: String?
     var status: Status
     enum Status {
         case waiting
@@ -25,20 +25,20 @@ class Alarm: NSObject, NSSecureCoding {
     func encode(with aCoder: NSCoder) {
         aCoder.encode(hour, forKey: "hour")
         aCoder.encode(minute, forKey: "minute")
-        aCoder.encode(soundFilePath, forKey: "soundFilePath")
+        aCoder.encode(soundFileName, forKey: "soundFileName")
     }
     
     required init?(coder aDecoder: NSCoder) {
         self.hour = (aDecoder.decodeObject(forKey: "hour") as? Int)
         self.minute = (aDecoder.decodeObject(forKey: "minute") as? Int)
-        self.soundFilePath = (aDecoder.decodeObject(forKey: "soundFilePath") as? String)
+        self.soundFileName = (aDecoder.decodeObject(forKey: "soundFileName") as? String)
         self.status = Status.waiting
     }
     
     override init() {
         self.hour = 0
         self.minute = 0
-        self.soundFilePath = ""
+        self.soundFileName = ""
         self.status = Status.waiting
     }
 }
