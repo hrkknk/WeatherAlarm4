@@ -83,7 +83,7 @@
                                 <color key="textColor" red="1" green="0.70980194539999997" blue="0.1165369555" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="G8H-Kb-vF9">
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="G8H-Kb-vF9">
                                 <rect key="frame" x="347" y="551" width="49" height="31"/>
                                 <connections>
                                     <action selector="changeSnoozeOnOff:" destination="qFs-eU-oB3" eventType="valueChanged" id="NkM-Rf-Qt9"/>
