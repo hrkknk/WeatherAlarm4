@@ -12,5 +12,6 @@ class Weather {
     enum Condition: String, CaseIterable {
         case sunny
         case rainy
+        case unsure
     }
 }

@@ -14,5 +14,6 @@ target 'WeatherAlarm' do
   
   pod 'SwiftyJSON', '4.2.0'
   pod 'Alamofire', '4.7.3'
+  pod 'ReachabilitySwift', '4.3.0'
 
 end
