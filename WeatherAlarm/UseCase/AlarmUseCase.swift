@@ -19,7 +19,7 @@ class AlarmUseCase {
         alarm.minute = Calendar.current.component(.minute, from: date)
         alarm.soundFileName = soundFileName
         alarm.status = Alarm.Status.waiting
-
+        
         return alarm
     }
     
@@ -85,5 +85,12 @@ class AlarmUseCase {
     
     static func stopAlarm(){
         self.player?.stop()
+    }
+    
+    static func startSnooze(alarm: inout Alarm) {
+        //300秒先の時刻でアラームをリセット
+        //TODO: 秒数をconfigに持って動的に設定可能とする
+        let date = Date().addingTimeInterval(300)
+        alarm = createAlarm(date: date)
     }
 }

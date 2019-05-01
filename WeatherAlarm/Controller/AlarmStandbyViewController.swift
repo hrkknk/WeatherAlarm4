@@ -46,8 +46,6 @@ class AlarmStandbyViewController: UIViewController {
     //MARK: - Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        //TEST
-        print(configRepository.getSnoozeOn())
         //ブラックUI化
         view.backgroundColor = UIColor(red: 20/255, green: 20/255, blue: 20/255, alpha: 1)
         
@@ -122,9 +120,15 @@ class AlarmStandbyViewController: UIViewController {
             }
         }
         
-        //どちらかのアラームを鳴らした場合、alarmStopButtonのhiddenを解除
+        //どちらかのアラームを鳴らした場合
         if (sunnyAlarm!.status == Alarm.Status.rang || rainyAlarm!.status == Alarm.Status.rang) {
+            //alarmStopButtonのhiddenを解除
             self.stopAlarmButton.isHidden = false
+            //スヌーズONの場合はもう一度カウント
+            if(configRepository.getSnoozeOn()) {
+                AlarmUseCase.startSnooze(alarm: &sunnyAlarm!)
+                AlarmUseCase.startSnooze(alarm: &rainyAlarm!)
+            }
         }
     }
     
