@@ -45,7 +45,6 @@ class AlarmStandbyViewController: UIViewController {
         AlarmUseCase.stopAlarm()
         self.snoozeAlarmButton.isEnabled = false
         self.snoozeAlarmButton.setTitle("SNOOZING", for: .normal)
-        alarmingView.isHidden = true
     }
     
     @IBAction func stopAlarm(_ sender: UIButton) {
