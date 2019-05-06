@@ -32,6 +32,7 @@ class AlarmStandbyViewController: UIViewController {
     @IBOutlet weak var alarmingView: UIView!
     @IBOutlet weak var alarmingWeather: UILabel!
     @IBOutlet weak var alarmingTime: UILabel!
+    @IBOutlet weak var alarmingLocation: UILabel!
     
     //MARK: - Actions
     @IBAction func backToPrevious(_ sender: UIBarButtonItem) {
@@ -108,10 +109,11 @@ class AlarmStandbyViewController: UIViewController {
         geoLocation.latitude = latitude
         geoLocation.longitude = longitude
 
+        var weather = Weather()
         var weatherCondition = Weather.Condition.unsure
         // 通信可能な場合のみ天気情報を取得する。ネット未接続なら時間が来たアラームを鳴らす。
         if NetworkChecker.reachable() {
-            let weather = self.weatherApiClient.getWeather(geoLocation: geoLocation)
+            weather = self.weatherApiClient.getWeather(geoLocation: geoLocation)
             weatherCondition = WeatherUseCase.getWeatherCondition(weatherId: weather.id)
         }
 
@@ -143,12 +145,18 @@ class AlarmStandbyViewController: UIViewController {
             if (sunnyAlarm!.status == Alarm.Status.rang) {
                 alarmingWeather.text = "Sunny"
                 alarmingWeather.textColor = UIColor(red: 255/255, green: 181/255, blue: 30/255, alpha: 1)
+                alarmingTime.text = AlarmUseCase.getAlarmTimeAsString(alarm: sunnyAlarm!)
             } else {
                 alarmingWeather.text = "Rainy"
                 alarmingWeather.textColor = UIColor(red: 10/255, green: 132/255, blue: 255/255, alpha: 1)
+                alarmingTime.text = AlarmUseCase.getAlarmTimeAsString(alarm: rainyAlarm!)
             }
             
-            alarmingTime.text = "at \(Calendar.current.component(.hour, from: Date())):\(String(format: "%02d", Calendar.current.component(.minute, from: Date())))"
+            if (weatherCondition != Weather.Condition.unsure) {
+                alarmingLocation.text = weather.location!
+            } else {
+                alarmingLocation.text = ""
+            }
             
             //スヌーズONの場合はもう一度カウント
             if(configRepository.getSnoozeOn()) {

@@ -37,6 +37,7 @@ class WeatherApiClient: NSObject {
                 if responseJson["cod"] == 200 {
                     weather.id = responseJson["weather"][0]["id"].stringValue
                     weather.description = responseJson["weather"][0]["description"].stringValue
+                    weather.location = responseJson["name"].stringValue
                 } else {
                     // WeatherAPI にアクセスできたものの、正常応答が得られなかった場合
                     print("Response condition is not 200: \(responseJson["cod"])")
