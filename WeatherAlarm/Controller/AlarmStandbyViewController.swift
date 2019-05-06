@@ -30,6 +30,7 @@ class AlarmStandbyViewController: UIViewController {
     @IBOutlet weak var snoozeAlarmButton: UIButton!
     @IBOutlet weak var stopAlarmButton: UIButton!
     @IBOutlet weak var alarmingView: UIView!
+    @IBOutlet weak var alarmingWeather: UILabel!
     
     //MARK: - Actions
     @IBAction func backToPrevious(_ sender: UIBarButtonItem) {
@@ -137,6 +138,15 @@ class AlarmStandbyViewController: UIViewController {
         if (sunnyAlarm!.status == Alarm.Status.rang || rainyAlarm!.status == Alarm.Status.rang) {
             self.stopAlarmButton.isHidden = false
             self.alarmingView.isHidden = false
+            
+            if (sunnyAlarm!.status == Alarm.Status.rang) {
+                alarmingWeather.text = "Sunny"
+                alarmingWeather.textColor = UIColor(red: 255/255, green: 181/255, blue: 30/255, alpha: 1)
+            } else {
+                alarmingWeather.text = "Rainy"
+                alarmingWeather.textColor = UIColor(red: 10/255, green: 132/255, blue: 255/255, alpha: 1)
+            }
+            
             //スヌーズONの場合はもう一度カウント
             if(configRepository.getSnoozeOn()) {
                 self.snoozeAlarmButton.isHidden = false
