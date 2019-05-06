@@ -39,7 +39,8 @@ class AlarmStandbyViewController: UIViewController {
     @IBAction func snoozeAlarm(_ sender: UIButton) {
         //アラームを止めるだけ。画面遷移はしない
         AlarmUseCase.stopAlarm()
-        self.snoozeAlarmButton.isHidden = true
+        self.snoozeAlarmButton.isEnabled = false
+        self.snoozeAlarmButton.setTitle("SNOOZING", for: .normal)
     }
     
     @IBAction func stopAlarm(_ sender: UIButton) {
@@ -77,6 +78,7 @@ class AlarmStandbyViewController: UIViewController {
         super.viewWillDisappear(animated)
         // 別画面に遷移する時にはtimerを破棄しておく
         timer?.invalidate()
+        AlarmUseCase.stopAlarm()
     }
     
     @objc private func observeAlarmTimer() {
@@ -134,6 +136,8 @@ class AlarmStandbyViewController: UIViewController {
             //スヌーズONの場合はもう一度カウント
             if(configRepository.getSnoozeOn()) {
                 self.snoozeAlarmButton.isHidden = false
+                self.snoozeAlarmButton.isEnabled = true
+                self.snoozeAlarmButton.setTitle("SNOOZE", for: .normal)
                 AlarmUseCase.startSnooze(alarm: &sunnyAlarm!)
                 AlarmUseCase.startSnooze(alarm: &rainyAlarm!)
             }
