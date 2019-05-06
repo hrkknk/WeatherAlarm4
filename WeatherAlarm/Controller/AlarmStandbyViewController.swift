@@ -31,6 +31,7 @@ class AlarmStandbyViewController: UIViewController {
     @IBOutlet weak var stopAlarmButton: UIButton!
     @IBOutlet weak var alarmingView: UIView!
     @IBOutlet weak var alarmingWeather: UILabel!
+    @IBOutlet weak var alarmingTime: UILabel!
     
     //MARK: - Actions
     @IBAction func backToPrevious(_ sender: UIBarButtonItem) {
@@ -146,6 +147,8 @@ class AlarmStandbyViewController: UIViewController {
                 alarmingWeather.text = "Rainy"
                 alarmingWeather.textColor = UIColor(red: 10/255, green: 132/255, blue: 255/255, alpha: 1)
             }
+            
+            alarmingTime.text = "at \(Calendar.current.component(.hour, from: Date())):\(String(format: "%02d", Calendar.current.component(.minute, from: Date())))"
             
             //スヌーズONの場合はもう一度カウント
             if(configRepository.getSnoozeOn()) {
