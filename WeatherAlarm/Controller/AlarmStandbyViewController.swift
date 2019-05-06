@@ -29,6 +29,7 @@ class AlarmStandbyViewController: UIViewController {
     @IBOutlet weak var rainyAlarmTime: UILabel!
     @IBOutlet weak var snoozeAlarmButton: UIButton!
     @IBOutlet weak var stopAlarmButton: UIButton!
+    @IBOutlet weak var alarmingView: UIView!
     
     //MARK: - Actions
     @IBAction func backToPrevious(_ sender: UIBarButtonItem) {
