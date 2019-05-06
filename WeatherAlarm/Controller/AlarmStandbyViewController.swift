@@ -60,6 +60,7 @@ class AlarmStandbyViewController: UIViewController {
         //observeAlarmTimer()でアラームが鳴った時にhidden解除
         self.stopAlarmButton.isHidden = true
         self.snoozeAlarmButton.isHidden = true
+        self.alarmingView.isHidden = true
 
         // 位置情報取得のためのデリゲート
         locationManager.delegate = self
