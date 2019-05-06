@@ -21,6 +21,7 @@
 		CCBC3454211F495600BF6E6D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CCBC3452211F495600BF6E6D /* Main.storyboard */; };
 		CCBC3456211F495800BF6E6D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CCBC3455211F495800BF6E6D /* Assets.xcassets */; };
 		CCBC3459211F495800BF6E6D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CCBC3457211F495800BF6E6D /* LaunchScreen.storyboard */; };
+		CCC48A4C22633A3D00BE07FC /* ConfigRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCC48A4B22633A3D00BE07FC /* ConfigRepository.swift */; };
 		CCD8F966217B69BC00C4B00F /* AlarmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD8F964217B69BB00C4B00F /* AlarmViewController.swift */; };
 		CCE7DBCA21EB241100D1415F /* 学校のチャイム01.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = CCE7DBC921EB241100D1415F /* 学校のチャイム01.mp3 */; };
 		CCE7DBCC21EB555D00D1415F /* CLLocationManagerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCE7DBCB21EB555D00D1415F /* CLLocationManagerDelegate.swift */; };
@@ -61,6 +62,7 @@
 		CCBC3455211F495800BF6E6D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CCBC3458211F495800BF6E6D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CCBC345A211F495800BF6E6D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CCC48A4B22633A3D00BE07FC /* ConfigRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigRepository.swift; sourceTree = "<group>"; };
 		CCD8F964217B69BB00C4B00F /* AlarmViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlarmViewController.swift; sourceTree = "<group>"; };
 		CCE7DBC921EB241100D1415F /* 学校のチャイム01.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "学校のチャイム01.mp3"; sourceTree = "<group>"; };
 		CCE7DBCB21EB555D00D1415F /* CLLocationManagerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLLocationManagerDelegate.swift; sourceTree = "<group>"; };
@@ -142,6 +144,7 @@
 			isa = PBXGroup;
 			children = (
 				5CAE5C8A222BDD65009EE0FB /* AlarmRepository.swift */,
+				CCC48A4B22633A3D00BE07FC /* ConfigRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -408,6 +411,7 @@
 				CCE7DBCC21EB555D00D1415F /* CLLocationManagerDelegate.swift in Sources */,
 				5C85DDB5226337AB00A90CAF /* NetworkChecker.swift in Sources */,
 				CCD8F966217B69BC00C4B00F /* AlarmViewController.swift in Sources */,
+				CCC48A4C22633A3D00BE07FC /* ConfigRepository.swift in Sources */,
 				5C71ED84222ACC97002CD717 /* AlarmUseCase.swift in Sources */,
 				5CE966482231643000263A2D /* WeatherApiClient.swift in Sources */,
 				5CE9664A2231644900263A2D /* WeatherUseCase.swift in Sources */,
