@@ -45,6 +45,7 @@ class AlarmStandbyViewController: UIViewController {
         AlarmUseCase.stopAlarm()
         self.snoozeAlarmButton.isEnabled = false
         self.snoozeAlarmButton.setTitle("SNOOZING", for: .normal)
+        alarmingView.isHidden = true
     }
     
     @IBAction func stopAlarm(_ sender: UIButton) {
@@ -74,8 +75,7 @@ class AlarmStandbyViewController: UIViewController {
         
         sunnyAlarm = alarmRepository.getAlarm(weatherCondition: Weather.Condition.sunny)
         rainyAlarm = alarmRepository.getAlarm(weatherCondition: Weather.Condition.rainy)
-        sunnyAlarmTime.text = AlarmUseCase.getAlarmTimeAsString(alarm: sunnyAlarm!)
-        rainyAlarmTime.text = AlarmUseCase.getAlarmTimeAsString(alarm: rainyAlarm!)
+        refreshAlarmTimeLabel()
         
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(observeAlarmTimer), userInfo: nil, repeats: true)
     }
@@ -165,8 +165,14 @@ class AlarmStandbyViewController: UIViewController {
                 self.snoozeAlarmButton.setTitle("SNOOZE", for: .normal)
                 AlarmUseCase.startSnooze(alarm: &sunnyAlarm!)
                 AlarmUseCase.startSnooze(alarm: &rainyAlarm!)
+                refreshAlarmTimeLabel()
             }
         }
+    }
+    
+    private func refreshAlarmTimeLabel() {
+        sunnyAlarmTime.text = AlarmUseCase.getAlarmTimeAsString(alarm: sunnyAlarm!)
+        rainyAlarmTime.text = AlarmUseCase.getAlarmTimeAsString(alarm: rainyAlarm!)
     }
     
     /*
