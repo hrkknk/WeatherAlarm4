@@ -55,6 +55,7 @@ class AlarmStandbyViewController: UIViewController {
         super.viewDidLoad()
         //ブラックUI化
         view.backgroundColor = UIColor(red: 20/255, green: 20/255, blue: 20/255, alpha: 1)
+        alarmingView.backgroundColor = UIColor(red: 20/255, green: 20/255, blue: 20/255, alpha: 1)
         
         //viewDidLoad()でhiddenにしているので最初は押せない
         //observeAlarmTimer()でアラームが鳴った時にhidden解除
@@ -135,6 +136,7 @@ class AlarmStandbyViewController: UIViewController {
         //どちらかのアラームを鳴らした場合
         if (sunnyAlarm!.status == Alarm.Status.rang || rainyAlarm!.status == Alarm.Status.rang) {
             self.stopAlarmButton.isHidden = false
+            self.alarmingView.isHidden = false
             //スヌーズONの場合はもう一度カウント
             if(configRepository.getSnoozeOn()) {
                 self.snoozeAlarmButton.isHidden = false
