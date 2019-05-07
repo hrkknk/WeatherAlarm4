@@ -152,7 +152,7 @@ class AlarmStandbyViewController: UIViewController {
             }
             
             if (weatherCondition != Weather.Condition.unsure) {
-                alarmingLocation.text = weather.location!
+                alarmingLocation.text = weather.place!
             } else {
                 alarmingLocation.text = ""
             }

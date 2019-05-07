@@ -9,7 +9,7 @@
 class Weather {
     var id: String?
     var description: String?
-    var location: String?
+    var place: String?
     enum Condition: String, CaseIterable {
         case sunny
         case rainy
