@@ -136,7 +136,7 @@ class AlarmStandbyViewController: UIViewController {
             self.alarmingView.isHidden = false
             self.alarmingWeather.text = WeatherUseCase.getWeatherText(weatherCondition: targetWeather)
             
-            let color = WeatherUseCase.getWeatherTestColor(weatherCondition: targetWeather)
+            let color = WeatherUseCase.getWeatherTextColor(weatherCondition: targetWeather)
             self.alarmingWeather.textColor = UIColor(red: CGFloat(color.red)/255, green: CGFloat(color.green)/255, blue: CGFloat(color.blue)/255, alpha: 1)
             
             alarmingTime.text = AlarmUseCase.getAlarmTimeAsString(alarm: targetAlarm)

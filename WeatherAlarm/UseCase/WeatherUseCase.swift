@@ -36,7 +36,7 @@ class WeatherUseCase {
         }
     }
     
-    static func getWeatherTestColor(weatherCondition: Weather.Condition) -> (red: Int, green: Int, blue: Int) {
+    static func getWeatherTextColor(weatherCondition: Weather.Condition) -> (red: Int, green: Int, blue: Int) {
         switch (weatherCondition) {
         case Weather.Condition.sunny:
             return (255, 181, 30)
