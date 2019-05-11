@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIApplication.shared.isIdleTimerDisabled = true
 
         // ナビゲーションバーの色変更
-        UINavigationBar.appearance().barTintColor = UIColor.black
+        UINavigationBar.appearance().barTintColor = UIColor(red: 80/255, green: 80/255, blue: 80/255, alpha: 1)
         
         return true
     }

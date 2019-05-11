@@ -13,6 +13,8 @@ class AlarmViewController: UIViewController {
     //MARK: - Outlets
     @IBOutlet weak var sunnyAlarmDatePicker: UIDatePicker!
     @IBOutlet weak var rainyAlarmDatePicker: UIDatePicker!
+    @IBOutlet weak var sunnyImageView: UIImageView!
+    @IBOutlet weak var rainyImageView: UIImageView!
     
     private let alarmRepository: AlarmRepository = AlarmRepository.sharedInstance
     private let configRepository: ConfigRepository = ConfigRepository.sharedInstance
@@ -34,9 +36,12 @@ class AlarmViewController: UIViewController {
     //MARK: - Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-                        
+        
+        sunnyImageView.image = UIImage(named: "Sunny")
+        rainyImageView.image = UIImage(named: "Rainy")
+
         //ブラックUI化
-        view.backgroundColor = UIColor(red: 20/255, green: 20/255, blue: 20/255, alpha: 1)
+        view.backgroundColor = UIColor(red: 80/255, green: 80/255, blue: 80/255, alpha: 1)
         self.sunnyAlarmDatePicker.setValue(UIColor.white, forKey: "textColor")
         self.rainyAlarmDatePicker.setValue(UIColor.white, forKey: "textColor")
         

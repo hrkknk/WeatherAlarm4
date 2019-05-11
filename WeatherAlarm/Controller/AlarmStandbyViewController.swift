@@ -25,7 +25,9 @@ class AlarmStandbyViewController: UIViewController {
     let locationManager = CLLocationManager()
 
     //MARK: - Outlets
+    @IBOutlet weak var sunnyImageView: UIImageView!
     @IBOutlet weak var sunnyAlarmTime: UILabel!
+    @IBOutlet weak var rainyImageView: UIImageView!
     @IBOutlet weak var rainyAlarmTime: UILabel!
     @IBOutlet weak var snoozeAlarmButton: UIButton!
     @IBOutlet weak var stopAlarmButton: UIButton!
@@ -53,8 +55,11 @@ class AlarmStandbyViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         //ブラックUI化
-        view.backgroundColor = UIColor(red: 20/255, green: 20/255, blue: 20/255, alpha: 1)
-        
+        view.backgroundColor = UIColor(red: 80/255, green: 80/255, blue: 80/255, alpha: 1)
+
+        sunnyImageView.image = UIImage(named: "Sunny")
+        rainyImageView.image = UIImage(named: "Rainy")
+
         //viewDidLoad()でhiddenにしているので最初は押せない
         //observeAlarmTimer()でアラームが鳴った時にhidden解除
         self.stopAlarmButton.isHidden = true

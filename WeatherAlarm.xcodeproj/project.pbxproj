@@ -16,7 +16,9 @@
 		5CE9664A2231644900263A2D /* WeatherUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE966492231644900263A2D /* WeatherUseCase.swift */; };
 		5CE9664C2231663B00263A2D /* GeoLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE9664B2231663B00263A2D /* GeoLocation.swift */; };
 		CC25685A2174F1C200156CD9 /* WeatherAlarmTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC2568592174F1C200156CD9 /* WeatherAlarmTests.swift */; };
+		CC2769C82285499000A378D7 /* Rainy.png in Resources */ = {isa = PBXBuildFile; fileRef = CC2769C72285499000A378D7 /* Rainy.png */; };
 		CC3C007421DF62CF0081B8CD /* AlarmStandbyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3C007321DF62CF0081B8CD /* AlarmStandbyViewController.swift */; };
+		CC5149212280463400CC4B55 /* Sunny.png in Resources */ = {isa = PBXBuildFile; fileRef = CC5149202280463400CC4B55 /* Sunny.png */; };
 		CCBC344F211F495600BF6E6D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBC344E211F495600BF6E6D /* AppDelegate.swift */; };
 		CCBC3454211F495600BF6E6D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CCBC3452211F495600BF6E6D /* Main.storyboard */; };
 		CCBC3456211F495800BF6E6D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CCBC3455211F495800BF6E6D /* Assets.xcassets */; };
@@ -55,7 +57,9 @@
 		CC2568572174F1C200156CD9 /* WeatherAlarmTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WeatherAlarmTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC2568592174F1C200156CD9 /* WeatherAlarmTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherAlarmTests.swift; sourceTree = "<group>"; };
 		CC25685B2174F1C200156CD9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CC2769C72285499000A378D7 /* Rainy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Rainy.png; sourceTree = "<group>"; };
 		CC3C007321DF62CF0081B8CD /* AlarmStandbyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmStandbyViewController.swift; sourceTree = "<group>"; };
+		CC5149202280463400CC4B55 /* Sunny.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sunny.png; sourceTree = "<group>"; };
 		CCBC344B211F495600BF6E6D /* WeatherAlarm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherAlarm.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCBC344E211F495600BF6E6D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CCBC3453211F495600BF6E6D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -113,6 +117,8 @@
 		2A4C1E9821A84BD400A1CF08 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				CC5149202280463400CC4B55 /* Sunny.png */,
+				CC2769C72285499000A378D7 /* Rainy.png */,
 				CCBC344E211F495600BF6E6D /* AppDelegate.swift */,
 				CCD8F964217B69BB00C4B00F /* AlarmViewController.swift */,
 				CC3C007321DF62CF0081B8CD /* AlarmStandbyViewController.swift */,
@@ -312,10 +318,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CC5149212280463400CC4B55 /* Sunny.png in Resources */,
 				CCBC3459211F495800BF6E6D /* LaunchScreen.storyboard in Resources */,
 				CCE7DBCA21EB241100D1415F /* 学校のチャイム01.mp3 in Resources */,
 				CCBC3456211F495800BF6E6D /* Assets.xcassets in Resources */,
 				CCBC3454211F495600BF6E6D /* Main.storyboard in Resources */,
+				CC2769C82285499000A378D7 /* Rainy.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
