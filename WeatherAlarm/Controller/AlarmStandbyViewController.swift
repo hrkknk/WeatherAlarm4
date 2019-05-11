@@ -134,7 +134,7 @@ class AlarmStandbyViewController: UIViewController {
             print("'\(targetWeather.rawValue)' alarmed.")
             self.stopAlarmButton.isHidden = false
             self.alarmingView.isHidden = false
-            self.alarmingWeather.text = WeatherUseCase.getWeatherTest(weatherCondition: targetWeather)
+            self.alarmingWeather.text = WeatherUseCase.getWeatherText(weatherCondition: targetWeather)
             
             let color = WeatherUseCase.getWeatherTestColor(weatherCondition: targetWeather)
             self.alarmingWeather.textColor = UIColor(red: CGFloat(color.red)/255, green: CGFloat(color.green)/255, blue: CGFloat(color.blue)/255, alpha: 1)

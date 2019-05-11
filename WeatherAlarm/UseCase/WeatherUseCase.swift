@@ -25,7 +25,7 @@ class WeatherUseCase {
         return Weather.Condition.sunny
     }
     
-    static func getWeatherTest(weatherCondition: Weather.Condition) -> String {
+    static func getWeatherText(weatherCondition: Weather.Condition) -> String {
         switch (weatherCondition) {
         case Weather.Condition.sunny:
             return "Sunny"
