@@ -16,8 +16,7 @@ class AlarmStandbyViewController: UIViewController {
     private let weatherApiClient: WeatherApiClient = WeatherApiClient.sharedInstance
     private let configRepository: ConfigRepository = ConfigRepository.sharedInstance
     private var timer: Timer?
-    private var sunnyAlarm: Alarm?
-    private var rainyAlarm: Alarm?
+    
     var latitude: String?
     var longitude: String?
 
@@ -72,9 +71,10 @@ class AlarmStandbyViewController: UIViewController {
         locationManager.requestAlwaysAuthorization()
         locationManager.startUpdatingLocation()
         
-        sunnyAlarm = alarmRepository.getAlarm(weatherCondition: Weather.Condition.sunny)
-        rainyAlarm = alarmRepository.getAlarm(weatherCondition: Weather.Condition.rainy)
-        refreshAlarmTimeLabel()
+        let sunnyAlarm = alarmRepository.getAlarm(weatherCondition: Weather.Condition.sunny)
+        let rainyAlarm = alarmRepository.getAlarm(weatherCondition: Weather.Condition.rainy)
+        sunnyAlarmTime.text = AlarmUseCase.getAlarmTimeAsString(alarm: sunnyAlarm!)
+        rainyAlarmTime.text = AlarmUseCase.getAlarmTimeAsString(alarm: rainyAlarm!)
         
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(observeAlarmTimer), userInfo: nil, repeats: true)
     }
@@ -88,21 +88,20 @@ class AlarmStandbyViewController: UIViewController {
     
     @objc private func observeAlarmTimer() {
         print("timer ticked: \(Date())")
-        
-        let isRainyAlarmRingTime = AlarmUseCase.changeStatusIfTimeHasCome(alarm: rainyAlarm!)
-        let isSunnyAlarmRingTime = AlarmUseCase.changeStatusIfTimeHasCome(alarm: sunnyAlarm!)
-        
-        // rainy も sunny も鳴る時間になっていないなら処理しない
-        if (rainyAlarm!.status != Alarm.Status.timeHasCome
-            && sunnyAlarm!.status != Alarm.Status.timeHasCome) {
+
+        // 鳴らし終わっているアラームがあるなら処理しない
+        if (alarmRepository.containsAlarms(status: Alarm.Status.rang)) {
             return
         }
         
-        // rainy か sunny が鳴らし終わっているなら処理しない
-        if (rainyAlarm!.status == Alarm.Status.rang
-            || sunnyAlarm!.status == Alarm.Status.rang) {
+        // 時間のきたアラームがないなら処理終了
+        alarmRepository.updateAllAlarmStatus()
+        let timeComingAlarm = alarmRepository.getTimeComingWeatherAlarm()
+        if (timeComingAlarm == nil) {
             return
         }
+        let targetWeather = timeComingAlarm!.weather
+        let targetAlarm = timeComingAlarm!.alarm
         
         let geoLocation = GeoLocation()
         geoLocation.latitude = latitude
@@ -116,62 +115,45 @@ class AlarmStandbyViewController: UIViewController {
             weatherCondition = WeatherUseCase.getWeatherCondition(weatherId: weather.id)
         }
 
-        if isRainyAlarmRingTime {
-            if weatherCondition == Weather.Condition.unsure || sunnyAlarm?.status == Alarm.Status.misfired {
-                AlarmUseCase.ringAlarmForcibly(alarm: rainyAlarm!)
-                print("'Rainy' alarmed forcibly.")
-            } else {
-                AlarmUseCase.ringAlarm(alarm: rainyAlarm!, currentWeather: weatherCondition, targetWeather: Weather.Condition.rainy) ?
-                    print("'Rainy' alarmed.") : print("'Rainy' misfired.")
-            }
+        var alarmed = false;
+        // 以下の場合は強制的に時間のきたアラームを鳴らす
+        // - 天気がわからない場合
+        // - 他にwaitingなアラームがない（今鳴らそうとしているアラームが最後の1つ）の場合
+        if weatherCondition == Weather.Condition.unsure || !alarmRepository.containsAlarms(status: Alarm.Status.waiting) {
+            AlarmUseCase.ringAlarmForcibly(alarm: targetAlarm)
+            alarmed = true
+            print("'\(targetWeather.rawValue)' alarming forcibly...")
+        }
+        // 上記以外なら天気が一致する場合のみ鳴らす
+        else {
+            alarmed = AlarmUseCase.ringAlarm(alarm: targetAlarm, currentWeather: weatherCondition, targetWeather: targetWeather)
         }
         
-        if isSunnyAlarmRingTime {
-            if weatherCondition == Weather.Condition.unsure || rainyAlarm?.status == Alarm.Status.misfired {
-                AlarmUseCase.ringAlarmForcibly(alarm: sunnyAlarm!)
-                print("'Sunny' alarmed forcibly.")
-            } else {
-                AlarmUseCase.ringAlarm(alarm: sunnyAlarm!, currentWeather: weatherCondition, targetWeather: Weather.Condition.sunny) ?
-                    print("'Sunny' alarmed.") : print("'Sunny' misfired.")
-            }
-        }
-        
-        //どちらかのアラームを鳴らした場合
-        if (sunnyAlarm!.status == Alarm.Status.rang || rainyAlarm!.status == Alarm.Status.rang) {
+        // アラームが鳴った場合
+        if (alarmed) {
+            print("'\(targetWeather.rawValue)' alarmed.")
             self.stopAlarmButton.isHidden = false
             self.alarmingView.isHidden = false
+            self.alarmingWeather.text = WeatherUseCase.getWeatherTest(weatherCondition: targetWeather)
             
-            if (sunnyAlarm!.status == Alarm.Status.rang) {
-                alarmingWeather.text = "Sunny"
-                alarmingWeather.textColor = UIColor(red: 255/255, green: 181/255, blue: 30/255, alpha: 1)
-                alarmingTime.text = AlarmUseCase.getAlarmTimeAsString(alarm: sunnyAlarm!)
-            } else {
-                alarmingWeather.text = "Rainy"
-                alarmingWeather.textColor = UIColor(red: 10/255, green: 132/255, blue: 255/255, alpha: 1)
-                alarmingTime.text = AlarmUseCase.getAlarmTimeAsString(alarm: rainyAlarm!)
-            }
+            let color = WeatherUseCase.getWeatherTestColor(weatherCondition: targetWeather)
+            self.alarmingWeather.textColor = UIColor(red: CGFloat(color.red)/255, green: CGFloat(color.green)/255, blue: CGFloat(color.blue)/255, alpha: 1)
             
-            if (weatherCondition != Weather.Condition.unsure) {
-                alarmingLocation.text = weather.place!
-            } else {
-                alarmingLocation.text = ""
-            }
+            alarmingTime.text = AlarmUseCase.getAlarmTimeAsString(alarm: targetAlarm)
+            
+            // 地名表示いる？
+            alarmingLocation.text = weatherCondition == Weather.Condition.unsure ? "" : weather.place!
             
             //スヌーズONの場合はもう一度カウント
             if(configRepository.getSnoozeOn()) {
                 self.snoozeAlarmButton.isHidden = false
                 self.snoozeAlarmButton.isEnabled = true
                 self.snoozeAlarmButton.setTitle("SNOOZE", for: .normal)
-                AlarmUseCase.startSnooze(alarm: &sunnyAlarm!)
-                AlarmUseCase.startSnooze(alarm: &rainyAlarm!)
-                refreshAlarmTimeLabel()
+                alarmRepository.updateSnoozingAlarmTime(addSeconds: 300)
             }
+        } else {
+            print("'\(targetWeather.rawValue)' misfired.")
         }
-    }
-    
-    private func refreshAlarmTimeLabel() {
-        sunnyAlarmTime.text = AlarmUseCase.getAlarmTimeAsString(alarm: sunnyAlarm!)
-        rainyAlarmTime.text = AlarmUseCase.getAlarmTimeAsString(alarm: rainyAlarm!)
     }
     
     /*

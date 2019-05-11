@@ -30,6 +30,39 @@ class AlarmRepository: NSObject {
         return alarms[weatherCondition.rawValue]
     }
     
+    func containsAlarms(status: Alarm.Status) -> Bool {
+        for alarm in alarms {
+            if alarm.value.status == status {
+                return true
+            }
+        }
+        return false
+    }
+    
+    func updateAllAlarmStatus() {
+        for alarm in alarms {
+            let _ = AlarmUseCase.changeStatusIfTimeHasCome(alarm: alarm.value)
+        }
+    }
+    
+    func getTimeComingWeatherAlarm() -> (weather: Weather.Condition, alarm: Alarm)? {
+        for alarm in alarms {
+            if alarm.value.status == Alarm.Status.timeHasCome {
+                // enum変換できない謎のkeyだったらunsureとして扱う
+                let weatherCondition = Weather.Condition(rawValue: alarm.key) ?? Weather.Condition.unsure
+                // 仮にtimeHasComeなアラームが複数あったとしても、鳴らすのは1つなので最初に見つかったものだけ返す
+                return (weatherCondition, alarm.value)
+            }
+        }
+        return nil
+    }
+    
+    func updateSnoozingAlarmTime(addSeconds: Int) {
+        for var alarm in alarms {
+            AlarmUseCase.startSnooze(alarm: &alarm.value, addSeconds: addSeconds)
+        }
+    }
+    
     func loadAlarm(weatherCondition: Weather.Condition) {
         if let loadedData = UserDefaults().data(forKey: weatherCondition.rawValue) {
             do {

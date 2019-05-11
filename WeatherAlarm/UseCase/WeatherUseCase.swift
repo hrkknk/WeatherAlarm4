@@ -24,4 +24,26 @@ class WeatherUseCase {
         // otherwise 'Sunny'
         return Weather.Condition.sunny
     }
+    
+    static func getWeatherTest(weatherCondition: Weather.Condition) -> String {
+        switch (weatherCondition) {
+        case Weather.Condition.sunny:
+            return "Sunny"
+        case Weather.Condition.rainy:
+            return "Rainy"
+        default:
+            return "Unsure"
+        }
+    }
+    
+    static func getWeatherTestColor(weatherCondition: Weather.Condition) -> (red: Int, green: Int, blue: Int) {
+        switch (weatherCondition) {
+        case Weather.Condition.sunny:
+            return (255, 181, 30)
+        case Weather.Condition.rainy:
+            return (10, 132, 255)
+        default:
+            return (255, 255, 255)
+        }
+    }
 }
