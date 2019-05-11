@@ -149,7 +149,7 @@ class AlarmStandbyViewController: UIViewController {
                 self.snoozeAlarmButton.isHidden = false
                 self.snoozeAlarmButton.isEnabled = true
                 self.snoozeAlarmButton.setTitle("SNOOZE", for: .normal)
-                alarmRepository.updateSnoozingAlarmTime(addSeconds: 300)
+                alarmRepository.snoozeAllAlarms(addSeconds: 300)
             }
         } else {
             print("'\(targetWeather.rawValue)' misfired.")

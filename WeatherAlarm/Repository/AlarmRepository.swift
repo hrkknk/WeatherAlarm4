@@ -57,7 +57,7 @@ class AlarmRepository: NSObject {
         return nil
     }
     
-    func updateSnoozingAlarmTime(addSeconds: Int) {
+    func snoozeAllAlarms(addSeconds: Int) {
         for var alarm in alarms {
             AlarmUseCase.startSnooze(alarm: &alarm.value, addSeconds: addSeconds)
             alarms[alarm.key] = alarm.value
