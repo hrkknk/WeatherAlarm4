@@ -15,14 +15,12 @@ class AlarmStandbyViewController: UIViewController {
     private let alarmRepository: AlarmRepository = AlarmRepository.sharedInstance
     private let weatherApiClient: WeatherApiClient = WeatherApiClient.sharedInstance
     private let configRepository: ConfigRepository = ConfigRepository.sharedInstance
+    private let locationRepository: LocationRepository = LocationRepository.sharedInstance
     private var timer: Timer?
     private var sunnyAlarm: Alarm?
     private var rainyAlarm: Alarm?
     var latitude: String?
     var longitude: String?
-
-    // 位置情報取得用オブジェクト
-    let locationManager = CLLocationManager()
 
     //MARK: - Outlets
     @IBOutlet weak var sunnyAlarmTime: UILabel!
@@ -61,10 +59,8 @@ class AlarmStandbyViewController: UIViewController {
         self.snoozeAlarmButton.isHidden = true
 
         // 位置情報取得のためのデリゲート
-        locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
-        locationManager.requestAlwaysAuthorization()
-        locationManager.startUpdatingLocation()
+        locationRepository.delegate = self
+        locationRepository.startUpdatingLocation()
         
         sunnyAlarm = alarmRepository.getAlarm(weatherCondition: Weather.Condition.sunny)
         rainyAlarm = alarmRepository.getAlarm(weatherCondition: Weather.Condition.rainy)
