@@ -10,6 +10,6 @@ import Foundation
 
 class ConfigUseCase {
     static func setSnoozeOn() {
-        Config.isSnoozeOn = true
+        Config.sharedInstance.isSnoozeOn = true
     }
 }
