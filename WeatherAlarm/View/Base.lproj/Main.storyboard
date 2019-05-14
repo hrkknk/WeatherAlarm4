@@ -127,7 +127,7 @@
                                     <color key="titleColor" red="0.89452609674603567" green="0.96135416706850174" blue="0.96302218264248707" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="startButton:" destination="qFs-eU-oB3" eventType="touchUpInside" id="csp-62-1FQ"/>
+                                    <action selector="standbyAlarm:" destination="qFs-eU-oB3" eventType="touchUpInside" id="fZ1-QF-EQI"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sunny" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U55-AG-2IM" userLabel="SunnyAlarm">
