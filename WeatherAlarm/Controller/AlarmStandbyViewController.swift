@@ -9,7 +9,7 @@
 import UIKit
 import CoreLocation
 
-class AlarmStandbyViewController: UIViewController {
+class AlarmStandbyViewController: UIViewController, LocationRepositoryDelegate {
     
     // MARK: - Properties
     private let alarmRepository: AlarmRepository = AlarmRepository.sharedInstance
