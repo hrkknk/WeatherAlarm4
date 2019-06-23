@@ -19,6 +19,8 @@
 		5CE966482231643000263A2D /* WeatherApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE966472231643000263A2D /* WeatherApiClient.swift */; };
 		5CE9664A2231644900263A2D /* WeatherUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE966492231644900263A2D /* WeatherUseCase.swift */; };
 		5CE9664C2231663B00263A2D /* GeoLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE9664B2231663B00263A2D /* GeoLocation.swift */; };
+		B1096A2422BF6D2000229B7D /* SoundTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1096A2322BF6D2000229B7D /* SoundTableViewController.swift */; };
+		B1096A2822BF6DD400229B7D /* SoundTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1096A2722BF6DD400229B7D /* SoundTableViewCell.swift */; };
 		CC25685A2174F1C200156CD9 /* WeatherAlarmTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC2568592174F1C200156CD9 /* WeatherAlarmTests.swift */; };
 		CC3C007421DF62CF0081B8CD /* AlarmStandbyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3C007321DF62CF0081B8CD /* AlarmStandbyViewController.swift */; };
 		CCBC344F211F495600BF6E6D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBC344E211F495600BF6E6D /* AppDelegate.swift */; };
@@ -59,6 +61,8 @@
 		5CE966472231643000263A2D /* WeatherApiClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherApiClient.swift; sourceTree = "<group>"; };
 		5CE966492231644900263A2D /* WeatherUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherUseCase.swift; sourceTree = "<group>"; };
 		5CE9664B2231663B00263A2D /* GeoLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoLocation.swift; sourceTree = "<group>"; };
+		B1096A2322BF6D2000229B7D /* SoundTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundTableViewController.swift; sourceTree = "<group>"; };
+		B1096A2722BF6DD400229B7D /* SoundTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundTableViewCell.swift; sourceTree = "<group>"; };
 		CC2568572174F1C200156CD9 /* WeatherAlarmTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WeatherAlarmTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC2568592174F1C200156CD9 /* WeatherAlarmTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherAlarmTests.swift; sourceTree = "<group>"; };
 		CC25685B2174F1C200156CD9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -123,6 +127,8 @@
 				CCD8F964217B69BB00C4B00F /* AlarmViewController.swift */,
 				CC3C007321DF62CF0081B8CD /* AlarmStandbyViewController.swift */,
 				2A874072228AC9DC00C4F49D /* LocationAgreementViewController.swift */,
+				B1096A2322BF6D2000229B7D /* SoundTableViewController.swift */,
+				B1096A2722BF6DD400229B7D /* SoundTableViewCell.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -421,11 +427,13 @@
 				5C85DDB5226337AB00A90CAF /* NetworkChecker.swift in Sources */,
 				2A874077228ACA1D00C4F49D /* Config.swift in Sources */,
 				CCD8F966217B69BC00C4B00F /* AlarmViewController.swift in Sources */,
+				B1096A2822BF6DD400229B7D /* SoundTableViewCell.swift in Sources */,
 				CCC48A4C22633A3D00BE07FC /* ConfigRepository.swift in Sources */,
 				5C71ED84222ACC97002CD717 /* AlarmUseCase.swift in Sources */,
 				5CE966482231643000263A2D /* WeatherApiClient.swift in Sources */,
 				5CE9664A2231644900263A2D /* WeatherUseCase.swift in Sources */,
 				CC3C007421DF62CF0081B8CD /* AlarmStandbyViewController.swift in Sources */,
+				B1096A2422BF6D2000229B7D /* SoundTableViewController.swift in Sources */,
 				5CAE5C8B222BDD65009EE0FB /* AlarmRepository.swift in Sources */,
 				CCBC344F211F495600BF6E6D /* AppDelegate.swift in Sources */,
 				2A874075228AC9FC00C4F49D /* LocationRepository.swift in Sources */,

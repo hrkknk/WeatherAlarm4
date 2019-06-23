@@ -14,6 +14,7 @@ class AlarmViewController: UIViewController {
     //MARK: - Outlets
     @IBOutlet weak var sunnyAlarmDatePicker: UIDatePicker!
     @IBOutlet weak var rainyAlarmDatePicker: UIDatePicker!
+    @IBOutlet weak var selectedSoundName: UILabel!
     
     private let alarmRepository: AlarmRepository = AlarmRepository.sharedInstance
     private let configRepository: ConfigRepository = ConfigRepository.sharedInstance
