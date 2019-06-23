@@ -87,10 +87,8 @@ class AlarmUseCase {
         self.player?.stop()
     }
     
-    static func startSnooze(alarm: inout Alarm) {
-        //300秒先の時刻でアラームをリセット
-        //TODO: 秒数をconfigに持って動的に設定可能とする
-        let date = Date().addingTimeInterval(300)
-        alarm = createAlarm(date: date)
+    static func startSnooze(alarm: inout Alarm, addSeconds: Int) {
+        let date = AlarmUseCase.getAlarmTimeAsDate(alarm: alarm)
+        alarm = createAlarm(date: date.addingTimeInterval(Double(addSeconds)))
     }
 }
