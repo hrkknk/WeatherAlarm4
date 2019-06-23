@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 class AlarmViewController: UIViewController {
     
@@ -29,6 +30,17 @@ class AlarmViewController: UIViewController {
     
     @IBAction func changeSnoozeOnOff(_ sender: UISwitch) {
         configRepository.setSnoozeOn(isSnoozeOn: sender.isOn)
+    }
+    
+    @IBAction func standbyAlarm(_ sender: UIButton) {
+        let locationStatus = CLLocationManager.authorizationStatus()
+        if locationStatus == .authorizedAlways || locationStatus == .authorizedWhenInUse {
+            print("location status: authorized always or authorized when in use")
+            performSegue(withIdentifier: "AlarmStandby", sender: nil)
+        } else {
+            print("location status: denied or restricted")
+            performSegue(withIdentifier: "LocationAgreement", sender: nil)
+        }
     }
     
     //MARK: - Methods

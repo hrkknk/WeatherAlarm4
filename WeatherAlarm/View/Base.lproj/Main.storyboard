@@ -10,6 +10,62 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Location Agreement View Controller-->
+        <scene sceneID="k1m-vX-hLD">
+            <objects>
+                <viewController modalPresentationStyle="overCurrentContext" id="9ev-no-1ke" customClass="LocationAgreementViewController" customModule="WeatherAlarm" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="sMS-Cy-vEN">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="18N-U2-RHT">
+                                <rect key="frame" x="20" y="178" width="374" height="541"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4CM-2Z-fbQ">
+                                        <rect key="frame" x="139" y="328" width="98" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Open Settings"/>
+                                        <connections>
+                                            <action selector="openSettings:" destination="9ev-no-1ke" eventType="touchUpInside" id="gc3-iD-Gcm"/>
+                                        </connections>
+                                    </button>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ChangeLocationServices_01" translatesAutoresizingMaskIntoConstraints="NO" id="ulX-Jn-qaF">
+                                        <rect key="frame" x="26" y="41" width="133" height="235"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ChangeLocationServices_02" translatesAutoresizingMaskIntoConstraints="NO" id="Kj7-QO-sNb">
+                                        <rect key="frame" x="215" y="41" width="133" height="235"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="arrow" translatesAutoresizingMaskIntoConstraints="NO" id="VUF-e7-emd">
+                                        <rect key="frame" x="164" y="139" width="48" height="39"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8V0-Y5-G5T">
+                                        <rect key="frame" x="169" y="445" width="39" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Close"/>
+                                        <connections>
+                                            <action selector="closeLocationAgreement:" destination="9ev-no-1ke" eventType="touchUpInside" id="jBL-2p-NOd"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="40M-JY-hsE"/>
+                    </view>
+                    <connections>
+                        <outlet property="locationAgreementModal" destination="18N-U2-RHT" id="gQY-nw-V0A"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FGX-wr-RCI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4003" y="-580"/>
+        </scene>
         <!--Add Alarm-->
         <scene sceneID="Uxu-fv-uj3">
             <objects>
@@ -71,7 +127,7 @@
                                     <color key="titleColor" red="0.89452609674603567" green="0.96135416706850174" blue="0.96302218264248707" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
-                                    <segue destination="Wb1-tK-xJb" kind="show" identifier="AlarmStandby" id="VB9-xg-SeZ"/>
+                                    <action selector="standbyAlarm:" destination="qFs-eU-oB3" eventType="touchUpInside" id="fZ1-QF-EQI"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sunny" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U55-AG-2IM" userLabel="SunnyAlarm">
@@ -133,6 +189,8 @@
                     <connections>
                         <outlet property="rainyAlarmDatePicker" destination="Tkf-HI-Nsm" id="t2N-og-7cJ"/>
                         <outlet property="sunnyAlarmDatePicker" destination="mxJ-nJ-EXX" id="9z2-EH-qoh"/>
+                        <segue destination="Wb1-tK-xJb" kind="show" identifier="AlarmStandby" id="YvF-29-g5Q"/>
+                        <segue destination="9ev-no-1ke" kind="presentation" identifier="LocationAgreement" id="Sy7-MB-c4L"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TRc-09-OFd" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -304,4 +362,9 @@
             <point key="canvasLocation" x="4882.608695652174" y="142.63392857142856"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="ChangeLocationServices_01" width="375" height="664"/>
+        <image name="ChangeLocationServices_02" width="375" height="665"/>
+        <image name="arrow" width="384" height="384"/>
+    </resources>
 </document>

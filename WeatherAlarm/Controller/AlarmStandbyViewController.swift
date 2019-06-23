@@ -9,19 +9,17 @@
 import UIKit
 import CoreLocation
 
-class AlarmStandbyViewController: UIViewController {
+class AlarmStandbyViewController: UIViewController, LocationRepositoryDelegate {
     
     // MARK: - Properties
     private let alarmRepository: AlarmRepository = AlarmRepository.sharedInstance
     private let weatherApiClient: WeatherApiClient = WeatherApiClient.sharedInstance
     private let configRepository: ConfigRepository = ConfigRepository.sharedInstance
+    private let locationRepository: LocationRepository = LocationRepository.sharedInstance
     private var timer: Timer?
     
     var latitude: String?
     var longitude: String?
-
-    // 位置情報取得用オブジェクト
-    let locationManager = CLLocationManager()
 
     //MARK: - Outlets
     @IBOutlet weak var sunnyAlarmTime: UILabel!
@@ -66,10 +64,8 @@ class AlarmStandbyViewController: UIViewController {
         self.alarmingView.isHidden = true
 
         // 位置情報取得のためのデリゲート
-        locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
-        locationManager.requestAlwaysAuthorization()
-        locationManager.startUpdatingLocation()
+        locationRepository.delegate = self
+        locationRepository.startUpdatingLocation()
         
         let sunnyAlarm = alarmRepository.getAlarm(weatherCondition: Weather.Condition.sunny)
         let rainyAlarm = alarmRepository.getAlarm(weatherCondition: Weather.Condition.rainy)
@@ -79,6 +75,21 @@ class AlarmStandbyViewController: UIViewController {
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(observeAlarmTimer), userInfo: nil, repeats: true)
     }
     
+    func setLatitudeAndLongitude() {
+        let currentLocation = LocationRepository.sharedInstance.currentLocation!
+
+        // horizontalAccuracy（水平方向の位置の精度）がマイナスの場合は有効な値でないので切り捨てる
+        if currentLocation.horizontalAccuracy > 0 {
+            print("latitude: \(currentLocation.coordinate.latitude), longitude: \(currentLocation.coordinate.longitude)")
+            latitude = String(currentLocation.coordinate.latitude)
+            longitude = String(currentLocation.coordinate.longitude)
+
+            // 位置情報が取得できたら取得をやめる、電池消耗防止
+            locationRepository.stopUpdatingLocation()
+            locationRepository.delegate = nil
+        }
+    }
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         // 別画面に遷移する時にはtimerを破棄しておく
