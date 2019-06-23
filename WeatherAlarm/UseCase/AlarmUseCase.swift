@@ -86,10 +86,6 @@ class AlarmUseCase {
     static func stopAlarm(){
         self.player?.stop()
     }
-   
-    static func setsound(alarm: inout Alarm, soundName: String){
-        alarm.soundFileName = soundName
-    }
 
     static func startSnooze(alarm: inout Alarm, addSeconds: Int) {
         let date = AlarmUseCase.getAlarmTimeAsDate(alarm: alarm)

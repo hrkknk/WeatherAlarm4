@@ -7,12 +7,13 @@
 //
 
 import UIKit
+import AVFoundation
 
 class SoundTableViewController: UITableViewController {
     
-    let soundlist=["学校のチャイム01"]
-    var givedata: String = ""
-    var setsound = AlarmUseCase.createAlarm(date: Date())
+    let soundList=["学校のチャイム01"]
+    var soundName: String = ""
+    var player: AVAudioPlayer?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,16 +26,22 @@ class SoundTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return soundlist.count
+        return soundList.count
     }
     
     // セルが選択された時に呼び出される
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at:indexPath)
         cell?.accessoryType = .checkmark
-        givedata = soundlist[indexPath.row]
-        AlarmUseCase.setsound(alarm: &setsound, soundName: givedata)
-        AlarmUseCase.ringAlarmForcibly(alarm: setsound)
+        soundName = soundList[indexPath.row]
+        let soundFilePath = Bundle.main.path(forResource: soundName, ofType: "mp3")!
+        do {
+            player = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: soundFilePath), fileTypeHint:nil)
+        } catch {
+            print("Failed to create alarm; \(error)")
+            return
+        }
+        player?.play()
     }
     
     // セルの選択が外れた時に呼び出される
@@ -45,7 +52,7 @@ class SoundTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier:"SoundTableViewCell", for: indexPath) as? SoundTableViewCell else{fatalError("UAAAAAAAAA")}
-        cell.SoundLabel.text = soundlist[indexPath.row]
+        cell.soundLabel.text = soundList[indexPath.row]
         return cell
     }
 }

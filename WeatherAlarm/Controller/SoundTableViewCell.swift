@@ -11,7 +11,7 @@ import UIKit
 class SoundTableViewCell: UITableViewCell {
     
 //    @IBOutlet weak var SoundLabel: UILabel!
-    @IBOutlet weak var SoundLabel: UILabel!
+    @IBOutlet weak var soundLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
