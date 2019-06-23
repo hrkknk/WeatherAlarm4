@@ -86,7 +86,7 @@ class AlarmUseCase {
     static func stopAlarm(){
         self.player?.stop()
     }
-    
+
     static func startSnooze(alarm: inout Alarm, addSeconds: Int) {
         let date = AlarmUseCase.getAlarmTimeAsDate(alarm: alarm)
         alarm = createAlarm(date: date.addingTimeInterval(Double(addSeconds)))
