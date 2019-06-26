@@ -18,7 +18,7 @@ class SetAlarmUseCse {
         self.cacheDataAccessor = cacheDataAccessor
     }
     
-    func load() {
+    func loadCache() {
         for weather in Weather.Condition.allCases {
             var alarm = cacheDataAccessor.loadAlarm(weather: weather)
             if alarm == nil {

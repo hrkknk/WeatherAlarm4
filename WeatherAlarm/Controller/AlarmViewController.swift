@@ -54,8 +54,8 @@ class AlarmViewController: UIViewController {
         self.sunnyAlarmDatePicker.setValue(UIColor.white, forKey: "textColor")
         self.rainyAlarmDatePicker.setValue(UIColor.white, forKey: "textColor")
         
-        //前回保存したデータのロード
-        setAlarmUseCase.load()
+        // 前回保存したデータのロード
+        setAlarmUseCase.loadCache()
         
         // アラーム設定時刻の初期表示
         self.sunnyAlarmDatePicker.date = setAlarmUseCase.getAlarmTime(weather: Weather.Condition.sunny)
