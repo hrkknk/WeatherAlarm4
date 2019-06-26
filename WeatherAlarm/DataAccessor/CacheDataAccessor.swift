@@ -11,6 +11,7 @@ import Foundation
 class CacheDataAccessor: CacheDataAccessorProtocol {
     
     func loadAlarm(weather: Weather.Condition) -> Alarm? {
+        //loadできなかった場合はnilが返るようにします
         var alarm: Alarm?
         if let loadedData = UserDefaults().data(forKey: weather.rawValue) {
             do {

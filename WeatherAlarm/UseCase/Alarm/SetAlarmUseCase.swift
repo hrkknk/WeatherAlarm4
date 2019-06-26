@@ -21,6 +21,7 @@ class SetAlarmUseCse {
     func loadCache() {
         for weather in Weather.Condition.allCases {
             var alarm = cacheDataAccessor.loadAlarm(weather: weather)
+            //キャッシュがない or ロード失敗した場合には現在時刻とデフォルト音声で alarm を生成します
             if alarm == nil {
                 alarm = Alarm()
                 alarm!.setTime(dateTime: Date())
@@ -39,6 +40,7 @@ class SetAlarmUseCse {
         let alarm = alarmRepository.getAlarm(weather: weather)
         alarm.setTime(dateTime: dateTime)
         alarmRepository.setAlarm(weather: weather, alarm: alarm)
+        //アラーム時刻が更新されるたびにキャッシュも更新します
         cacheDataAccessor.saveAlarm(weather: weather, alarm: alarm)
     }
 }
