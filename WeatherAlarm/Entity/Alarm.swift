@@ -41,4 +41,9 @@ class Alarm: NSObject, NSSecureCoding {
         self.soundFileName = ""
         self.status = Status.waiting
     }
+    
+    func setTime(dateTime: Date) {
+        self.hour = Calendar.current.component(.hour, from: dateTime)
+        self.minute = Calendar.current.component(.minute, from: dateTime)
+    }
 }

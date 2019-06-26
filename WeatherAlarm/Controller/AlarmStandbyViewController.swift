@@ -67,10 +67,10 @@ class AlarmStandbyViewController: UIViewController, LocationRepositoryDelegate {
         locationRepository.delegate = self
         locationRepository.startUpdatingLocation()
         
-        let sunnyAlarm = alarmRepository.getAlarm(weatherCondition: Weather.Condition.sunny)
-        let rainyAlarm = alarmRepository.getAlarm(weatherCondition: Weather.Condition.rainy)
-        sunnyAlarmTime.text = AlarmUseCase.getAlarmTimeAsString(alarm: sunnyAlarm!)
-        rainyAlarmTime.text = AlarmUseCase.getAlarmTimeAsString(alarm: rainyAlarm!)
+        let sunnyAlarm = alarmRepository.getAlarm(weather: Weather.Condition.sunny)
+        let rainyAlarm = alarmRepository.getAlarm(weather: Weather.Condition.rainy)
+        sunnyAlarmTime.text = AlarmUseCase.getAlarmTimeAsString(alarm: sunnyAlarm)
+        rainyAlarmTime.text = AlarmUseCase.getAlarmTimeAsString(alarm: rainyAlarm)
         
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(observeAlarmTimer), userInfo: nil, repeats: true)
     }
