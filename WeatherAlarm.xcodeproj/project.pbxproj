@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2A874071228AC9A200C4F49D /* ConfigUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A874070228AC9A200C4F49D /* ConfigUseCase.swift */; };
 		2A874073228AC9DC00C4F49D /* LocationAgreementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A874072228AC9DC00C4F49D /* LocationAgreementViewController.swift */; };
 		2A874075228AC9FC00C4F49D /* LocationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A874074228AC9FC00C4F49D /* LocationRepository.swift */; };
 		2A874077228ACA1D00C4F49D /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A874076228ACA1D00C4F49D /* Config.swift */; };
@@ -15,6 +14,7 @@
 		5C51872222C2D94F007D2B44 /* AlarmRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C51872122C2D94F007D2B44 /* AlarmRepositoryProtocol.swift */; };
 		5C51872422C2DC6E007D2B44 /* CacheDataAccessorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C51872322C2DC6E007D2B44 /* CacheDataAccessorProtocol.swift */; };
 		5C51872622C2DD86007D2B44 /* CacheDataAccessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C51872522C2DD86007D2B44 /* CacheDataAccessor.swift */; };
+		5C51872822C3BBFA007D2B44 /* ConfigRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C51872722C3BBF9007D2B44 /* ConfigRepositoryProtocol.swift */; };
 		5C71ED7F222AB190002CD717 /* Alarm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C71ED7E222AB190002CD717 /* Alarm.swift */; };
 		5C71ED84222ACC97002CD717 /* AlarmUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C71ED83222ACC97002CD717 /* AlarmUseCase.swift */; };
 		5C85DDB5226337AB00A90CAF /* NetworkChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C85DDB4226337AB00A90CAF /* NetworkChecker.swift */; };
@@ -51,7 +51,6 @@
 /* Begin PBXFileReference section */
 		0776B1E629A069F246DFD845 /* Pods-WeatherAlarm.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeatherAlarm.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WeatherAlarm/Pods-WeatherAlarm.debug.xcconfig"; sourceTree = "<group>"; };
 		0CD4F052C81BDE8DAAD9A48A /* Pods-WeatherAlarmTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeatherAlarmTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WeatherAlarmTests/Pods-WeatherAlarmTests.debug.xcconfig"; sourceTree = "<group>"; };
-		2A874070228AC9A200C4F49D /* ConfigUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConfigUseCase.swift; path = WeatherAlarm/UseCase/ConfigUseCase.swift; sourceTree = SOURCE_ROOT; };
 		2A874072228AC9DC00C4F49D /* LocationAgreementViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = LocationAgreementViewController.swift; path = WeatherAlarm/Controller/LocationAgreementViewController.swift; sourceTree = SOURCE_ROOT; };
 		2A874074228AC9FC00C4F49D /* LocationRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LocationRepository.swift; path = WeatherAlarm/Repository/LocationRepository.swift; sourceTree = SOURCE_ROOT; };
 		2A874076228ACA1D00C4F49D /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Config.swift; path = WeatherAlarm/Entity/Config.swift; sourceTree = SOURCE_ROOT; };
@@ -61,6 +60,7 @@
 		5C51872122C2D94F007D2B44 /* AlarmRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmRepositoryProtocol.swift; sourceTree = "<group>"; };
 		5C51872322C2DC6E007D2B44 /* CacheDataAccessorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheDataAccessorProtocol.swift; sourceTree = "<group>"; };
 		5C51872522C2DD86007D2B44 /* CacheDataAccessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheDataAccessor.swift; sourceTree = "<group>"; };
+		5C51872722C3BBF9007D2B44 /* ConfigRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigRepositoryProtocol.swift; sourceTree = "<group>"; };
 		5C71ED7E222AB190002CD717 /* Alarm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alarm.swift; sourceTree = "<group>"; };
 		5C71ED83222ACC97002CD717 /* AlarmUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmUseCase.swift; sourceTree = "<group>"; };
 		5C85DDB4226337AB00A90CAF /* NetworkChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkChecker.swift; sourceTree = "<group>"; };
@@ -147,6 +147,7 @@
 				5C51871F22C2D912007D2B44 /* SetAlarmUseCase.swift */,
 				5C51872122C2D94F007D2B44 /* AlarmRepositoryProtocol.swift */,
 				5C51872322C2DC6E007D2B44 /* CacheDataAccessorProtocol.swift */,
+				5C51872722C3BBF9007D2B44 /* ConfigRepositoryProtocol.swift */,
 			);
 			path = Alarm;
 			sourceTree = "<group>";
@@ -167,7 +168,6 @@
 			children = (
 				5C51871E22C2D8EC007D2B44 /* Alarm */,
 				5C71ED83222ACC97002CD717 /* AlarmUseCase.swift */,
-				2A874070228AC9A200C4F49D /* ConfigUseCase.swift */,
 				5CE966492231644900263A2D /* WeatherUseCase.swift */,
 			);
 			path = UseCase;
@@ -445,6 +445,7 @@
 				5CE9664C2231663B00263A2D /* GeoLocation.swift in Sources */,
 				2A874073228AC9DC00C4F49D /* LocationAgreementViewController.swift in Sources */,
 				5C85DDB5226337AB00A90CAF /* NetworkChecker.swift in Sources */,
+				5C51872822C3BBFA007D2B44 /* ConfigRepositoryProtocol.swift in Sources */,
 				2A874077228ACA1D00C4F49D /* Config.swift in Sources */,
 				CCD8F966217B69BC00C4B00F /* AlarmViewController.swift in Sources */,
 				B1096A2822BF6DD400229B7D /* SoundTableViewCell.swift in Sources */,
@@ -460,7 +461,6 @@
 				CCBC344F211F495600BF6E6D /* AppDelegate.swift in Sources */,
 				5C51872222C2D94F007D2B44 /* AlarmRepositoryProtocol.swift in Sources */,
 				2A874075228AC9FC00C4F49D /* LocationRepository.swift in Sources */,
-				2A874071228AC9A200C4F49D /* ConfigUseCase.swift in Sources */,
 				5C51872422C2DC6E007D2B44 /* CacheDataAccessorProtocol.swift in Sources */,
 				5C71ED7F222AB190002CD717 /* Alarm.swift in Sources */,
 				5CE966452231633700263A2D /* Weather.swift in Sources */,

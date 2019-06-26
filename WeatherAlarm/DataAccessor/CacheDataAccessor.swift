@@ -9,7 +9,6 @@
 import Foundation
 
 class CacheDataAccessor: CacheDataAccessorProtocol {
-    
     func loadAlarm(weather: Weather.Condition) -> Alarm? {
         //loadできなかった場合はnilが返るようにします
         var alarm: Alarm?
@@ -27,10 +26,34 @@ class CacheDataAccessor: CacheDataAccessorProtocol {
         do {
             //alarmsを保存するためアーカイブ
             let archiveData = try NSKeyedArchiver.archivedData(withRootObject: alarm, requiringSecureCoding: true)
-            //アーカイブしたalarmsをUserDefaultsに保存
+            //アーカイブしたalarmをUserDefaultsに保存
             UserDefaults.standard.set(archiveData, forKey: weather.rawValue)
         } catch {
             print(error)
         }
     }
+    
+    func loadConfig() -> Config? {
+        var config: Config?
+        if let loadedData = UserDefaults().data(forKey: "config") {
+            do {
+                config = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(loadedData) as? Config
+            } catch {
+                print("Load failed")
+            }
+        }
+        return config
+    }
+    
+    func saveConfig(config: Config) {
+        do {
+            //alarmsを保存するためアーカイブ
+            let archiveData = try NSKeyedArchiver.archivedData(withRootObject: config, requiringSecureCoding: true)
+            //アーカイブしたconfigをUserDefaultsに保存
+            UserDefaults.standard.set(archiveData, forKey: "config")
+        } catch {
+            print(error)
+        }
+    }
+    
 }

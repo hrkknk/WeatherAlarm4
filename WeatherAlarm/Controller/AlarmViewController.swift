@@ -18,10 +18,9 @@ class AlarmViewController: UIViewController {
     
     private let setAlarmUseCase: SetAlarmUseCse
         = SetAlarmUseCse(alarmRepository: AlarmRepository.sharedInstance,
+                         configRepository: ConfigRepository.sharedInstance,
                          cacheDataAccessor: CacheDataAccessor())
     
-    private let configRepository: ConfigRepository = ConfigRepository.sharedInstance
-
     @IBAction func setSunnyAlarm(_ sender: UIDatePicker) {
         setAlarmUseCase.updateAlarmTime(weather: Weather.Condition.sunny, dateTime: sender.date)
     }
@@ -31,7 +30,7 @@ class AlarmViewController: UIViewController {
     }
     
     @IBAction func changeSnoozeOnOff(_ sender: UISwitch) {
-        configRepository.setSnoozeOn(isSnoozeOn: sender.isOn)
+        setAlarmUseCase.setSnooze(isSnoozeOn: sender.isOn)
     }
     
     @IBAction func standbyAlarm(_ sender: UIButton) {
