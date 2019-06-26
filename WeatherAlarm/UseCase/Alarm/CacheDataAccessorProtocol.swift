@@ -11,4 +11,6 @@ import Foundation
 protocol CacheDataAccessorProtocol {
     func loadAlarm(weather: Weather.Condition) -> Alarm?
     func saveAlarm(weather: Weather.Condition, alarm: Alarm)
+    func loadConfig() -> Config?
+    func saveConfig(config: Config)
 }

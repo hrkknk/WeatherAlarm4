@@ -7,35 +7,19 @@
 //
 
 import Foundation
-class ConfigRepository: NSObject, NSSecureCoding {
+class ConfigRepository: NSObject, ConfigRepositoryProtocol {
     static let sharedInstance: ConfigRepository = ConfigRepository()
-    
-    static var supportsSecureCoding: Bool = true
-    
-    private var isSnoozeOn: Bool = false
-    
-    func encode(with aCoder: NSCoder) {
-        aCoder.encode(isSnoozeOn, forKey: "isSnoozeOn")
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        self.isSnoozeOn = (aDecoder.decodeObject(forKey: "isSnoozeOn") as! Bool)
-    }
+    private var config: Config
     
     private override init() {
-        self.isSnoozeOn = false
+        self.config = Config()
     }
     
-    func setSnoozeOn(isSnoozeOn: Bool) {
-        self.isSnoozeOn = isSnoozeOn
-        //TODO: save
+    func getConfig() -> Config {
+        return self.config
     }
     
-    func getSnoozeOn() -> Bool {
-        return self.isSnoozeOn
-    }
-    
-    func loadConfig() {
-        //TODO: load
+    func setConfig(config: Config) {
+        self.config = config
     }
 }

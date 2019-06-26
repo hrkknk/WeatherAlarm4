@@ -9,21 +9,19 @@
 import Foundation
 
 class Config: NSObject, NSSecureCoding {
-    static let sharedInstance: Config = Config()
-    
     static var supportsSecureCoding: Bool = true
     
-    var isSnoozeOn: Bool?
+    var isSnoozeOn: Bool
     
     func encode(with aCoder: NSCoder) {
         aCoder.encode(isSnoozeOn, forKey: "isSnoozeOn")
     }
     
     required init?(coder aDecoder: NSCoder) {
-        self.isSnoozeOn = (aDecoder.decodeObject(forKey: "isSnoozeOn") as? Bool)
+        self.isSnoozeOn = (aDecoder.decodeObject(forKey: "isSnoozeOn") as? Bool) ?? false
     }
     
-    private override init() {
+    override init() {
         self.isSnoozeOn = false
     }
 }

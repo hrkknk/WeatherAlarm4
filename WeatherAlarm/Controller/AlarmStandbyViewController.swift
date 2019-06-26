@@ -156,7 +156,7 @@ class AlarmStandbyViewController: UIViewController, LocationRepositoryDelegate {
             alarmingLocation.text = weatherCondition == Weather.Condition.unsure ? "" : weather.place!
             
             //スヌーズONの場合はもう一度カウント
-            if(configRepository.getSnoozeOn()) {
+            if(configRepository.getConfig().isSnoozeOn) {
                 self.snoozeAlarmButton.isHidden = false
                 self.snoozeAlarmButton.isEnabled = true
                 self.snoozeAlarmButton.setTitle("SNOOZE", for: .normal)

@@ -10,11 +10,14 @@ import Foundation
 
 class SetAlarmUseCse {
     private var alarmRepository: AlarmRepositoryProtocol
+    private var configRepository: ConfigRepositoryProtocol
     private var cacheDataAccessor: CacheDataAccessorProtocol
     
     init(alarmRepository: AlarmRepositoryProtocol,
+         configRepository: ConfigRepositoryProtocol,
          cacheDataAccessor: CacheDataAccessorProtocol) {
         self.alarmRepository = alarmRepository
+        self.configRepository = configRepository
         self.cacheDataAccessor = cacheDataAccessor
     }
     
@@ -42,5 +45,13 @@ class SetAlarmUseCse {
         alarmRepository.setAlarm(weather: weather, alarm: alarm)
         //アラーム時刻が更新されるたびにキャッシュも更新します
         cacheDataAccessor.saveAlarm(weather: weather, alarm: alarm)
+    }
+    
+    func setSnooze(isSnoozeOn: Bool) {
+        let config = configRepository.getConfig()
+        config.isSnoozeOn = isSnoozeOn
+        configRepository.setConfig(config: config)
+        //snooze設定が切り替えられるたびにキャッシュも更新します
+        cacheDataAccessor.saveConfig(config: config)
     }
 }
