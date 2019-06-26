@@ -16,21 +16,21 @@ class AlarmViewController: UIViewController {
     @IBOutlet weak var rainyAlarmDatePicker: UIDatePicker!
     @IBOutlet weak var selectedSoundName: UILabel!
     
-    private let setAlarmUseCase: SetAlarmUseCse
-        = SetAlarmUseCse(alarmRepository: AlarmRepository.sharedInstance,
+    private let alarmSetUseCase: AlarmSetUseCse
+        = AlarmSetUseCse(alarmRepository: AlarmRepository.sharedInstance,
                          configRepository: ConfigRepository.sharedInstance,
                          cacheDataAccessor: CacheDataAccessor())
     
     @IBAction func setSunnyAlarm(_ sender: UIDatePicker) {
-        setAlarmUseCase.updateAlarmTime(weather: Weather.Condition.sunny, dateTime: sender.date)
+        alarmSetUseCase.updateAlarmTime(weather: Weather.Condition.sunny, dateTime: sender.date)
     }
     
     @IBAction func setRainyAlarm(_ sender: UIDatePicker) {
-        setAlarmUseCase.updateAlarmTime(weather: Weather.Condition.rainy, dateTime: sender.date)
+        alarmSetUseCase.updateAlarmTime(weather: Weather.Condition.rainy, dateTime: sender.date)
     }
     
     @IBAction func changeSnoozeOnOff(_ sender: UISwitch) {
-        setAlarmUseCase.setSnooze(isSnoozeOn: sender.isOn)
+        alarmSetUseCase.setSnooze(isSnoozeOn: sender.isOn)
     }
     
     @IBAction func standbyAlarm(_ sender: UIButton) {
@@ -54,11 +54,11 @@ class AlarmViewController: UIViewController {
         self.rainyAlarmDatePicker.setValue(UIColor.white, forKey: "textColor")
         
         //前回保存したデータのロード
-        setAlarmUseCase.loadCache()
+        alarmSetUseCase.loadCache()
         
         //アラーム設定時刻の初期表示
-        self.sunnyAlarmDatePicker.date = setAlarmUseCase.getAlarmTime(weather: Weather.Condition.sunny)
-        self.sunnyAlarmDatePicker.date = setAlarmUseCase.getAlarmTime(weather: Weather.Condition.rainy)
+        self.sunnyAlarmDatePicker.date = alarmSetUseCase.getAlarmTime(weather: Weather.Condition.sunny)
+        self.sunnyAlarmDatePicker.date = alarmSetUseCase.getAlarmTime(weather: Weather.Condition.rainy)
     }
     
     override func viewWillAppear(_ animated: Bool) {

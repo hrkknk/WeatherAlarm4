@@ -8,7 +8,7 @@
 
 import Foundation
 
-class SetAlarmUseCse {
+class AlarmSetUseCse {
     private var alarmRepository: AlarmRepositoryProtocol
     private var configRepository: ConfigRepositoryProtocol
     private var cacheDataAccessor: CacheDataAccessorProtocol
