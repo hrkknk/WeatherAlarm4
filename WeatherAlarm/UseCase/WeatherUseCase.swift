@@ -7,10 +7,7 @@
 //
 
 class WeatherUseCase {
-    static func getWeatherCondition(weatherId: String?) -> Weather.Condition {
-        if weatherId == nil {
-            return Weather.Condition.unsure
-        }
+    static func getWeathaerCondition(weatherId: String?) -> Weather.Condition {
         
         // id 2xx, 3xx, 4xx, 5xx and 6xx are 'Rainy'
         // https://openweathermap.org/weather-conditions
@@ -23,27 +20,5 @@ class WeatherUseCase {
         }
         // otherwise 'Sunny'
         return Weather.Condition.sunny
-    }
-    
-    static func getWeatherText(weatherCondition: Weather.Condition) -> String {
-        switch (weatherCondition) {
-        case Weather.Condition.sunny:
-            return "Sunny"
-        case Weather.Condition.rainy:
-            return "Rainy"
-        default:
-            return "Unsure"
-        }
-    }
-    
-    static func getWeatherTextColor(weatherCondition: Weather.Condition) -> (red: Int, green: Int, blue: Int) {
-        switch (weatherCondition) {
-        case Weather.Condition.sunny:
-            return (255, 181, 30)
-        case Weather.Condition.rainy:
-            return (10, 132, 255)
-        default:
-            return (255, 255, 255)
-        }
     }
 }

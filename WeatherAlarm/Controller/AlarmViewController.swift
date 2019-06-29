@@ -11,15 +11,16 @@ import CoreLocation
 
 class AlarmViewController: UIViewController {
     
+    //MARK: - Properties
+    private let alarmSetUseCase: AlarmSetUseCse
+        = AlarmSetUseCse(alarmRepository: AlarmRepository.sharedInstance,
+                         configRepository: ConfigRepository.sharedInstance,
+                         cacheDataAccessor: CacheDataAccessor.sharedInstance)
+    
     //MARK: - Outlets
     @IBOutlet weak var sunnyAlarmDatePicker: UIDatePicker!
     @IBOutlet weak var rainyAlarmDatePicker: UIDatePicker!
     @IBOutlet weak var selectedSoundName: UILabel!
-    
-    private let alarmSetUseCase: AlarmSetUseCse
-        = AlarmSetUseCse(alarmRepository: AlarmRepository.sharedInstance,
-                         configRepository: ConfigRepository.sharedInstance,
-                         cacheDataAccessor: CacheDataAccessor())
     
     @IBAction func setSunnyAlarm(_ sender: UIDatePicker) {
         alarmSetUseCase.updateAlarmTime(weather: Weather.Condition.sunny, dateTime: sender.date)

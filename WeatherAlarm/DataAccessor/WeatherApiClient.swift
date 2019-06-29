@@ -9,7 +9,7 @@
 import Alamofire
 import SwiftyJSON
 
-class WeatherApiClient: NSObject {
+class WeatherApiClient: NSObject, WeatherDataAccessorProtocol {
     static let sharedInstance: WeatherApiClient = WeatherApiClient()
     
     private let weatherUrl = "http://api.openweathermap.org/data/2.5/weather"
@@ -35,7 +35,8 @@ class WeatherApiClient: NSObject {
                 print(responseJson)
                 
                 if responseJson["cod"] == 200 {
-                    weather.id = responseJson["weather"][0]["id"].stringValue
+                    let weatherId = responseJson["weather"][0]["id"].stringValue
+                    weather.condition = self.getWethaerCondition(weatherId: weatherId)
                     weather.description = responseJson["weather"][0]["description"].stringValue
                     weather.place = responseJson["name"].stringValue
                 } else {
@@ -50,5 +51,19 @@ class WeatherApiClient: NSObject {
         semaphore.wait()
         
         return weather
+    }
+    
+    private func getWethaerCondition(weatherId: String?) -> Weather.Condition? {
+        // id 2xx, 3xx, 4xx, 5xx and 6xx are 'Rainy'
+        // https://openweathermap.org/weather-conditions
+        if weatherId!.hasPrefix("2") ||
+            weatherId!.hasPrefix("3") ||
+            weatherId!.hasPrefix("4") ||
+            weatherId!.hasPrefix("5") ||
+            weatherId!.hasPrefix("6") {
+            return Weather.Condition.rainy
+        }
+        // otherwise 'Sunny'
+        return Weather.Condition.sunny
     }
 }

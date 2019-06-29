@@ -8,8 +8,12 @@
 
 import Reachability
 
-class NetworkChecker {
-    static func reachable() -> Bool {
+class NetworkChecker: NetworkCheckerProtocol {
+    static let sharedInstance: NetworkChecker = NetworkChecker()
+    
+    private init() { }
+    
+    func checkAvailable() -> Bool {
         if let reachability = Reachability() {
             print("Reachability.connection : \(reachability.connection)")
             return reachability.connection != .none

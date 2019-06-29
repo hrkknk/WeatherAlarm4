@@ -10,8 +10,10 @@ import Foundation
 
 class AlarmRepository: NSObject, AlarmRepositoryProtocol {
     static let sharedInstance: AlarmRepository = AlarmRepository()
-    private var alarms: Dictionary = [Weather.Condition.sunny.rawValue: AlarmUseCase.createAlarm(),
-                                      Weather.Condition.rainy.rawValue: AlarmUseCase.createAlarm()]
+    private var alarms: Dictionary = [Weather.Condition.sunny.rawValue: Alarm(),
+                                      Weather.Condition.rainy.rawValue: Alarm()]
+    
+    private override init() { }
     
     func setAlarm(weather: Weather.Condition, alarm: Alarm) {
         alarms[weather.rawValue] = alarm
@@ -21,37 +23,36 @@ class AlarmRepository: NSObject, AlarmRepositoryProtocol {
         return alarms[weather.rawValue]!
     }
     
-    func containsAlarms(status: Alarm.Status) -> Bool {
-        for alarm in alarms {
-            if alarm.value.status == status {
-                return true
+    func getNotTriedAlarms() -> [Alarm] {
+        var results = [Alarm]()
+        for weather in Weather.Condition.allCases {
+            let alarm = alarms[weather.rawValue]!
+            if alarm.isTried {
+                results.append(alarm)
             }
         }
-        return false
+        return results
     }
     
-    func updateAllAlarmStatus() {
-        for alarm in alarms {
-            let _ = AlarmUseCase.changeStatusIfTimeHasCome(alarm: alarm.value)
-        }
-    }
-    
-    func getTimeComingWeatherAlarm() -> (weather: Weather.Condition, alarm: Alarm)? {
-        for alarm in alarms {
-            if alarm.value.status == Alarm.Status.timeHasCome {
-                // enum変換できない謎のkeyだったらunsureとして扱う
-                let weatherCondition = Weather.Condition(rawValue: alarm.key) ?? Weather.Condition.unsure
-                // 仮にtimeHasComeなアラームが複数あったとしても、鳴らすのは1つなので最初に見つかったものだけ返す
-                return (weatherCondition, alarm.value)
+    func getRingTimingAlarms(dateTime: Date) -> [Alarm] {
+        var results = [Alarm]()
+        for weather in Weather.Condition.allCases {
+            let alarm = alarms[weather.rawValue]!
+            if alarm.isRingTime(dateTime: dateTime) {
+                results.append(alarm)
             }
         }
-        return nil
+        return results
     }
     
-    func snoozeAllAlarms(addSeconds: Int) {
-        for var alarm in alarms {
-            AlarmUseCase.startSnooze(alarm: &alarm.value, addSeconds: addSeconds)
-            alarms[alarm.key] = alarm.value
+    func getRangAlarms() -> [Alarm] {
+        var results = [Alarm]()
+        for weather in Weather.Condition.allCases {
+            let alarm = alarms[weather.rawValue]!
+            if alarm.isRang {
+                results.append(alarm)
+            }
         }
+        return results
     }
 }

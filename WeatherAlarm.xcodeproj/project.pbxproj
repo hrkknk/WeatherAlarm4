@@ -15,13 +15,16 @@
 		5C51872422C2DC6E007D2B44 /* CacheDataAccessorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C51872322C2DC6E007D2B44 /* CacheDataAccessorProtocol.swift */; };
 		5C51872622C2DD86007D2B44 /* CacheDataAccessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C51872522C2DD86007D2B44 /* CacheDataAccessor.swift */; };
 		5C51872822C3BBFA007D2B44 /* ConfigRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C51872722C3BBF9007D2B44 /* ConfigRepositoryProtocol.swift */; };
+		5C51872A22C3C306007D2B44 /* AlarmStandbyUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C51872922C3C306007D2B44 /* AlarmStandbyUseCase.swift */; };
+		5C51872C22C3C6C9007D2B44 /* SoundPlayerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C51872B22C3C6C9007D2B44 /* SoundPlayerProtocol.swift */; };
+		5C51872E22C3C7E5007D2B44 /* SoundPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C51872D22C3C7E5007D2B44 /* SoundPlayer.swift */; };
+		5C51873022C3CDD4007D2B44 /* WeatherDataAccessorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C51872F22C3CDD4007D2B44 /* WeatherDataAccessorProtocol.swift */; };
+		5C51873222C3CF00007D2B44 /* NetworkCheckerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C51873122C3CF00007D2B44 /* NetworkCheckerProtocol.swift */; };
 		5C71ED7F222AB190002CD717 /* Alarm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C71ED7E222AB190002CD717 /* Alarm.swift */; };
-		5C71ED84222ACC97002CD717 /* AlarmUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C71ED83222ACC97002CD717 /* AlarmUseCase.swift */; };
 		5C85DDB5226337AB00A90CAF /* NetworkChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C85DDB4226337AB00A90CAF /* NetworkChecker.swift */; };
 		5CAE5C8B222BDD65009EE0FB /* AlarmRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CAE5C8A222BDD65009EE0FB /* AlarmRepository.swift */; };
 		5CE966452231633700263A2D /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE966442231633700263A2D /* Weather.swift */; };
 		5CE966482231643000263A2D /* WeatherApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE966472231643000263A2D /* WeatherApiClient.swift */; };
-		5CE9664A2231644900263A2D /* WeatherUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE966492231644900263A2D /* WeatherUseCase.swift */; };
 		5CE9664C2231663B00263A2D /* GeoLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE9664B2231663B00263A2D /* GeoLocation.swift */; };
 		B1096A2422BF6D2000229B7D /* SoundTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1096A2322BF6D2000229B7D /* SoundTableViewController.swift */; };
 		B1096A2822BF6DD400229B7D /* SoundTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1096A2722BF6DD400229B7D /* SoundTableViewCell.swift */; };
@@ -61,13 +64,16 @@
 		5C51872322C2DC6E007D2B44 /* CacheDataAccessorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheDataAccessorProtocol.swift; sourceTree = "<group>"; };
 		5C51872522C2DD86007D2B44 /* CacheDataAccessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheDataAccessor.swift; sourceTree = "<group>"; };
 		5C51872722C3BBF9007D2B44 /* ConfigRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigRepositoryProtocol.swift; sourceTree = "<group>"; };
+		5C51872922C3C306007D2B44 /* AlarmStandbyUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmStandbyUseCase.swift; sourceTree = "<group>"; };
+		5C51872B22C3C6C9007D2B44 /* SoundPlayerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundPlayerProtocol.swift; sourceTree = "<group>"; };
+		5C51872D22C3C7E5007D2B44 /* SoundPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundPlayer.swift; sourceTree = "<group>"; };
+		5C51872F22C3CDD4007D2B44 /* WeatherDataAccessorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherDataAccessorProtocol.swift; sourceTree = "<group>"; };
+		5C51873122C3CF00007D2B44 /* NetworkCheckerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkCheckerProtocol.swift; sourceTree = "<group>"; };
 		5C71ED7E222AB190002CD717 /* Alarm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alarm.swift; sourceTree = "<group>"; };
-		5C71ED83222ACC97002CD717 /* AlarmUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmUseCase.swift; sourceTree = "<group>"; };
 		5C85DDB4226337AB00A90CAF /* NetworkChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkChecker.swift; sourceTree = "<group>"; };
 		5CAE5C8A222BDD65009EE0FB /* AlarmRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmRepository.swift; sourceTree = "<group>"; };
 		5CE966442231633700263A2D /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
 		5CE966472231643000263A2D /* WeatherApiClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherApiClient.swift; sourceTree = "<group>"; };
-		5CE966492231644900263A2D /* WeatherUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherUseCase.swift; sourceTree = "<group>"; };
 		5CE9664B2231663B00263A2D /* GeoLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoLocation.swift; sourceTree = "<group>"; };
 		B1096A2322BF6D2000229B7D /* SoundTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundTableViewController.swift; sourceTree = "<group>"; };
 		B1096A2722BF6DD400229B7D /* SoundTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundTableViewCell.swift; sourceTree = "<group>"; };
@@ -141,15 +147,17 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
-		5C51871E22C2D8EC007D2B44 /* Alarm */ = {
+		5C51873322C6F30A007D2B44 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
-				5C51871F22C2D912007D2B44 /* AlarmSetUseCase.swift */,
 				5C51872122C2D94F007D2B44 /* AlarmRepositoryProtocol.swift */,
 				5C51872322C2DC6E007D2B44 /* CacheDataAccessorProtocol.swift */,
 				5C51872722C3BBF9007D2B44 /* ConfigRepositoryProtocol.swift */,
+				5C51872B22C3C6C9007D2B44 /* SoundPlayerProtocol.swift */,
+				5C51873122C3CF00007D2B44 /* NetworkCheckerProtocol.swift */,
+				5C51872F22C3CDD4007D2B44 /* WeatherDataAccessorProtocol.swift */,
 			);
-			path = Alarm;
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 		5C71ED7D222AB03E002CD717 /* Entity */ = {
@@ -166,9 +174,9 @@
 		5C71ED82222AB6D9002CD717 /* UseCase */ = {
 			isa = PBXGroup;
 			children = (
-				5C51871E22C2D8EC007D2B44 /* Alarm */,
-				5C71ED83222ACC97002CD717 /* AlarmUseCase.swift */,
-				5CE966492231644900263A2D /* WeatherUseCase.swift */,
+				5C51873322C6F30A007D2B44 /* Protocols */,
+				5C51871F22C2D912007D2B44 /* AlarmSetUseCase.swift */,
+				5C51872922C3C306007D2B44 /* AlarmStandbyUseCase.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -189,6 +197,7 @@
 				5CE966472231643000263A2D /* WeatherApiClient.swift */,
 				5C85DDB4226337AB00A90CAF /* NetworkChecker.swift */,
 				5C51872522C2DD86007D2B44 /* CacheDataAccessor.swift */,
+				5C51872D22C3C7E5007D2B44 /* SoundPlayer.swift */,
 			);
 			path = DataAccessor;
 			sourceTree = "<group>";
@@ -442,28 +451,31 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5C51872E22C3C7E5007D2B44 /* SoundPlayer.swift in Sources */,
 				5CE9664C2231663B00263A2D /* GeoLocation.swift in Sources */,
 				2A874073228AC9DC00C4F49D /* LocationAgreementViewController.swift in Sources */,
 				5C85DDB5226337AB00A90CAF /* NetworkChecker.swift in Sources */,
 				5C51872822C3BBFA007D2B44 /* ConfigRepositoryProtocol.swift in Sources */,
+				5C51872C22C3C6C9007D2B44 /* SoundPlayerProtocol.swift in Sources */,
 				2A874077228ACA1D00C4F49D /* Config.swift in Sources */,
+				5C51872A22C3C306007D2B44 /* AlarmStandbyUseCase.swift in Sources */,
 				CCD8F966217B69BC00C4B00F /* AlarmViewController.swift in Sources */,
 				B1096A2822BF6DD400229B7D /* SoundTableViewCell.swift in Sources */,
 				CCC48A4C22633A3D00BE07FC /* ConfigRepository.swift in Sources */,
 				5C51872022C2D912007D2B44 /* AlarmSetUseCase.swift in Sources */,
-				5C71ED84222ACC97002CD717 /* AlarmUseCase.swift in Sources */,
 				5C51872622C2DD86007D2B44 /* CacheDataAccessor.swift in Sources */,
 				5CE966482231643000263A2D /* WeatherApiClient.swift in Sources */,
-				5CE9664A2231644900263A2D /* WeatherUseCase.swift in Sources */,
 				CC3C007421DF62CF0081B8CD /* AlarmStandbyViewController.swift in Sources */,
 				B1096A2422BF6D2000229B7D /* SoundTableViewController.swift in Sources */,
 				5CAE5C8B222BDD65009EE0FB /* AlarmRepository.swift in Sources */,
 				CCBC344F211F495600BF6E6D /* AppDelegate.swift in Sources */,
+				5C51873222C3CF00007D2B44 /* NetworkCheckerProtocol.swift in Sources */,
 				5C51872222C2D94F007D2B44 /* AlarmRepositoryProtocol.swift in Sources */,
 				2A874075228AC9FC00C4F49D /* LocationRepository.swift in Sources */,
 				5C51872422C2DC6E007D2B44 /* CacheDataAccessorProtocol.swift in Sources */,
 				5C71ED7F222AB190002CD717 /* Alarm.swift in Sources */,
 				5CE966452231633700263A2D /* Weather.swift in Sources */,
+				5C51873022C3CDD4007D2B44 /* WeatherDataAccessorProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
