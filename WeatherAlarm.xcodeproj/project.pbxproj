@@ -147,19 +147,17 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
-		5C51871E22C2D8EC007D2B44 /* Alarm */ = {
+		5C51873322C6F30A007D2B44 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
-				5C51871F22C2D912007D2B44 /* AlarmSetUseCase.swift */,
-				5C51872922C3C306007D2B44 /* AlarmStandbyUseCase.swift */,
 				5C51872122C2D94F007D2B44 /* AlarmRepositoryProtocol.swift */,
 				5C51872322C2DC6E007D2B44 /* CacheDataAccessorProtocol.swift */,
 				5C51872722C3BBF9007D2B44 /* ConfigRepositoryProtocol.swift */,
 				5C51872B22C3C6C9007D2B44 /* SoundPlayerProtocol.swift */,
-				5C51872F22C3CDD4007D2B44 /* WeatherDataAccessorProtocol.swift */,
 				5C51873122C3CF00007D2B44 /* NetworkCheckerProtocol.swift */,
+				5C51872F22C3CDD4007D2B44 /* WeatherDataAccessorProtocol.swift */,
 			);
-			path = Alarm;
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 		5C71ED7D222AB03E002CD717 /* Entity */ = {
@@ -176,7 +174,9 @@
 		5C71ED82222AB6D9002CD717 /* UseCase */ = {
 			isa = PBXGroup;
 			children = (
-				5C51871E22C2D8EC007D2B44 /* Alarm */,
+				5C51873322C6F30A007D2B44 /* Protocols */,
+				5C51871F22C2D912007D2B44 /* AlarmSetUseCase.swift */,
+				5C51872922C3C306007D2B44 /* AlarmStandbyUseCase.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
