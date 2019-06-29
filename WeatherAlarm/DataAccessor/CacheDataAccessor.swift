@@ -9,6 +9,10 @@
 import Foundation
 
 class CacheDataAccessor: CacheDataAccessorProtocol {
+    static let sharedInstance: CacheDataAccessor = CacheDataAccessor()
+    
+    private init() { }
+    
     func loadAlarm(weather: Weather.Condition) -> Alarm? {
         //loadできなかった場合はnilが返るようにします
         var alarm: Alarm?
