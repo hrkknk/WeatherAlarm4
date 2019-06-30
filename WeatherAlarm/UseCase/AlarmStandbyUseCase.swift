@@ -13,15 +13,26 @@ class AlarmStandbyUseCase {
     private var soundPlayer: SoundPlayerProtocol
     private var networkChecker: NetworkCheckerProtocol
     private var weatherDataAccessor: WeatherDataAccessorProtocol
+    private var locationRepository: LocationRepositoryProtocol
     
     init(alarmRepository: AlarmRepositoryProtocol,
          soundPlayer: SoundPlayerProtocol,
          networkChecker: NetworkCheckerProtocol,
-         weatherDataAccessor: WeatherDataAccessorProtocol) {
+         weatherDataAccessor: WeatherDataAccessorProtocol,
+         locationRepository: LocationRepositoryProtocol) {
         self.alarmRepository = alarmRepository
         self.soundPlayer = soundPlayer
         self.networkChecker = networkChecker
         self.weatherDataAccessor = weatherDataAccessor
+        self.locationRepository = locationRepository
+    }
+    
+    func startStandby(){
+        locationRepository.startUpdatingLocation()
+    }
+    
+    func stopStandby(){
+        locationRepository.stopUpdatingLocation()
     }
     
     func getAlarmTimeAsString(weather: Weather.Condition) -> String {
@@ -77,12 +88,14 @@ class AlarmStandbyUseCase {
         }
         
         //天気情報取得のためには位置情報が必要なのでその取得
-        let geoLocation = GeoLocation()
-        //geoLocation.latitude = latitude
-        //geoLocation.longitude = longitude
+        let location = locationRepository.getLocation()
+        if location == nil || location?.latitude == nil || location?.longitude == nil {
+            print("'\(weather.rawValue)' alarming because location unknown.")
+            return soundPlayer.playAlarmSound(alarm: alarm)
+        }
         
         //天気情報取得
-        let weatherData = weatherDataAccessor.getWeather(geoLocation: geoLocation)
+        let weatherData = weatherDataAccessor.getWeather(geoLocation: location!)
         
         // 天気が一致する場合は鳴らす
         if weatherData.condition == weather {

@@ -9,21 +9,18 @@
 import UIKit
 import CoreLocation
 
-class AlarmStandbyViewController: UIViewController, LocationRepositoryDelegate {
+class AlarmStandbyViewController: UIViewController {
     
     //MARK: - Properties
     private let alarmStandbyUseCase: AlarmStandbyUseCase
         = AlarmStandbyUseCase(alarmRepository: AlarmRepository.sharedInstance,
                               soundPlayer: SoundPlayer.sharedInstance,
                               networkChecker: NetworkChecker.sharedInstance,
-                              weatherDataAccessor: WeatherApiClient.sharedInstance)
+                              weatherDataAccessor: WeatherApiClient.sharedInstance,
+                              locationRepository: LocationRepository.sharedInstance)
     
-    private let configRepository: ConfigRepository = ConfigRepository.sharedInstance
-    private let locationRepository: LocationRepository = LocationRepository.sharedInstance
+    private let configRepository = ConfigRepository.sharedInstance
     private var timer: Timer?
-    
-    var latitude: String?
-    var longitude: String?
 
     //MARK: - Outlets
     @IBOutlet weak var sunnyAlarmTime: UILabel!
@@ -66,31 +63,14 @@ class AlarmStandbyViewController: UIViewController, LocationRepositoryDelegate {
         self.stopAlarmButton.isHidden = true
         self.snoozeAlarmButton.isHidden = true
         self.alarmingView.isHidden = true
-
-        // 位置情報取得のためのデリゲート
-        locationRepository.delegate = self
-        locationRepository.startUpdatingLocation()
         
         //設定したアラーム時刻を表示
         sunnyAlarmTime.text = alarmStandbyUseCase.getAlarmTimeAsString(weather: Weather.Condition.sunny)
         rainyAlarmTime.text = alarmStandbyUseCase.getAlarmTimeAsString(weather: Weather.Condition.rainy)
         
+        //スタンバイ開始処理してタイマを起動
+        alarmStandbyUseCase.startStandby()
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(observeAlarmTimer), userInfo: nil, repeats: true)
-    }
-    
-    func setLatitudeAndLongitude() {
-        let currentLocation = LocationRepository.sharedInstance.currentLocation!
-
-        // horizontalAccuracy（水平方向の位置の精度）がマイナスの場合は有効な値でないので切り捨てる
-        if currentLocation.horizontalAccuracy > 0 {
-            print("latitude: \(currentLocation.coordinate.latitude), longitude: \(currentLocation.coordinate.longitude)")
-            latitude = String(currentLocation.coordinate.latitude)
-            longitude = String(currentLocation.coordinate.longitude)
-
-            // 位置情報が取得できたら取得をやめる、電池消耗防止
-            locationRepository.stopUpdatingLocation()
-            locationRepository.delegate = nil
-        }
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -119,12 +99,16 @@ class AlarmStandbyViewController: UIViewController, LocationRepositoryDelegate {
         //アラームが鳴らされた場合
         if (isAlarmed && alarmedWeather != nil) {
             print("'\(alarmedWeather!.rawValue)' alarmed.")
+            //スタンバイ停止
+            alarmStandbyUseCase.startStandby()
             //アラームが鳴ったとき用のviewを表示
             self.stopAlarmButton.isHidden = false
             self.alarmingView.isHidden = false
             self.alarmingWeather.text = getWeatherText(weather: alarmedWeather!)
             //スヌーズONの場合
             if(configRepository.getConfig().isSnoozeOn) {
+                //スタンバイ再開
+                alarmStandbyUseCase.startStandby()
                 self.snoozeAlarmButton.isHidden = false
                 self.snoozeAlarmButton.isEnabled = true
                 self.snoozeAlarmButton.setTitle("SNOOZE", for: .normal)

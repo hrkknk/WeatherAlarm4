@@ -20,6 +20,7 @@
 		5C51872E22C3C7E5007D2B44 /* SoundPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C51872D22C3C7E5007D2B44 /* SoundPlayer.swift */; };
 		5C51873022C3CDD4007D2B44 /* WeatherDataAccessorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C51872F22C3CDD4007D2B44 /* WeatherDataAccessorProtocol.swift */; };
 		5C51873222C3CF00007D2B44 /* NetworkCheckerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C51873122C3CF00007D2B44 /* NetworkCheckerProtocol.swift */; };
+		5C51873522C875F8007D2B44 /* LocationRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C51873422C875F8007D2B44 /* LocationRepositoryProtocol.swift */; };
 		5C71ED7F222AB190002CD717 /* Alarm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C71ED7E222AB190002CD717 /* Alarm.swift */; };
 		5C85DDB5226337AB00A90CAF /* NetworkChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C85DDB4226337AB00A90CAF /* NetworkChecker.swift */; };
 		5CAE5C8B222BDD65009EE0FB /* AlarmRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CAE5C8A222BDD65009EE0FB /* AlarmRepository.swift */; };
@@ -69,6 +70,7 @@
 		5C51872D22C3C7E5007D2B44 /* SoundPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundPlayer.swift; sourceTree = "<group>"; };
 		5C51872F22C3CDD4007D2B44 /* WeatherDataAccessorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherDataAccessorProtocol.swift; sourceTree = "<group>"; };
 		5C51873122C3CF00007D2B44 /* NetworkCheckerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkCheckerProtocol.swift; sourceTree = "<group>"; };
+		5C51873422C875F8007D2B44 /* LocationRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationRepositoryProtocol.swift; sourceTree = "<group>"; };
 		5C71ED7E222AB190002CD717 /* Alarm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alarm.swift; sourceTree = "<group>"; };
 		5C85DDB4226337AB00A90CAF /* NetworkChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkChecker.swift; sourceTree = "<group>"; };
 		5CAE5C8A222BDD65009EE0FB /* AlarmRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmRepository.swift; sourceTree = "<group>"; };
@@ -156,6 +158,7 @@
 				5C51872B22C3C6C9007D2B44 /* SoundPlayerProtocol.swift */,
 				5C51873122C3CF00007D2B44 /* NetworkCheckerProtocol.swift */,
 				5C51872F22C3CDD4007D2B44 /* WeatherDataAccessorProtocol.swift */,
+				5C51873422C875F8007D2B44 /* LocationRepositoryProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -461,6 +464,7 @@
 				5C51872A22C3C306007D2B44 /* AlarmStandbyUseCase.swift in Sources */,
 				CCD8F966217B69BC00C4B00F /* AlarmViewController.swift in Sources */,
 				B1096A2822BF6DD400229B7D /* SoundTableViewCell.swift in Sources */,
+				5C51873522C875F8007D2B44 /* LocationRepositoryProtocol.swift in Sources */,
 				CCC48A4C22633A3D00BE07FC /* ConfigRepository.swift in Sources */,
 				5C51872022C2D912007D2B44 /* AlarmSetUseCase.swift in Sources */,
 				5C51872622C2DD86007D2B44 /* CacheDataAccessor.swift in Sources */,
