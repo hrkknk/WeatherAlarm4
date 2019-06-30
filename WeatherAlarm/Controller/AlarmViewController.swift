@@ -59,7 +59,7 @@ class AlarmViewController: UIViewController {
         
         //アラーム設定時刻の初期表示
         self.sunnyAlarmDatePicker.date = alarmSetUseCase.getAlarmTime(weather: Weather.Condition.sunny)
-        self.sunnyAlarmDatePicker.date = alarmSetUseCase.getAlarmTime(weather: Weather.Condition.rainy)
+        self.rainyAlarmDatePicker.date = alarmSetUseCase.getAlarmTime(weather: Weather.Condition.rainy)
     }
     
     override func viewWillAppear(_ animated: Bool) {
