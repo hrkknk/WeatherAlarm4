@@ -21,6 +21,7 @@ class SoundPlayer: SoundPlayerProtocol {
         let soundFilePath = Bundle.main.path(forResource: alarm.soundFileName!, ofType: "mp3")!
         do {
             player = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: soundFilePath), fileTypeHint:nil)
+            player?.play()
         } catch {
             print("Failed to create alarm; \(error)")
         }
