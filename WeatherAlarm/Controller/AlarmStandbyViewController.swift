@@ -107,8 +107,6 @@ class AlarmStandbyViewController: UIViewController {
             self.alarmingWeather.text = getWeatherText(weather: alarmedWeather!)
             //スヌーズONの場合
             if(configRepository.getConfig().isSnoozeOn) {
-                //スタンバイ再開
-                alarmStandbyUseCase.startStandby()
                 self.snoozeAlarmButton.isHidden = false
                 self.snoozeAlarmButton.isEnabled = true
                 self.snoozeAlarmButton.setTitle("SNOOZE", for: .normal)

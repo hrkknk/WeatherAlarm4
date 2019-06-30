@@ -28,6 +28,13 @@ class AlarmStandbyUseCase {
     }
     
     func startStandby(){
+        //フラグ系を全てリセット
+        for weather in Weather.Condition.allCases {
+            let alarm = alarmRepository.getAlarm(weather: weather)
+            alarm.isTried = false
+            alarm.isRang = false
+            alarmRepository.setAlarm(weather: weather, alarm: alarm)
+        }
         locationRepository.startUpdatingLocation()
     }
     
@@ -49,6 +56,7 @@ class AlarmStandbyUseCase {
         alarm.isTried = false
         alarm.isRang = false
         alarmRepository.setAlarm(weather: weather, alarm: alarm)
+        locationRepository.startUpdatingLocation()
     }
     
     func tryRingAlarm(weather: Weather.Condition, time: Date) -> Bool {
