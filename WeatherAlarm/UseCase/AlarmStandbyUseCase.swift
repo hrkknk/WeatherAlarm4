@@ -78,20 +78,23 @@ class AlarmStandbyUseCase {
         //トライされていない最後のアラームである場合は天気無関係に鳴らす
         if isLastOne {
             print("'\(weather.rawValue)' alarming because last one.")
-            return soundPlayer.playAlarmSound(alarm: alarm)
+            ringAlarm(weather: weather, alarm: alarm)
+            return true
         }
         
         //通信できない場合は天気情報が取得できないので、トライ中のアラームを鳴らす
         if !networkChecker.checkAvailable() {
             print("'\(weather.rawValue)' alarming because network unavailable.")
-            return soundPlayer.playAlarmSound(alarm: alarm)
+            ringAlarm(weather: weather, alarm: alarm)
+            return true
         }
         
         //天気情報取得のためには位置情報が必要なのでその取得
         let location = locationRepository.getLocation()
         if location == nil || location?.latitude == nil || location?.longitude == nil {
             print("'\(weather.rawValue)' alarming because location unknown.")
-            return soundPlayer.playAlarmSound(alarm: alarm)
+            ringAlarm(weather: weather, alarm: alarm)
+            return true
         }
         
         //天気情報取得
@@ -99,8 +102,15 @@ class AlarmStandbyUseCase {
         
         // 天気が一致する場合は鳴らす
         if weatherData.condition == weather {
-            return soundPlayer.playAlarmSound(alarm: alarm)
+            ringAlarm(weather: weather, alarm: alarm)
+            return true
         }
         return false
+    }
+    
+    private func ringAlarm(weather: Weather.Condition, alarm: Alarm) {
+        soundPlayer.playAlarmSound(alarm: alarm)
+        alarm.isRang = true
+        alarmRepository.setAlarm(weather: weather, alarm: alarm)
     }
 }
