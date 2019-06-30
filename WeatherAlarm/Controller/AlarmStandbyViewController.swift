@@ -100,7 +100,7 @@ class AlarmStandbyViewController: UIViewController {
         if (isAlarmed && alarmedWeather != nil) {
             print("'\(alarmedWeather!.rawValue)' alarmed.")
             //スタンバイ停止
-            alarmStandbyUseCase.startStandby()
+            alarmStandbyUseCase.stopStandby()
             //アラームが鳴ったとき用のviewを表示
             self.stopAlarmButton.isHidden = false
             self.alarmingView.isHidden = false
