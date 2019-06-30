@@ -22,6 +22,7 @@ class AlarmSetUseCse {
     }
     
     func loadCache() {
+        //alarms
         for weather in Weather.Condition.allCases {
             var alarm = cacheDataAccessor.loadAlarm(weather: weather)
             //キャッシュがない or ロード失敗した場合には現在時刻とデフォルト音声で alarm を生成します
@@ -32,6 +33,12 @@ class AlarmSetUseCse {
             }
             alarmRepository.setAlarm(weather: weather, alarm: alarm!)
         }
+        //config
+        var config = cacheDataAccessor.loadConfig()
+        if config == nil {
+            config = Config()
+        }
+        configRepository.setConfig(config: config!)
     }
     
     func getAlarmTime(weather: Weather.Condition) -> Date {
