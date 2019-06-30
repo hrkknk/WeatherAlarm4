@@ -17,8 +17,8 @@ class SoundPlayer: SoundPlayerProtocol {
     
     private init() { }
     
-    func playAlarmSound(alarm: Alarm) {
-        let soundFilePath = Bundle.main.path(forResource: alarm.soundFileName!, ofType: "mp3")!
+    func playSound(fileName: String) {
+        let soundFilePath = Bundle.main.path(forResource: fileName, ofType: "mp3")!
         do {
             player = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: soundFilePath), fileTypeHint:nil)
             player?.play()

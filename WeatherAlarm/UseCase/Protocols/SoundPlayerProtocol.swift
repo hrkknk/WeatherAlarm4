@@ -9,6 +9,6 @@
 import Foundation
 
 protocol SoundPlayerProtocol {
-    func playAlarmSound(alarm: Alarm)
+    func playSound(fileName: String)
     func stop()
 }

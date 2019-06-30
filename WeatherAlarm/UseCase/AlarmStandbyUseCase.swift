@@ -117,7 +117,7 @@ class AlarmStandbyUseCase {
     }
     
     private func ringAlarm(weather: Weather.Condition, alarm: Alarm) {
-        soundPlayer.playAlarmSound(alarm: alarm)
+        soundPlayer.playSound(fileName: alarm.soundFileName!)
         alarm.isRang = true
         alarmRepository.setAlarm(weather: weather, alarm: alarm)
     }
