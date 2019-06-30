@@ -13,15 +13,33 @@ class AlarmStandbyUseCase {
     private var soundPlayer: SoundPlayerProtocol
     private var networkChecker: NetworkCheckerProtocol
     private var weatherDataAccessor: WeatherDataAccessorProtocol
+    private var locationRepository: LocationRepositoryProtocol
     
     init(alarmRepository: AlarmRepositoryProtocol,
          soundPlayer: SoundPlayerProtocol,
          networkChecker: NetworkCheckerProtocol,
-         weatherDataAccessor: WeatherDataAccessorProtocol) {
+         weatherDataAccessor: WeatherDataAccessorProtocol,
+         locationRepository: LocationRepositoryProtocol) {
         self.alarmRepository = alarmRepository
         self.soundPlayer = soundPlayer
         self.networkChecker = networkChecker
         self.weatherDataAccessor = weatherDataAccessor
+        self.locationRepository = locationRepository
+    }
+    
+    func startStandby(){
+        //フラグ系を全てリセット
+        for weather in Weather.Condition.allCases {
+            let alarm = alarmRepository.getAlarm(weather: weather)
+            alarm.isTried = false
+            alarm.isRang = false
+            alarmRepository.setAlarm(weather: weather, alarm: alarm)
+        }
+        locationRepository.startUpdatingLocation()
+    }
+    
+    func stopStandby(){
+        locationRepository.stopUpdatingLocation()
     }
     
     func getAlarmTimeAsString(weather: Weather.Condition) -> String {
@@ -38,6 +56,7 @@ class AlarmStandbyUseCase {
         alarm.isTried = false
         alarm.isRang = false
         alarmRepository.setAlarm(weather: weather, alarm: alarm)
+        locationRepository.startUpdatingLocation()
     }
     
     func tryRingAlarm(weather: Weather.Condition, time: Date) -> Bool {
@@ -67,27 +86,39 @@ class AlarmStandbyUseCase {
         //トライされていない最後のアラームである場合は天気無関係に鳴らす
         if isLastOne {
             print("'\(weather.rawValue)' alarming because last one.")
-            return soundPlayer.playAlarmSound(alarm: alarm)
+            ringAlarm(weather: weather, alarm: alarm)
+            return true
         }
         
         //通信できない場合は天気情報が取得できないので、トライ中のアラームを鳴らす
-        if networkChecker.checkAvailable() {
+        if !networkChecker.checkAvailable() {
             print("'\(weather.rawValue)' alarming because network unavailable.")
-            return soundPlayer.playAlarmSound(alarm: alarm)
+            ringAlarm(weather: weather, alarm: alarm)
+            return true
         }
         
         //天気情報取得のためには位置情報が必要なのでその取得
-        let geoLocation = GeoLocation()
-        //geoLocation.latitude = latitude
-        //geoLocation.longitude = longitude
+        let location = locationRepository.getLocation()
+        if location == nil || location?.latitude == nil || location?.longitude == nil {
+            print("'\(weather.rawValue)' alarming because location unknown.")
+            ringAlarm(weather: weather, alarm: alarm)
+            return true
+        }
         
         //天気情報取得
-        let weatherData = weatherDataAccessor.getWeather(geoLocation: geoLocation)
+        let weatherData = weatherDataAccessor.getWeather(geoLocation: location!)
         
         // 天気が一致する場合は鳴らす
         if weatherData.condition == weather {
-            return soundPlayer.playAlarmSound(alarm: alarm)
+            ringAlarm(weather: weather, alarm: alarm)
+            return true
         }
         return false
+    }
+    
+    private func ringAlarm(weather: Weather.Condition, alarm: Alarm) {
+        soundPlayer.playAlarmSound(alarm: alarm)
+        alarm.isRang = true
+        alarmRepository.setAlarm(weather: weather, alarm: alarm)
     }
 }

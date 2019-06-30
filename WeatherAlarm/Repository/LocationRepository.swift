@@ -13,12 +13,13 @@ protocol LocationRepositoryDelegate {
     func setLatitudeAndLongitude()
 }
 
-class LocationRepository: NSObject, CLLocationManagerDelegate {
+class LocationRepository: NSObject, CLLocationManagerDelegate, LocationRepositoryProtocol {
     static let sharedInstance: LocationRepository = LocationRepository()
     
+    private var location: GeoLocation?
+    
     private var locationManager: CLLocationManager = CLLocationManager()
-    var currentLocation: CLLocation?
-    var delegate: LocationRepositoryDelegate?
+    private var currentLocation: CLLocation?
     
     private override init() {
         super.init()
@@ -39,20 +40,24 @@ class LocationRepository: NSObject, CLLocationManagerDelegate {
         self.locationManager.stopUpdatingLocation()
     }
     
+    func getLocation() -> GeoLocation? {
+        return self.location
+    }
+    
     // MARK: - 位置情報取得
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        self.currentLocation = locations[locations.count - 1]
-        setLatitudeAndLongitude()
+        currentLocation = locations[locations.count - 1]
+        // horizontalAccuracy（水平方向の位置の精度）がマイナスの場合は有効な値でないので切り捨てる
+        if currentLocation!.horizontalAccuracy > 0 {
+            location = GeoLocation()
+            location!.latitude = String(currentLocation!.coordinate.latitude)
+            location!.longitude = String(currentLocation!.coordinate.longitude)
+        }
     }
 
     //MARK: - 位置情報取得エラー時
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print(error)
-    }
-    
-    private func setLatitudeAndLongitude() {
-        guard let delegate = self.delegate else { return }
-        delegate.setLatitudeAndLongitude()
     }
 }
 

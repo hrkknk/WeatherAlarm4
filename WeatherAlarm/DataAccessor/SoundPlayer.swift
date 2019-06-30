@@ -17,15 +17,14 @@ class SoundPlayer: SoundPlayerProtocol {
     
     private init() { }
     
-    func playAlarmSound(alarm: Alarm) -> Bool {
+    func playAlarmSound(alarm: Alarm) {
         let soundFilePath = Bundle.main.path(forResource: alarm.soundFileName!, ofType: "mp3")!
         do {
             player = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: soundFilePath), fileTypeHint:nil)
-            return true
+            player?.play()
         } catch {
             print("Failed to create alarm; \(error)")
         }
-        return false
     }
     
     func stop() {
