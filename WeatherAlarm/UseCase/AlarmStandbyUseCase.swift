@@ -82,7 +82,7 @@ class AlarmStandbyUseCase {
         }
         
         //通信できない場合は天気情報が取得できないので、トライ中のアラームを鳴らす
-        if networkChecker.checkAvailable() {
+        if !networkChecker.checkAvailable() {
             print("'\(weather.rawValue)' alarming because network unavailable.")
             return soundPlayer.playAlarmSound(alarm: alarm)
         }
