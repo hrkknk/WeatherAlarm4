@@ -23,11 +23,11 @@ class AlarmViewController: UIViewController {
     @IBOutlet weak var selectedSoundName: UILabel!
     
     @IBAction func setSunnyAlarm(_ sender: UIDatePicker) {
-        alarmSetUseCase.updateAlarmTime(weather: Weather.Condition.sunny, dateTime: sender.date)
+        alarmSetUseCase.setAlarmTime(weather: Weather.Condition.sunny, dateTime: sender.date)
     }
     
     @IBAction func setRainyAlarm(_ sender: UIDatePicker) {
-        alarmSetUseCase.updateAlarmTime(weather: Weather.Condition.rainy, dateTime: sender.date)
+        alarmSetUseCase.setAlarmTime(weather: Weather.Condition.rainy, dateTime: sender.date)
     }
     
     @IBAction func changeSnoozeOnOff(_ sender: UISwitch) {

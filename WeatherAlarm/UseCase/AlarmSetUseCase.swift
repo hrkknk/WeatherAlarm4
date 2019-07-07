@@ -46,7 +46,7 @@ class AlarmSetUseCse {
         return Calendar.current.date(from: DateComponents(hour: alarm.hour, minute: alarm.minute))!
     }
     
-    func updateAlarmTime(weather: Weather.Condition, dateTime: Date) {
+    func setAlarmTime(weather: Weather.Condition, dateTime: Date) {
         let alarm = alarmRepository.getAlarm(weather: weather)
         alarm.setTime(dateTime: dateTime)
         alarmRepository.setAlarm(weather: weather, alarm: alarm)
