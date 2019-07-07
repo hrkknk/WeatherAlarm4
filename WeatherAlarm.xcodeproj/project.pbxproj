@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -27,6 +27,7 @@
 		5CE966452231633700263A2D /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE966442231633700263A2D /* Weather.swift */; };
 		5CE966482231643000263A2D /* WeatherApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE966472231643000263A2D /* WeatherApiClient.swift */; };
 		5CE9664C2231663B00263A2D /* GeoLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CE9664B2231663B00263A2D /* GeoLocation.swift */; };
+		5CECA81322D1F1A100008D37 /* ジングル・ワルツ06.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5CECA81222D1F1A100008D37 /* ジングル・ワルツ06.mp3 */; };
 		B1096A2422BF6D2000229B7D /* SoundTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1096A2322BF6D2000229B7D /* SoundTableViewController.swift */; };
 		B1096A2822BF6DD400229B7D /* SoundTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1096A2722BF6DD400229B7D /* SoundTableViewCell.swift */; };
 		CC25685A2174F1C200156CD9 /* WeatherAlarmTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC2568592174F1C200156CD9 /* WeatherAlarmTests.swift */; };
@@ -77,6 +78,7 @@
 		5CE966442231633700263A2D /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
 		5CE966472231643000263A2D /* WeatherApiClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherApiClient.swift; sourceTree = "<group>"; };
 		5CE9664B2231663B00263A2D /* GeoLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoLocation.swift; sourceTree = "<group>"; };
+		5CECA81222D1F1A100008D37 /* ジングル・ワルツ06.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "ジングル・ワルツ06.mp3"; path = "../../../Downloads/ジングル・ワルツ06.mp3"; sourceTree = "<group>"; };
 		B1096A2322BF6D2000229B7D /* SoundTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundTableViewController.swift; sourceTree = "<group>"; };
 		B1096A2722BF6DD400229B7D /* SoundTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundTableViewCell.swift; sourceTree = "<group>"; };
 		CC2568572174F1C200156CD9 /* WeatherAlarmTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WeatherAlarmTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -253,6 +255,7 @@
 		CCE7DBC821EB23DA00D1415F /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				5CECA81222D1F1A100008D37 /* ジングル・ワルツ06.mp3 */,
 				CCE7DBC921EB241100D1415F /* 学校のチャイム01.mp3 */,
 			);
 			path = Resources;
@@ -359,6 +362,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5CECA81322D1F1A100008D37 /* ジングル・ワルツ06.mp3 in Resources */,
 				CCBC3459211F495800BF6E6D /* LaunchScreen.storyboard in Resources */,
 				CCE7DBCA21EB241100D1415F /* 学校のチャイム01.mp3 in Resources */,
 				CCBC3456211F495800BF6E6D /* Assets.xcassets in Resources */,
