@@ -11,26 +11,27 @@ import CoreLocation
 
 class AlarmViewController: UIViewController {
     
+    //MARK: - Properties
+    private let alarmSetUseCase: AlarmSetUseCse
+        = AlarmSetUseCse(alarmRepository: AlarmRepository.sharedInstance,
+                         configRepository: ConfigRepository.sharedInstance,
+                         cacheDataAccessor: CacheDataAccessor.sharedInstance)
+    
     //MARK: - Outlets
     @IBOutlet weak var sunnyAlarmDatePicker: UIDatePicker!
     @IBOutlet weak var rainyAlarmDatePicker: UIDatePicker!
     @IBOutlet weak var selectedSoundName: UILabel!
     
-    private let alarmRepository: AlarmRepository = AlarmRepository.sharedInstance
-    private let configRepository: ConfigRepository = ConfigRepository.sharedInstance
-
     @IBAction func setSunnyAlarm(_ sender: UIDatePicker) {
-        let alarm = AlarmUseCase.createAlarm(date: sender.date)
-        alarmRepository.setAlarm(weatherCondition: Weather.Condition.sunny, alarm: alarm)
+        alarmSetUseCase.setAlarmTime(weather: Weather.Condition.sunny, dateTime: sender.date)
     }
     
     @IBAction func setRainyAlarm(_ sender: UIDatePicker) {
-        let alarm = AlarmUseCase.createAlarm(date: sender.date)
-        alarmRepository.setAlarm(weatherCondition: Weather.Condition.rainy, alarm: alarm)
+        alarmSetUseCase.setAlarmTime(weather: Weather.Condition.rainy, dateTime: sender.date)
     }
     
     @IBAction func changeSnoozeOnOff(_ sender: UISwitch) {
-        configRepository.setSnoozeOn(isSnoozeOn: sender.isOn)
+        alarmSetUseCase.setSnooze(isSnoozeOn: sender.isOn)
     }
     
     @IBAction func standbyAlarm(_ sender: UIButton) {
@@ -54,24 +55,11 @@ class AlarmViewController: UIViewController {
         self.rainyAlarmDatePicker.setValue(UIColor.white, forKey: "textColor")
         
         //前回保存したデータのロード
-        alarmRepository.loadAlarm(weatherCondition: Weather.Condition.sunny)
-        alarmRepository.loadAlarm(weatherCondition: Weather.Condition.rainy)
-
-        initAlarmDatePickers()
-    }
-    
-    private func initAlarmDatePickers() {
-        if let sunnyAlarm = alarmRepository.getAlarm(weatherCondition: Weather.Condition.sunny) {
-            self.sunnyAlarmDatePicker.date = AlarmUseCase.getAlarmTimeAsDate(alarm: sunnyAlarm)
-        } else {
-            self.sunnyAlarmDatePicker.date = Date()
-        }
+        alarmSetUseCase.loadCache()
         
-        if let rainyAlarm = alarmRepository.getAlarm(weatherCondition: Weather.Condition.rainy) {
-            self.rainyAlarmDatePicker.date = AlarmUseCase.getAlarmTimeAsDate(alarm: rainyAlarm)
-        } else {
-            self.rainyAlarmDatePicker.date = Date()
-        }
+        //アラーム設定時刻の初期表示
+        self.sunnyAlarmDatePicker.date = alarmSetUseCase.getAlarmTime(weather: Weather.Condition.sunny)
+        self.rainyAlarmDatePicker.date = alarmSetUseCase.getAlarmTime(weather: Weather.Condition.rainy)
     }
     
     override func viewWillAppear(_ animated: Bool) {

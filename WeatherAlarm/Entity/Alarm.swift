@@ -14,13 +14,8 @@ class Alarm: NSObject, NSSecureCoding {
     var hour: Int?
     var minute: Int?
     var soundFileName: String?
-    var status: Status
-    enum Status {
-        case waiting
-        case timeHasCome
-        case rang
-        case misfired
-    }
+    var isTried: Bool
+    var isRang: Bool
     
     func encode(with aCoder: NSCoder) {
         aCoder.encode(hour, forKey: "hour")
@@ -32,13 +27,33 @@ class Alarm: NSObject, NSSecureCoding {
         self.hour = (aDecoder.decodeObject(forKey: "hour") as? Int)
         self.minute = (aDecoder.decodeObject(forKey: "minute") as? Int)
         self.soundFileName = (aDecoder.decodeObject(forKey: "soundFileName") as? String)
-        self.status = Status.waiting
+        self.isTried = false
+        self.isRang = false
     }
     
     override init() {
         self.hour = 0
         self.minute = 0
         self.soundFileName = ""
-        self.status = Status.waiting
+        self.isTried = false
+        self.isRang = false
+    }
+    
+    func setTime(dateTime: Date) {
+        self.hour = Calendar.current.component(.hour, from: dateTime)
+        self.minute = Calendar.current.component(.minute, from: dateTime)
+    }
+    
+    func getTimeAsString() -> String {
+        return "\(self.hour!):\(String(format: "%02d", self.minute!))"
+    }
+    
+    func isRingTime(dateTime: Date) -> Bool {
+        let nowHour = Calendar.current.component(.hour, from: Date())
+        let nowMinute = Calendar.current.component(.minute, from: Date())
+        if(nowHour == self.hour && nowMinute == self.minute) {
+            return true
+        }
+        return false
     }
 }

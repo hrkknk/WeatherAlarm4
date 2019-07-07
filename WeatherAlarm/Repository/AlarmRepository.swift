@@ -8,72 +8,51 @@
 
 import Foundation
 
-class AlarmRepository: NSObject {
+class AlarmRepository: NSObject, AlarmRepositoryProtocol {
     static let sharedInstance: AlarmRepository = AlarmRepository()
-    private var alarms: Dictionary = [Weather.Condition.sunny.rawValue: AlarmUseCase.createAlarm(),
-                                      Weather.Condition.rainy.rawValue: AlarmUseCase.createAlarm()]
-
+    private var alarms: Dictionary = [Weather.Condition.sunny.rawValue: Alarm(),
+                                      Weather.Condition.rainy.rawValue: Alarm()]
     
-    func setAlarm(weatherCondition: Weather.Condition, alarm: Alarm) {
-        alarms[weatherCondition.rawValue] = alarm
-        do {
-            //alarmsを保存するためアーカイブ
-            let archiveData = try NSKeyedArchiver.archivedData(withRootObject: alarm, requiringSecureCoding: true)
-            //アーカイブしたalarmsをUserDefaultsに保存
-            UserDefaults.standard.set(archiveData, forKey: weatherCondition.rawValue)
-        } catch {
-            print(error)
-        }
+    private override init() { }
+    
+    func setAlarm(weather: Weather.Condition, alarm: Alarm) {
+        alarms[weather.rawValue] = alarm
     }
     
-    func getAlarm(weatherCondition: Weather.Condition) -> Alarm? {
-        return alarms[weatherCondition.rawValue]
+    func getAlarm(weather: Weather.Condition) -> Alarm {
+        return alarms[weather.rawValue]!
     }
     
-    func containsAlarms(status: Alarm.Status) -> Bool {
-        for alarm in alarms {
-            if alarm.value.status == status {
-                return true
+    func getNotTriedAlarms() -> [Alarm] {
+        var results = [Alarm]()
+        for weather in Weather.Condition.allCases {
+            let alarm = alarms[weather.rawValue]!
+            if alarm.isTried {
+                results.append(alarm)
             }
         }
-        return false
+        return results
     }
     
-    func updateAllAlarmStatus() {
-        for alarm in alarms {
-            let _ = AlarmUseCase.changeStatusIfTimeHasCome(alarm: alarm.value)
-        }
-    }
-    
-    func getTimeComingWeatherAlarm() -> (weather: Weather.Condition, alarm: Alarm)? {
-        for alarm in alarms {
-            if alarm.value.status == Alarm.Status.timeHasCome {
-                // enum変換できない謎のkeyだったらunsureとして扱う
-                let weatherCondition = Weather.Condition(rawValue: alarm.key) ?? Weather.Condition.unsure
-                // 仮にtimeHasComeなアラームが複数あったとしても、鳴らすのは1つなので最初に見つかったものだけ返す
-                return (weatherCondition, alarm.value)
+    func getRingTimingAlarms(dateTime: Date) -> [Alarm] {
+        var results = [Alarm]()
+        for weather in Weather.Condition.allCases {
+            let alarm = alarms[weather.rawValue]!
+            if alarm.isRingTime(dateTime: dateTime) {
+                results.append(alarm)
             }
         }
-        return nil
+        return results
     }
     
-    func snoozeAllAlarms(addSeconds: Int) {
-        for var alarm in alarms {
-            AlarmUseCase.startSnooze(alarm: &alarm.value, addSeconds: addSeconds)
-            alarms[alarm.key] = alarm.value
-        }
-    }
-    
-    func loadAlarm(weatherCondition: Weather.Condition) {
-        if let loadedData = UserDefaults().data(forKey: weatherCondition.rawValue) {
-            do {
-                let tmp = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(loadedData) as? Alarm
-                if(tmp != nil) {
-                    alarms[weatherCondition.rawValue] = tmp
-                }
-            } catch {
-                print("Load failed")
+    func getRangAlarms() -> [Alarm] {
+        var results = [Alarm]()
+        for weather in Weather.Condition.allCases {
+            let alarm = alarms[weather.rawValue]!
+            if alarm.isRang {
+                results.append(alarm)
             }
         }
+        return results
     }
 }
