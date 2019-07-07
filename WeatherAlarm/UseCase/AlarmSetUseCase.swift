@@ -54,6 +54,10 @@ class AlarmSetUseCse {
         cacheDataAccessor.saveAlarm(weather: weather, alarm: alarm)
     }
     
+    func getSnooze() -> Bool {
+        return configRepository.getConfig().isSnoozeOn
+    }
+    
     func setSnooze(isSnoozeOn: Bool) {
         let config = configRepository.getConfig()
         config.isSnoozeOn = isSnoozeOn
