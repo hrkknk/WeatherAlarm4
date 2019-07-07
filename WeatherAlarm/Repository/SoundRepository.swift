@@ -11,7 +11,7 @@ import Foundation
 class SoundRepository: SoundRepositoryProtocol {
     static let sharedInstance: SoundRepository = SoundRepository()
     private var soundFileNames: [String] = ["学校のチャイム01",
-                                            "シングル・ワルツ06"]
+                                            "ジングル・ワルツ06"]
     
     private init() {}
     

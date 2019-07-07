@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import AVFoundation
 
 class SoundTableViewController: UITableViewController {
     private let soundSelectUseCase: SoundSelectUseCase
@@ -30,8 +29,8 @@ class SoundTableViewController: UITableViewController {
     
     // セルに値を設定するメソッド
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier:"SoundTableViewCell", for: indexPath)
-        cell.textLabel!.text = soundSelectUseCase.getSoundNameByIndex(index: indexPath.row)
+        let cell = tableView.dequeueReusableCell(withIdentifier:"SoundTableViewCell", for: indexPath) as! SoundTableViewCell
+        cell.soundLabel.text = soundSelectUseCase.getSoundNameByIndex(index: indexPath.row)
         return cell
     }
     
