@@ -17,6 +17,13 @@ class SoundTableViewController: UITableViewController {
         super.viewDidLoad()
     }
     
+    //MARK: - Actions
+    @IBAction func backToPrevious(_ sender: UIBarButtonItem) {
+        //音声選択画面から離れるときにまだ音声再生中だったら止めておく
+        soundSelectUseCase.stopSound()
+        dismiss(animated: true, completion: nil)
+    }
+    
     // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1

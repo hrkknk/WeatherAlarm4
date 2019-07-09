@@ -30,4 +30,8 @@ class SoundSelectUseCase {
         let soundFileName = soundRepository.getSoundFileName(index: index)
         soundPlayer.playSound(fileName: soundFileName)
     }
+    
+    func stopSound() {
+        soundPlayer.stop()
+    }
 }

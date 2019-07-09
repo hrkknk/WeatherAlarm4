@@ -253,7 +253,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="XrC-iq-gub">
-                        <barButtonItem key="leftBarButtonItem" title="Back" id="GjK-I5-Yvd"/>
+                        <barButtonItem key="leftBarButtonItem" title="Back" id="GjK-I5-Yvd">
+                            <connections>
+                                <action selector="backToPrevious:" destination="W5c-bq-Hws" id="jKz-z1-N4i"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VmE-sW-8QJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
