@@ -9,11 +9,17 @@
 import Foundation
 
 class SoundSelectUseCase {
+    private var alarmRepository: AlarmRepositoryProtocol
+    private var cacheDataAccessor: CacheDataAccessorProtocol
     private var soundRepository: SoundRepositoryProtocol
     private var soundPlayer: SoundPlayerProtocol
     
-    init(soundRepository: SoundRepositoryProtocol,
+    init(alarmRepository: AlarmRepositoryProtocol,
+         cacheDataAccessor: CacheDataAccessorProtocol,
+         soundRepository: SoundRepositoryProtocol,
          soundPlayer: SoundPlayerProtocol){
+        self.alarmRepository = alarmRepository
+        self.cacheDataAccessor = cacheDataAccessor
         self.soundRepository = soundRepository
         self.soundPlayer = soundPlayer
     }
@@ -33,5 +39,12 @@ class SoundSelectUseCase {
     
     func stopSound() {
         soundPlayer.stop()
+    }
+    
+    func setSound(weather: Weather.Condition, index: Int) {
+        let alarm = alarmRepository.getAlarm(weather: weather)
+        alarm.soundFileName = soundRepository.getSoundFileName(index: index)
+        alarmRepository.setAlarm(weather: weather, alarm: alarm)
+        cacheDataAccessor.saveAlarm(weather: weather, alarm: alarm)
     }
 }

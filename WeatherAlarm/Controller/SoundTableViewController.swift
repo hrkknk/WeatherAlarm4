@@ -10,7 +10,9 @@ import UIKit
 
 class SoundTableViewController: UITableViewController {
     private let soundSelectUseCase: SoundSelectUseCase
-        = SoundSelectUseCase(soundRepository: SoundRepository.sharedInstance,
+        = SoundSelectUseCase(alarmRepository: AlarmRepository.sharedInstance,
+                             cacheDataAccessor: CacheDataAccessor.sharedInstance,
+                             soundRepository: SoundRepository.sharedInstance,
                              soundPlayer: SoundPlayer.sharedInstance)
     
     override func viewDidLoad() {
@@ -46,6 +48,9 @@ class SoundTableViewController: UITableViewController {
         let cell = tableView.cellForRow(at:indexPath)
         cell?.accessoryType = .checkmark
         soundSelectUseCase.playSoundByIndex(index: indexPath.row)
+        // TODO: rainy,sunny別々に音声設定できるようにする。とりあえず共通。
+        soundSelectUseCase.setSound(weather: Weather.Condition.rainy, index: indexPath.row)
+        soundSelectUseCase.setSound(weather: Weather.Condition.sunny, index: indexPath.row)
     }
     
     // セルの選択が外れた時に呼び出されるメソッド
