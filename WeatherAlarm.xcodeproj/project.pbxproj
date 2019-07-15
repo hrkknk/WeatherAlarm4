@@ -31,6 +31,7 @@
 		5CECA81522D1F1DD00008D37 /* SoundSelectUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CECA81422D1F1DD00008D37 /* SoundSelectUseCase.swift */; };
 		5CECA81722D1F41300008D37 /* SoundRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CECA81622D1F41300008D37 /* SoundRepositoryProtocol.swift */; };
 		5CECA81922D1F44800008D37 /* SoundRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CECA81822D1F44800008D37 /* SoundRepository.swift */; };
+		5CECA81B22DC187A00008D37 /* alarm.png in Resources */ = {isa = PBXBuildFile; fileRef = 5CECA81A22DC187A00008D37 /* alarm.png */; };
 		B1096A2422BF6D2000229B7D /* SoundTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1096A2322BF6D2000229B7D /* SoundTableViewController.swift */; };
 		B1096A2822BF6DD400229B7D /* SoundTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1096A2722BF6DD400229B7D /* SoundTableViewCell.swift */; };
 		CC25685A2174F1C200156CD9 /* WeatherAlarmTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC2568592174F1C200156CD9 /* WeatherAlarmTests.swift */; };
@@ -85,6 +86,7 @@
 		5CECA81422D1F1DD00008D37 /* SoundSelectUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundSelectUseCase.swift; sourceTree = "<group>"; };
 		5CECA81622D1F41300008D37 /* SoundRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundRepositoryProtocol.swift; sourceTree = "<group>"; };
 		5CECA81822D1F44800008D37 /* SoundRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundRepository.swift; sourceTree = "<group>"; };
+		5CECA81A22DC187A00008D37 /* alarm.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = alarm.png; path = ../../../Downloads/alarm.png; sourceTree = "<group>"; };
 		B1096A2322BF6D2000229B7D /* SoundTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundTableViewController.swift; sourceTree = "<group>"; };
 		B1096A2722BF6DD400229B7D /* SoundTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundTableViewCell.swift; sourceTree = "<group>"; };
 		CC2568572174F1C200156CD9 /* WeatherAlarmTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WeatherAlarmTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -264,6 +266,7 @@
 		CCE7DBC821EB23DA00D1415F /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				5CECA81A22DC187A00008D37 /* alarm.png */,
 				5CECA81222D1F1A100008D37 /* ジングル・ワルツ06.mp3 */,
 				CCE7DBC921EB241100D1415F /* 学校のチャイム01.mp3 */,
 			);
@@ -376,6 +379,7 @@
 				CCE7DBCA21EB241100D1415F /* 学校のチャイム01.mp3 in Resources */,
 				CCBC3456211F495800BF6E6D /* Assets.xcassets in Resources */,
 				CCBC3454211F495600BF6E6D /* Main.storyboard in Resources */,
+				5CECA81B22DC187A00008D37 /* alarm.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
