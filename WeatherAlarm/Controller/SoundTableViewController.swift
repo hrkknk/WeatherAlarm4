@@ -45,8 +45,12 @@ class SoundTableViewController: UITableViewController {
     
     // セルが選択された時に呼び出されるメソッド
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let cell = tableView.cellForRow(at:indexPath)
+        let cell = tableView.cellForRow(at:indexPath) as? SoundTableViewCell
+        // チェックマークをつける
         cell?.accessoryType = .checkmark
+        // 文字色を黒くする（選択中は背景が白くなるので）
+        cell?.soundLabel.textColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1)
+        // 音を再生
         soundSelectUseCase.playSoundByIndex(index: indexPath.row)
         // TODO: rainy,sunny別々に音声設定できるようにする。とりあえず共通。
         soundSelectUseCase.setSound(weather: Weather.Condition.rainy, index: indexPath.row)
@@ -55,7 +59,10 @@ class SoundTableViewController: UITableViewController {
     
     // セルの選択が外れた時に呼び出されるメソッド
     override func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        let cell = tableView.cellForRow(at:indexPath)
+        let cell = tableView.cellForRow(at:indexPath) as? SoundTableViewCell
+        // チェックマークを外す
         cell?.accessoryType = .none
+        // 文字色を白に戻す
+        cell?.soundLabel.textColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
     }
 }
