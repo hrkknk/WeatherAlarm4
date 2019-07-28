@@ -27,10 +27,10 @@ class AlarmStandbyViewController: UIViewController {
     @IBOutlet weak var rainyAlarmTime: UILabel!
     @IBOutlet weak var snoozeAlarmButton: UIButton!
     @IBOutlet weak var stopAlarmButton: UIButton!
-    @IBOutlet weak var alarmingView: UIView!
-    @IBOutlet weak var alarmingWeather: UILabel!
-    @IBOutlet weak var alarmingTime: UILabel!
-    @IBOutlet weak var alarmingLocation: UILabel!
+    @IBOutlet weak var currentHourLabel: UILabel!
+    @IBOutlet weak var currentColonLabel: UILabel!
+    @IBOutlet weak var currentMinuteLabel: UILabel!
+    @IBOutlet weak var alarmingImageView: UIImageView!
     
     //MARK: - Actions
     @IBAction func backToPrevious(_ sender: UIBarButtonItem) {
@@ -54,15 +54,18 @@ class AlarmStandbyViewController: UIViewController {
     //MARK: - Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        //ブラックUI化
-        view.backgroundColor = UIColor(red: 20/255, green: 20/255, blue: 20/255, alpha: 1)
-        alarmingView.backgroundColor = UIColor(red: 20/255, green: 20/255, blue: 20/255, alpha: 1)
         
         //viewDidLoad()でhiddenにしているので最初は押せない
         //observeAlarmTimer()でアラームが鳴った時にhidden解除
         self.stopAlarmButton.isHidden = true
         self.snoozeAlarmButton.isHidden = true
-        self.alarmingView.isHidden = true
+        
+        //天気アイコンをでかく表示するimage view
+        //最初は非表示にしておく
+        alarmingImageView.isHidden = true
+        
+        //現在時刻を表示
+        setCurrentTimeLabels(date: Date())
         
         //設定したアラーム時刻を表示
         sunnyAlarmTime.text = alarmStandbyUseCase.getAlarmTimeAsString(weather: Weather.Condition.sunny)
@@ -82,14 +85,14 @@ class AlarmStandbyViewController: UIViewController {
     }
     
     @objc private func observeAlarmTimer() {
-        let currentTime = Date()
-        print("timer ticked: \(currentTime)")
+        let nowDate = Date()
+        setCurrentTimeLabels(date: nowDate)
         
         var isAlarmed = false
         var alarmedWeather: Weather.Condition? = nil
         
         for weather in Weather.Condition.allCases {
-            if alarmStandbyUseCase.tryRingAlarm(weather: weather, time: currentTime) {
+            if alarmStandbyUseCase.tryRingAlarm(weather: weather, time: nowDate) {
                 isAlarmed = true
                 alarmedWeather = weather
                 break;
@@ -102,26 +105,28 @@ class AlarmStandbyViewController: UIViewController {
             //スタンバイ停止
             alarmStandbyUseCase.stopStandby()
             //アラームが鳴ったとき用のviewを表示
+            if alarmedWeather! == Weather.Condition.rainy {
+                self.alarmingImageView.image = UIImage(named: "rainy.png")
+            } else {
+                self.alarmingImageView.image = UIImage(named: "notrainy.png")
+            }
+            self.alarmingImageView.isHidden = false
             self.stopAlarmButton.isHidden = false
-            self.alarmingView.isHidden = false
-            self.alarmingWeather.text = getWeatherText(weather: alarmedWeather!)
             //スヌーズONの場合
             if(configRepository.getConfig().isSnoozeOn) {
                 self.snoozeAlarmButton.isHidden = false
                 self.snoozeAlarmButton.isEnabled = true
                 self.snoozeAlarmButton.setTitle("SNOOZE", for: .normal)
                 alarmStandbyUseCase.snoozeAlarm(weather: alarmedWeather!,
-                                                nextTime: currentTime.addingTimeInterval(Double(300)))
+                                                nextTime: nowDate.addingTimeInterval(Double(300)))
             }
             
             //天気に応じて文字色を変更
             let color = getWeatherTextColor(weather: alarmedWeather!)
-            self.alarmingWeather.textColor = UIColor(red: CGFloat(color.red)/255, green: CGFloat(color.green)/255, blue: CGFloat(color.blue)/255, alpha: 1)
             
             //アラームが鳴った時刻を表示
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "HH:mm"
-            alarmingTime.text = dateFormatter.string(from: currentTime)
         }
     }
     
@@ -148,6 +153,21 @@ class AlarmStandbyViewController: UIViewController {
             return (10, 132, 255)
         default:
             return (255, 255, 255)
+        }
+    }
+    
+    private func setCurrentTimeLabels(date: Date) {
+        let nowHour = Calendar.current.component(.hour, from: date)
+        let nowMinute = Calendar.current.component(.minute, from: date)
+        let nowSecond = Calendar.current.component(.second, from: date)
+        
+        currentHourLabel.text = "\(nowHour)"
+        currentMinuteLabel.text = String(format: "%02d", nowMinute)
+        
+        if nowSecond % 2 == 0 {
+            currentColonLabel.isHidden = true
+        } else {
+            currentColonLabel.isHidden = false
         }
     }
     
