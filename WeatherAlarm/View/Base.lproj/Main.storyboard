@@ -379,4 +379,5 @@
         <image name="notrainy.png" width="600" height="600"/>
         <image name="rainy.png" width="600" height="600"/>
     </resources>
+    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
 </document>
