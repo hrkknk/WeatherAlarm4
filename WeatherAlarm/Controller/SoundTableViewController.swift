@@ -7,52 +7,55 @@
 //
 
 import UIKit
-import AVFoundation
 
 class SoundTableViewController: UITableViewController {
-    
-    let soundList=["学校のチャイム01"]
-    var soundName: String = ""
-    var player: AVAudioPlayer?
+    private let soundSelectUseCase: SoundSelectUseCase
+        = SoundSelectUseCase(alarmRepository: AlarmRepository.sharedInstance,
+                             cacheDataAccessor: CacheDataAccessor.sharedInstance,
+                             soundRepository: SoundRepository.sharedInstance,
+                             soundPlayer: SoundPlayer.sharedInstance)
     
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
-    // MARK: - Table view data source
+    //MARK: - Actions
+    @IBAction func backToPrevious(_ sender: UIBarButtonItem) {
+        //音声選択画面から離れるときにまだ音声再生中だったら止めておく
+        soundSelectUseCase.stopSound()
+        dismiss(animated: true, completion: nil)
+    }
     
+    // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
+    // セルの個数を指定するメソッド
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return soundList.count
+        return soundSelectUseCase.getAvailableSoundNames().count
     }
     
-    // セルが選択された時に呼び出される
+    // セルに値を設定するメソッド
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier:"SoundTableViewCell", for: indexPath) as! SoundTableViewCell
+        cell.soundLabel.text = soundSelectUseCase.getSoundNameByIndex(index: indexPath.row)
+        return cell
+    }
+    
+    // セルが選択された時に呼び出されるメソッド
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at:indexPath)
         cell?.accessoryType = .checkmark
-        soundName = soundList[indexPath.row]
-        let soundFilePath = Bundle.main.path(forResource: soundName, ofType: "mp3")!
-        do {
-            player = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: soundFilePath), fileTypeHint:nil)
-        } catch {
-            print("Failed to create alarm; \(error)")
-            return
-        }
-        player?.play()
+        soundSelectUseCase.playSoundByIndex(index: indexPath.row)
+        // TODO: rainy,sunny別々に音声設定できるようにする。とりあえず共通。
+        soundSelectUseCase.setSound(weather: Weather.Condition.rainy, index: indexPath.row)
+        soundSelectUseCase.setSound(weather: Weather.Condition.sunny, index: indexPath.row)
     }
     
-    // セルの選択が外れた時に呼び出される
+    // セルの選択が外れた時に呼び出されるメソッド
     override func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at:indexPath)
         cell?.accessoryType = .none
-    }
-    
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier:"SoundTableViewCell", for: indexPath) as? SoundTableViewCell else{fatalError("UAAAAAAAAA")}
-        cell.soundLabel.text = soundList[indexPath.row]
-        return cell
     }
 }

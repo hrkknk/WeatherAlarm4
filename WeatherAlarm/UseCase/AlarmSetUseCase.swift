@@ -65,4 +65,8 @@ class AlarmSetUseCse {
         //snooze設定が切り替えられるたびにキャッシュも更新します
         cacheDataAccessor.saveConfig(config: config)
     }
+    
+    func getSoundName(weather: Weather.Condition) -> String {
+        return alarmRepository.getAlarm(weather: weather).soundFileName ?? "Please select..."
+    }
 }

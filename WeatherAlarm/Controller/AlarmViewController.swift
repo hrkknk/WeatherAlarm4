@@ -60,9 +60,16 @@ class AlarmViewController: UIViewController {
         //アラーム設定時刻の初期表示
         self.sunnyAlarmDatePicker.date = alarmSetUseCase.getAlarmTime(weather: Weather.Condition.sunny)
         self.rainyAlarmDatePicker.date = alarmSetUseCase.getAlarmTime(weather: Weather.Condition.rainy)
+
+        //サウンドの初期表示
+        // TODO: 天気別にアラームを選べるようにしたい。とりあえず雨のほうを使う。
+        self.selectedSoundName.text = alarmSetUseCase.getSoundName(weather: Weather.Condition.rainy)
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        //サウンドが更新されていたら画面に反映する
+        // TODO: 天気別にアラームを選べるようにしたい。とりあえず雨のほうを使う。
+        self.selectedSoundName.text = alarmSetUseCase.getSoundName(weather: Weather.Condition.rainy)
         super.viewWillAppear(animated)
     }
     
@@ -73,7 +80,6 @@ class AlarmViewController: UIViewController {
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
-        //TODO: サウンド選択画面に遷移
     }
 }
 
