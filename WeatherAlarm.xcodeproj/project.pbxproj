@@ -34,6 +34,7 @@
 		5CECA81B22DC187A00008D37 /* alarm.png in Resources */ = {isa = PBXBuildFile; fileRef = 5CECA81A22DC187A00008D37 /* alarm.png */; };
 		5CECA81D22DC6A5F00008D37 /* rainy.png in Resources */ = {isa = PBXBuildFile; fileRef = 5CECA81C22DC6A5F00008D37 /* rainy.png */; };
 		5CECA81F22DC6D9200008D37 /* notrainy.png in Resources */ = {isa = PBXBuildFile; fileRef = 5CECA81E22DC6D9200008D37 /* notrainy.png */; };
+		5CECA82122DC70EC00008D37 /* setting.png in Resources */ = {isa = PBXBuildFile; fileRef = 5CECA82022DC70EC00008D37 /* setting.png */; };
 		B1096A2422BF6D2000229B7D /* SoundTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1096A2322BF6D2000229B7D /* SoundTableViewController.swift */; };
 		B1096A2822BF6DD400229B7D /* SoundTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1096A2722BF6DD400229B7D /* SoundTableViewCell.swift */; };
 		CC25685A2174F1C200156CD9 /* WeatherAlarmTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC2568592174F1C200156CD9 /* WeatherAlarmTests.swift */; };
@@ -91,6 +92,7 @@
 		5CECA81A22DC187A00008D37 /* alarm.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = alarm.png; path = ../../../Downloads/alarm.png; sourceTree = "<group>"; };
 		5CECA81C22DC6A5F00008D37 /* rainy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = rainy.png; path = ../../../Downloads/rainy.png; sourceTree = "<group>"; };
 		5CECA81E22DC6D9200008D37 /* notrainy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = notrainy.png; path = ../../../Downloads/notrainy.png; sourceTree = "<group>"; };
+		5CECA82022DC70EC00008D37 /* setting.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = setting.png; path = ../../../Downloads/setting.png; sourceTree = "<group>"; };
 		B1096A2322BF6D2000229B7D /* SoundTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundTableViewController.swift; sourceTree = "<group>"; };
 		B1096A2722BF6DD400229B7D /* SoundTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundTableViewCell.swift; sourceTree = "<group>"; };
 		CC2568572174F1C200156CD9 /* WeatherAlarmTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WeatherAlarmTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -270,6 +272,7 @@
 		CCE7DBC821EB23DA00D1415F /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				5CECA82022DC70EC00008D37 /* setting.png */,
 				5CECA81E22DC6D9200008D37 /* notrainy.png */,
 				5CECA81C22DC6A5F00008D37 /* rainy.png */,
 				5CECA81A22DC187A00008D37 /* alarm.png */,
@@ -385,6 +388,7 @@
 				CCE7DBCA21EB241100D1415F /* 学校のチャイム01.mp3 in Resources */,
 				5CECA81F22DC6D9200008D37 /* notrainy.png in Resources */,
 				CCBC3456211F495800BF6E6D /* Assets.xcassets in Resources */,
+				5CECA82122DC70EC00008D37 /* setting.png in Resources */,
 				CCBC3454211F495600BF6E6D /* Main.storyboard in Resources */,
 				5CECA81D22DC6A5F00008D37 /* rainy.png in Resources */,
 				5CECA81B22DC187A00008D37 /* alarm.png in Resources */,
