@@ -50,7 +50,6 @@ class AlarmViewController: UIViewController {
         super.viewDidLoad()
                         
         //ブラックUI化
-        view.backgroundColor = UIColor(red: 20/255, green: 20/255, blue: 20/255, alpha: 1)
         self.sunnyAlarmDatePicker.setValue(UIColor.white, forKey: "textColor")
         self.rainyAlarmDatePicker.setValue(UIColor.white, forKey: "textColor")
         
